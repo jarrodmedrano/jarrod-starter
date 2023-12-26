@@ -1,0 +1,16 @@
+{
+  "extends": "tsconfig/react-library.json",
+  "include": ["."],
+  "exclude": ["dist", "build", "node_modules"],
+
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@app/*": ["./packages/app/*"],
+      "@ui/*": ["./*"],
+      "@ui/components/ui*": ["./components/ui*"],
+      "@ui/components/tailwind*": ["./components/tailwind*"]
+    }
+  }
+}

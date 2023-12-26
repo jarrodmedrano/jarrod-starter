@@ -17,6 +17,7 @@ const nextConfig = {
     'react-native-reanimated',
     'nativewind',
     'react-native-gesture-handler',
+    'ui',
   ],
 }
 
