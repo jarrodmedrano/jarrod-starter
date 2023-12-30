@@ -3,6 +3,8 @@ import { Hero } from '@ui/components/tailwind/hero'
 import { Footer } from '@ui/components/tailwind/footer'
 import { Feature } from '@ui/components/tailwind/feature'
 import { FeatureList } from '@ui/components/tailwind/featurelist'
+import { Switcher } from 'app/theme/switcher'
+
 const navigation = [
   { name: 'Product', href: '#' },
   { name: 'Features', href: '#' },

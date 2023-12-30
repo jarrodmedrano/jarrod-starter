@@ -5,7 +5,9 @@
   "dependencies": {
     "moti": "latest",
     "nativewind": "2.0.11",
+    "next-themes": "^0.2.1",
     "solito": "4.0.1",
+    "styled-components": "^6.1.6",
     "ui": "*"
   },
   "sideEffects": false

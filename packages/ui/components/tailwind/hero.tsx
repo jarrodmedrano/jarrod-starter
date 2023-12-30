@@ -162,12 +162,11 @@ export const Hero = ({
             </div>
           </div>
           <div className="text-center">
-            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
-              {title}
-            </h1>
+            <h1 className="text-black dark:text-white text-4xl font-bold tracking-tight  sm:text-6xl">
+            {title}</h1>
             <p className="mt-6 text-lg leading-8 text-gray-300">
               {description}
-            </p>
+            </p> 
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <a
                 href={buttonLink}
@@ -181,6 +180,7 @@ export const Hero = ({
               >
                 {altButtonText} <span aria-hidden="true">→</span>
               </a>
+              
             </div>
           </div>
         </div>
