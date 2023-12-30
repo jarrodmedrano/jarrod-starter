@@ -6,7 +6,7 @@
     "moti": "latest",
     "nativewind": "2.0.11",
     "solito": "4.0.1",
-    "@ui": "*"
+    "ui": "*"
   },
   "sideEffects": false
 }

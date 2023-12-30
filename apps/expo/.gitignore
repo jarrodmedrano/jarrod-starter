@@ -123,3 +123,7 @@ web-build/
 dist/
 
 # @end expo-cli
+# Expo
+.expo
+dist/
+web-build/
