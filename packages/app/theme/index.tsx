@@ -15,13 +15,15 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
-export function Providers({ children }) {
+export function Providers({
+  children: children,
+}: {
+  children: React.ReactNode
+}) {
   return (
     <>
       <GlobalStyle />
-      <ThemeProvider attribute="class">
-        {children}
-      </ThemeProvider>
-    </> 
+      <ThemeProvider attribute="class">{children}</ThemeProvider>
+    </>
   )
 }

@@ -5,6 +5,8 @@ import { Feature } from '@ui/components/tailwind/feature'
 import { FeatureList } from '@ui/components/tailwind/featurelist'
 import { Switcher } from 'app/theme/switcher'
 
+import '@ui/styles/globals.css'
+
 const navigation = [
   { name: 'Product', href: '#' },
   { name: 'Features', href: '#' },
@@ -32,7 +34,7 @@ export function HomeScreen() {
         companyLogo={
           <img
             className="h-8 w-auto"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+            src="https://tailwindui.com/img/logos/mark.svg?color=primary&shade=500"
             alt=""
           />
         }

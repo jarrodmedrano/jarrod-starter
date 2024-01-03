@@ -93,7 +93,7 @@ export const Hero = ({
                 <span className="sr-only">{companyName}</span>
                 <img
                   className="h-8 w-auto"
-                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                  src="https://tailwindui.com/img/logos/mark.svg?color=primary&shade=500"
                   alt=""
                 />
               </a>
@@ -162,15 +162,16 @@ export const Hero = ({
             </div>
           </div>
           <div className="text-center">
-            <h1 className="text-black dark:text-white text-4xl font-bold tracking-tight  sm:text-6xl">
-            {title}</h1>
+            <h1 className="text-4xl font-bold tracking-tight text-black sm:text-6xl  dark:text-white">
+              {title}
+            </h1>
             <p className="mt-6 text-lg leading-8 text-gray-300">
               {description}
-            </p> 
+            </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <a
                 href={buttonLink}
-                className="rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
+                className="bg-primary-500 hover:bg-primary-400 focus-visible:outline-primary-400 rounded-md px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
               >
                 {buttonText}
               </a>
@@ -180,7 +181,6 @@ export const Hero = ({
               >
                 {altButtonText} <span aria-hidden="true">→</span>
               </a>
-              
             </div>
           </div>
         </div>

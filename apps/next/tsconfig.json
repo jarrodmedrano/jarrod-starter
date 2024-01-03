@@ -1,4 +1,5 @@
 {
+  "extends": "../../packages/ui/tsconfig",
   "compilerOptions": {
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -16,7 +17,9 @@
     "incremental": true,
     "paths": {
       "app/*": ["../../packages/app/*"],
-      "app/provider": ["../../packages/app/provider"]
+      "app/provider": ["../../packages/app/provider"],
+      "@ui/*": ["../../packages/ui/*"],
+      "ui/*": ["../../packages/ui/*"]
     }
   },
   "include": ["next-env.d.ts", "app-env.d.ts", "**/*.ts", "**/*.tsx"],
