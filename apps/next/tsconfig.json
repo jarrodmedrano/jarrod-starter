@@ -16,10 +16,9 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "app/*": ["../../packages/app/*"],
-      "app/provider": ["../../packages/app/provider"],
-      "@ui/*": ["../../packages/ui/*"],
-      "ui/*": ["../../packages/ui/*"]
+      "@app/*": ["../../packages/app/*"],
+      "@app/provider": ["../../packages/app/provider"],
+      "@ui/*": ["../../packages/ui/*"]
     }
   },
   "include": ["next-env.d.ts", "app-env.d.ts", "**/*.ts", "**/*.tsx"],

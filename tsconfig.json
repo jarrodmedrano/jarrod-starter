@@ -3,7 +3,7 @@
     "strictNullChecks": true,
     "noUncheckedIndexedAccess": true,
     "paths": {
-      "app/*": ["./packages/app/*"],
+      "@app/*": ["./packages/app/*"],
       "@ui/*": ["./packages/ui/*"]
     },
     "jsx": "react-jsx"

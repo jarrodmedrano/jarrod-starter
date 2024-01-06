@@ -31,6 +31,11 @@ ENTRYPOINT ["sh", "./entrypoint.sh"]
 COPY .gitignore .gitignore
 COPY --from=builder /app/out/json/ .
 COPY --from=builder /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
+COPY packages/app /app/packages/app
+COPY packages/ui /app/packages/ui
+COPY packages/tsconfig /app/packages/tsconfig
+COPY packages/eslint-config-custom /app/packages/eslint-config-custom
+
 # COPY packages/database /app/packages/database
 # COPY apps/api /app/apps/api
 COPY apps/next /app/apps/next

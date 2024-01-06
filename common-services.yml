@@ -1,11 +1,11 @@
 version: '3'
 
 services:
-  client:
-    container_name: client
+  next:
+    container_name: next
     build:
       context: .
-      dockerfile: ./apps/client/Dockerfile
+      dockerfile: ./apps/next/Dockerfile
     restart: always
     ports:
       - 3000:3000
@@ -15,11 +15,11 @@ services:
       - .env
   reverse-proxy:
     image: nginx:latest
-    container_name: nginx_container
+    container_name: nginx_cont
     ports:
       - 3050:80
     depends_on:
-      - client
+      - next
     volumes:
       - ./packages/config/nginx.conf:/etc/nginx/nginx.conf
     extra_hosts:

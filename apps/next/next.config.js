@@ -1,5 +1,7 @@
 const { withExpo } = require('@expo/next-adapter')
 
+const path = require('path')
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // reanimated (and thus, Moti) doesn't work with strict mode currently...
@@ -8,6 +10,18 @@ const nextConfig = {
   // https://github.com/nandorojo/moti/issues/224
   // once that gets fixed, set this back to true
   reactStrictMode: false,
+  output: 'standalone',
+  experimental: {
+    outputFileTracingRoot: path.join(__dirname, '../../'),
+    serverActions: true,
+  },
+  webpack: (config) => {
+    config.watchOptions = {
+      poll: 1000,
+      aggregateTimeout: 300,
+    }
+    return config
+  },
   transpilePackages: [
     'react-native',
     'react-native-web',
