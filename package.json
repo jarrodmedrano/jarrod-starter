@@ -54,7 +54,7 @@
     "nps": "5.10.0",
     "prettier": "3.0.3",
     "prettier-plugin-tailwindcss": "0.5.4",
-    "turbo": "1.4.2",
+    "turbo": "1.10.16",
     "typescript": "5.2.2",
     "vite-plugin-istanbul": "4.0.0",
     "vitest": "0.26.2"
