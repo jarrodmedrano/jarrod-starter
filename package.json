@@ -1,54 +1,64 @@
 {
   "name": "slashclick-starter-app",
+  "version": "1.0.0",
   "private": true,
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
-  "devDependencies": {
-    "@types/react": "18.2.21",
-    "@types/react-native": "0.72.2",
-    "eslint": "8.21.0",
-    "prettier": "3.0.3",
-    "prettier-plugin-tailwindcss": "0.5.4",
-    "turbo": "1.4.2",
-    "typescript": "5.2.2",
-    "nps": "5.10.0",
-    "@babel/core": "7.20.0",
-    "@vitejs/plugin-react": "3.1.0",
-    "@vitest/coverage-istanbul": "0.28.3",
-    "vite-plugin-istanbul": "4.0.0",
-    "vitest": "0.26.2",
-    "jsdom": "20.0.3",
-    "@vitest/ui": "0.28.4"
-  },
   "scripts": {
-    "native": "cd apps/expo && pnpm start",
-    "web": "cd apps/next && pnpm next",
-    "prepare": "npx husky install",
-    "precommit": "nps precommit",
-    "eslint": "eslint \"**/*.+(js|jsx|ts|tsx)\"",
-    "eslint:fix": "eslint --fix \"**/*.+(js|jsx|ts|tsx)\"",
-    "prettier": "prettier --check \"**/*.+(js|jsx|ts|tsx|json|yml|yaml|md|css)\"",
-    "prettier:fix": "prettier --write \"**/*.+(js|jsx|ts|tsx|json|yml|yaml|md|css)\"",
-    "preinstall": "npx only-allow pnpm",
+    "android": "expo run:android",
     "prebuild": "nps prebuild",
     "build": "nps build",
-    "android": "expo run:android",
-    "ios": "expo run:ios"
+    "eslint": "eslint \"**/*.+(js|jsx|ts|tsx)\"",
+    "eslint:fix": "eslint --fix \"**/*.+(js|jsx|ts|tsx)\"",
+    "preinstall": "npx only-allow pnpm",
+    "ios": "expo run:ios",
+    "native": "cd apps/expo && pnpm start",
+    "precommit": "nps precommit",
+    "prepare": "npx husky install",
+    "prettier": "prettier --check \"**/*.+(js|jsx|ts|tsx|json|yml|yaml|md|css)\"",
+    "prettier:fix": "prettier --write \"**/*.+(js|jsx|ts|tsx|json|yml|yaml|md|css)\"",
+    "web": "cd apps/next && pnpm next"
+  },
+  "lint-staged": {
+    "./*/**/*.{js,jsx,ts,tsx}": [
+      "pnpm run prettier:fix",
+      "pnpm run eslint:fix"
+    ],
+    "*.{json,md}": [
+      "pnpm run prettier:fix"
+    ]
   },
   "resolutions": {
     "metro": "~0.76.7",
     "metro-resolver": "~0.76.7"
   },
-  "nohoist": [
-    "**/expo-router",
-    "**/expo-router/**",
-    "**/react-native",
-    "**/react-native/**",
-    "**/react-native-codegen"
-  ],
-  "packageManager": "pnpm@7.15.0",
+  "dependencies": {
+    "expo": "~49.0.18",
+    "expo-splash-screen": "~0.20.5",
+    "expo-status-bar": "~1.6.0",
+    "husky": "8.0.3",
+    "react": "18.2.0",
+    "react-native": "0.72.6"
+  },
+  "devDependencies": {
+    "@babel/core": "7.20.0",
+    "@types/react": "18.2.21",
+    "@types/react-native": "0.72.2",
+    "@vitejs/plugin-react": "3.1.0",
+    "@vitest/coverage-istanbul": "0.28.3",
+    "@vitest/ui": "0.28.4",
+    "eslint": "8.21.0",
+    "jsdom": "20.0.3",
+    "nps": "5.10.0",
+    "prettier": "3.0.3",
+    "prettier-plugin-tailwindcss": "0.5.4",
+    "turbo": "1.4.2",
+    "typescript": "5.2.2",
+    "vite-plugin-istanbul": "4.0.0",
+    "vitest": "0.26.2"
+  },
   "peerDependencies": {
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -59,26 +69,16 @@
     "react-native-screens": "~3.22.0",
     "react-native-web": "~0.19.6"
   },
-  "version": "1.0.0",
-  "lint-staged": {
-    "./*/**/*.{js,jsx,ts,tsx}": [
-      "pnpm run prettier:fix",
-      "pnpm run eslint:fix"
-    ],
-    "*.{json,md}": [
-      "pnpm run prettier:fix"
-    ]
-  },
+  "packageManager": "pnpm@7.15.0",
   "engines": {
-    "npm": ">=8.0.0",
-    "node": ">=18.0.0"
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
   },
-  "dependencies": {
-    "expo": "~49.0.18",
-    "expo-splash-screen": "~0.20.5",
-    "expo-status-bar": "~1.6.0",
-    "react": "18.2.0",
-    "react-native": "0.72.6",
-    "husky": "8.0.3"
-  }
+  "nohoist": [
+    "**/expo-router",
+    "**/expo-router/**",
+    "**/react-native",
+    "**/react-native/**",
+    "**/react-native-codegen"
+  ]
 }
