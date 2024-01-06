@@ -14,7 +14,13 @@
     "turbo": "^1.4.2",
     "typescript": "^5.2.2",
     "nps": "5.10.0",
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.20.0",
+    "@vitejs/plugin-react": "3.1.0",
+    "@vitest/coverage-istanbul": "0.28.3",
+    "vite-plugin-istanbul": "4.0.0",
+    "vitest": "0.26.2",
+    "jsdom": "20.0.3",
+    "@vitest/ui": "0.28.4"
   },
   "scripts": {
     "native": "cd apps/expo && pnpm start",
