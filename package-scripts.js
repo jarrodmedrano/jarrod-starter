@@ -5,9 +5,16 @@ const apiPath = path.resolve(__dirname, 'apps/api')
 
 module.exports = {
   scripts: {
+    clean: {
+      default: 'docker system prune',
+    },
+    network: {
+      default: 'docker network create starter_app_network',
+    },
     prepare: {
       default: 'nps prepare.install prepare.format',
       install: 'npx husky install && pnpm install',
+      docker: 'docker compose up',
     },
     build: {
       default: 'npx turbo run build',
@@ -21,13 +28,19 @@ module.exports = {
       fix: 'prettier --write "**/*.+(js|jsx|ts|tsx|json|yml|yaml|md|css)"',
     },
     lint: 'turbo run lint',
+    dev: {
+      default: 'docker compose -f docker-compose.dev.yml up --build',
+    },
+    prod: {
+      default: 'docker compose -f docker-compose.yml up --build',
+    },
     prepare: {
       default: 'nps prepare.install prepare.format',
       install: 'npx husky install && pnpm install',
       format: 'nps lintStaged',
       docker: 'docker compose up',
       ci: {
-        web: `npx turbo prune --scope=next && cd out && pnpm install --frozen-lockfile`,
+        web: `npx turbo prune --scope=next-app && cd out && pnpm install --frozen-lockfile`,
       },
     },
     preview: 'vite preview',

@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  client:
+    container_name: client
+    build:
+      context: .
+      dockerfile: ./apps/client/Dockerfile
+    restart: always
+    ports:
+      - 3000:3000
+    networks:
+      - starter_app_network
+    env_file:
+      - .env
+  reverse-proxy:
+    image: nginx:latest
+    container_name: nginx_container
+    ports:
+      - 3050:80
+    depends_on:
+      - client
+    volumes:
+      - ./packages/config/nginx.conf:/etc/nginx/nginx.conf
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
