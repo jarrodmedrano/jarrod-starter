@@ -27,7 +27,7 @@ module.exports = {
       default: 'nps prettier.fix eslint.fix',
     },
     precommit: {
-      default: 'nps lintStaged',
+      default: 'nps build',
     },
     prebuild: {
       default: 'nps lintStaged',
