@@ -3,9 +3,6 @@ const path = require('path')
 const clientPath = path.resolve(__dirname, 'apps/next')
 const apiPath = path.resolve(__dirname, 'apps/api')
 
-const ciApiPath = path.resolve(__dirname, 'out/apps/api')
-const ciWebPath = path.resolve(__dirname, 'out/apps/next')
-
 module.exports = {
   scripts: {
     prepare: {
@@ -39,7 +36,7 @@ module.exports = {
       default: 'nps prettier.fix eslint.fix',
     },
     precommit: {
-      default: 'npx sort-package-json && nps build',
+      default: 'npx sort-package-json && nps prebuild && nps build',
     },
     prebuild: {
       default: 'nps prepare.format',

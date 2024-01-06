@@ -2,15 +2,15 @@
 import 'react-native'
 
 declare module 'react-native' {
-  interface PressableStateCallbackType {
+  export interface PressableStateCallbackType {
     hovered?: boolean
     focused?: boolean
   }
-  interface ViewStyle {
+  export interface ViewStyle {
     transitionProperty?: string
     transitionDuration?: string
   }
-  interface TextProps {
+  export interface TextProps {
     accessibilityComponentType?: never
     accessibilityTraits?: never
     accessibilityLevel?: number
@@ -20,13 +20,13 @@ declare module 'react-native' {
       target?: '_blank'
     }
   }
-  interface ViewProps {
+  export interface ViewProps {
     accessibilityRole?: string
     href?: string
     hrefAttrs?: {
       rel: 'noreferrer'
       target?: '_blank'
     }
-    onClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void
+    onClick?: () => void
   }
 }
