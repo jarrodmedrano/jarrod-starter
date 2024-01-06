@@ -1,5 +1,5 @@
 {
-  "name": "solito-with-tailwind",
+  "name": "slashclick-starter-app",
   "private": true,
   "workspaces": [
     "apps/*",
@@ -19,8 +19,13 @@
   "scripts": {
     "native": "cd apps/expo && pnpm start",
     "web": "cd apps/next && pnpm next",
-    "preinstall": "npx only-allow pnpm",
+    "prepare": "npx husky install",
     "precommit": "nps precommit",
+    "eslint": "eslint \"**/*.+(js|jsx|ts|tsx)\"",
+    "eslint:fix": "eslint --fix \"**/*.+(js|jsx|ts|tsx)\"",
+    "prettier": "prettier --check \"**/*.+(js|jsx|ts|tsx|json|yml|yaml|md|css)\"",
+    "prettier:fix": "prettier --write \"**/*.+(js|jsx|ts|tsx|json|yml|yaml|md|css)\"",
+    "preinstall": "npx only-allow pnpm",
     "prebuild": "nps prebuild",
     "build": "nps build",
     "android": "expo run:android",
@@ -49,11 +54,25 @@
     "react-native-web": "~0.19.6"
   },
   "version": "1.0.0",
+  "lint-staged": {
+    "./*/**/*.{js,jsx,ts,tsx}": [
+      "pnpm run prettier:fix",
+      "pnpm run eslint:fix"
+    ],
+    "*.{json,md}": [
+      "pnpm run prettier:fix"
+    ]
+  },
+  "engines": {
+    "npm": ">=8.0.0",
+    "node": ">=18.0.0"
+  },
   "dependencies": {
     "expo": "~49.0.18",
     "expo-splash-screen": "~0.20.5",
     "expo-status-bar": "~1.6.0",
     "react": "18.2.0",
-    "react-native": "0.72.6"
+    "react-native": "0.72.6",
+    "husky": "8.0.3"
   }
 }
