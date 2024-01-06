@@ -27,7 +27,7 @@ module.exports = {
     prepare: {
       default: 'nps prepare.install prepare.format',
       install: 'npx husky install && pnpm install',
-      format: 'prettier --write "**/*.{ts,tsx,md}',
+      format: 'nps lintStaged',
       docker: 'docker compose up',
       ci: {
         web: `npx turbo prune --scope=next && cd out && pnpm install --frozen-lockfile`,
