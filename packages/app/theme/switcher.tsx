@@ -1,4 +1,5 @@
 import { useTheme } from 'next-themes'
+import React from 'react'
 
 // Do NOT use this! It will throw a hydration mismatch error.
 export const Switcher = () => {

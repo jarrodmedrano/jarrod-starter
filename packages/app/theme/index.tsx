@@ -15,11 +15,11 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
-export function Providers({
+export const Providers = ({
   children: children,
 }: {
   children: React.ReactNode
-}) {
+}) => {
   return (
     <>
       <GlobalStyle />

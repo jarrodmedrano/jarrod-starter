@@ -1,12 +1,13 @@
-import { createParam } from 'solito'
+'use client'
 import { TextLink } from 'solito/link'
 import { Text } from '../../design/typography'
 import { View } from '../../design/view'
+import { useParams } from 'solito/navigation'
 
-const { useParam } = createParam<{ id: string }>()
+const useUserParams = useParams<{ id: string }>
 
 export function UserDetailScreen() {
-  const [id] = useParam('id')
+  const { id } = useUserParams()
 
   return (
     <View className="flex-1 items-center justify-center">

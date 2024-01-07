@@ -8,8 +8,10 @@
   ],
   "scripts": {
     "android": "expo run:android",
+    "api": "cd apps/api && pnpm start",
     "prebuild": "nps prebuild",
     "build": "nps build",
+    "dev": "turbo run dev --parallel --force",
     "eslint": "eslint \"**/*.+(js|jsx|ts|tsx)\"",
     "eslint:fix": "eslint --fix \"**/*.+(js|jsx|ts|tsx)\"",
     "preinstall": "npx only-allow pnpm",
