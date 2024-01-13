@@ -4,5 +4,5 @@ yarn.lock
 package-lock.json
 **/*.test.js
 coverage
-**/**/*/dist
+dist/
 **/*.eslintrc.js

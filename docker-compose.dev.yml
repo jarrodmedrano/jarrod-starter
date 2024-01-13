@@ -1,6 +1,22 @@
 version: '3'
 
 services:
+  api:
+    extends:
+      file: common-services.yml
+      service: api
+    volumes:
+      - ./apps/api:/app/apps/api
+      - ./apps/api/node_modules:/app/apps/api/node_modules
+      - /app/node_modules
+      - /app/
+    build:
+      context: .
+      dockerfile: ./apps/api/Dockerfile.dev
+    environment:
+      - VERBECC_API=http://localhost:8000
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_URL=http://localhost:8080
   next:
     extends:
       file: common-services.yml
@@ -11,7 +27,7 @@ services:
     environment:
       - VERBECC_API=http://localhost:8000
       - NODE_ENV=development
-      - NEXT_PUBLIC_TRPC_API=http://localhost:8080
+      - NEXT_PUBLIC_API_URL=http://localhost:8080
     volumes:
       - ./:/app
       - ./apps/next/node_modules:/app/apps/next/node_modules

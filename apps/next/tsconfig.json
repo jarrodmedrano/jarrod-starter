@@ -18,7 +18,9 @@
     "paths": {
       "@app/*": ["../../packages/app/*"],
       "@app/provider": ["../../packages/app/provider"],
-      "@ui/*": ["../../packages/ui/*"]
+      "@ui/*": ["../../packages/ui/*"],
+      "@utils/*": ["./utils"],
+      "auth": ["./auth"]
     },
     "plugins": [
       {
@@ -31,7 +33,9 @@
     "app-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "next-auth.d.ts",
+    "process.d.ts"
   ],
   "exclude": ["node_modules"]
 }
