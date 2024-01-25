@@ -1,5 +1,6 @@
 import { SigninFormCard } from '@ui/components/tailwind/signin'
 import { authConfig } from '../../../auth'
+import { signIn, signOut } from 'next-auth/react'
 
 type Provider = {
   id: string
@@ -31,7 +32,9 @@ function getProviders(): Provider[] {
 const SigninPage = () => {
   const providers = getProviders()
 
-  return <SigninFormCard providers={providers} />
+  return (
+    <SigninFormCard signIn={signIn} signOut={signOut} providers={providers} />
+  )
 }
 
 export default SigninPage

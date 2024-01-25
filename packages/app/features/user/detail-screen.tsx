@@ -1,4 +1,5 @@
 'use client'
+import React from 'react'
 import { TextLink } from 'solito/link'
 import { Text } from '../../design/typography'
 import { View } from '../../design/view'
