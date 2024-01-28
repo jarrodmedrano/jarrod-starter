@@ -1,3 +1,4 @@
+import Google from 'next-auth/providers/google'
 import EmailProvider, { EmailConfig } from 'next-auth/providers/email'
 import NextAuth from 'next-auth'
 import type { NextAuthConfig, User } from 'next-auth'
@@ -40,6 +41,7 @@ export const authConfig = {
       sendVerificationRequest,
     }) as EmailConfig & { options: Record<string, unknown> },
     GitHub,
+    Google,
   ],
   callbacks: {
     authorized(params) {
