@@ -1,28 +1,49 @@
 'use client'
-import { FormEvent, useState } from 'react'
 import { Button } from '../ui/button'
 import { ProviderIcons } from './providerIcons'
+import { Input } from '../ui/input'
+import { FormEvent } from 'react'
+
+export type Provider = {
+  id: string
+  name: string
+  type: string
+  style: {
+    logo: string
+    bg: string
+    text: string
+  }
+}
 export const SigninFormCard = ({
   providers,
-  signIn,
+  emailSignin,
+  providerSignin,
   credentials = false,
 }: {
-  providers: any
-  signIn: any
-  signOut: any
+  providers: Provider[]
+  emailSignin: (
+    _provider: string,
+    { ..._args }: { [x: string]: any },
+  ) => Promise<void>
+  providerSignin: (_x: string) => Promise<void>
+  signOut: () => Promise<void>
   credentials?: boolean
 }) => {
-  const [email, setEmail] = useState('')
+  const handleEmailSignin = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const formData = new FormData(e.currentTarget)
+    const email = formData.get('email')
+    try {
+      const result = await emailSignin('email', {
+        email,
+      })
 
-  const handleEmailSignIn = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault() // prevent form submission from refreshing the page
-    await signIn('email', { email, callbackUrl: '/protected' })
+      return result
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error(err)
+    }
   }
-
-  const handleProviderSignIn = async (provider: string) => {
-    await signIn(provider, { callbackUrl: '/protected' })
-  }
-
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -42,7 +63,7 @@ export const SigninFormCard = ({
             <form
               className="space-y-6"
               action="#"
-              onSubmit={handleEmailSignIn}
+              onSubmit={handleEmailSignin}
               method="POST"
             >
               <div>
@@ -53,14 +74,12 @@ export const SigninFormCard = ({
                   Email address
                 </label>
                 <div className="mt-2">
-                  <input
+                  <Input
                     id="email"
                     name="email"
                     type="email"
                     autoComplete="email"
                     required
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
               </div>
@@ -145,7 +164,7 @@ export const SigninFormCard = ({
                         <Button
                           variant="icon"
                           className="flex w-full"
-                          onClick={() => handleProviderSignIn(provider.name)}
+                          onClick={() => providerSignin(provider.name)}
                         >
                           <ProviderIcons providerName={provider.name} />
                           Login with {provider.name}
@@ -158,9 +177,8 @@ export const SigninFormCard = ({
           </div>
 
           <p className="mt-10 text-center text-sm text-gray-500 dark:text-gray-400">
-            Not a member?{' '}
-            <a href="#" className="font-semibold leading-6">
-              Start a 14 day free trial
+            <a href="/" className="font-semibold leading-6">
+              Cancel and go back
             </a>
           </p>
         </div>

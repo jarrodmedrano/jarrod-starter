@@ -1,3 +1,5 @@
+import { Copyright } from '../generic/copyright'
+
 const navigation = {
   solutions: [
     { name: 'Marketing', href: '#' },
@@ -216,7 +218,7 @@ export const Footer = () => {
             ))}
           </div>
           <p className="mt-8 text-xs leading-5 text-gray-400 md:order-1 md:mt-0">
-            &copy; 2020 Your Company, Inc. All rights reserved.
+            <Copyright />
           </p>
         </div>
       </div>

@@ -13,7 +13,7 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/no-unstable-nested-components': ['error'],
     'no-console': 'error',
-    'no-unused-vars': 'error',
+    'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
   },
   ignorePatterns: ['*/**/dist/*'],
 }

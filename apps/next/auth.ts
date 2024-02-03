@@ -1,30 +1,57 @@
+import { User as DefaultUser } from '@auth/core/types'
+import { AdapterUser as DefaultAdapterUser } from '@auth/core/adapters'
 import Google from 'next-auth/providers/google'
+import Facebook from 'next-auth/providers/facebook'
+import Apple from 'next-auth/providers/apple'
 import EmailProvider, { EmailConfig } from 'next-auth/providers/email'
 import NextAuth from 'next-auth'
-import type { NextAuthConfig, User } from 'next-auth'
+import type { NextAuthConfig } from 'next-auth'
 import GitHub from 'next-auth/providers/github'
 import { sendVerificationRequest } from './utils/sendVerificationRequest'
 import PostgresAdapter from '@auth/pg-adapter'
 import { Pool } from 'pg'
 
 const pool = new Pool({
-  host: 'localhost',
-  user: 'database-user',
+  host: process.env.DATABASE_HOST || 'localhost',
+  user: process.env.DATABASE_USER || 'root',
+  port: 5499,
+  password: process.env.DATABASE_SECRET || 'secret',
   max: 20,
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 2000,
+  database: process.env.DATABASE_NAME || 'starter-app',
 })
 
 declare module 'next-auth' {
-  // eslint-disable-next-line no-unused-vars
-  interface Session {
+  export interface User extends DefaultUser {
+    id: string
+    isAdmin: boolean
+    role: string
+  }
+
+  export interface Session {
+    user: User
+  }
+
+  export interface JWT {
     user: {
-      picture?: string
-    } & Omit<User, 'id'>
+      id: string
+      role: string
+    }
   }
 }
 
-export const authConfig = {
+declare module '@auth/core/adapters' {
+  //@ts-ignore this bullshit
+  export interface AdapterUser extends DefaultAdapterUser {
+    isAdmin: boolean
+    id: string
+    role: string
+  }
+}
+
+export const authConfig: NextAuthConfig = {
+  trustHost: true, // for build
   debug: true,
   adapter: PostgresAdapter(pool),
   providers: [
@@ -40,10 +67,24 @@ export const authConfig = {
       from: process.env.EMAIL_FROM,
       sendVerificationRequest,
     }) as EmailConfig & { options: Record<string, unknown> },
+    Apple,
+    Facebook,
     GitHub,
     Google,
   ],
   callbacks: {
+    async jwt({ token, user }) {
+      if (user) token.role = user.role
+      return token
+    },
+    async session({ session, user }) {
+      if (session?.user) {
+        session.user.id = user.id
+        session.user.role = user.role
+      }
+
+      return session
+    },
     authorized(params) {
       return !!params.auth?.user
     },
