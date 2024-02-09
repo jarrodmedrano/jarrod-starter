@@ -29,30 +29,20 @@ function getProviders(): Provider[] {
 }
 
 const SigninPage = () => {
-  const callbackUrl = '/'
-
   const providers = getProviders()
 
   const handleEmailSignIn = async (signinType: string, { ...args }) => {
     'use server'
-    try {
-      const result = await signIn(signinType, {
-        ...args,
-        callbackUrl,
-      })
-      // eslint-disable-next-line no-console
-      console.log('result', result)
-      return result
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.error(err)
-    }
+
+    await signIn(signinType, {
+      ...args,
+    })
   }
 
-  const handleProviderSignIn = async (provider: string) => {
+  const handleProviderSignIn = async (provider: string, { ...args }) => {
     'use server'
 
-    await signIn(provider, { callbackUrl })
+    await signIn(provider, { ...args })
   }
 
   const handleSignOut = async () => {

@@ -3,6 +3,7 @@ import { Button } from '../ui/button'
 import { ProviderIcons } from './providerIcons'
 import { Input } from '../ui/input'
 import { FormEvent } from 'react'
+import { useSearchParams } from 'next/navigation'
 
 export type Provider = {
   id: string
@@ -25,24 +26,24 @@ export const SigninFormCard = ({
     _provider: string,
     { ..._args }: { [x: string]: any },
   ) => Promise<void>
-  providerSignin: (_x: string) => Promise<void>
+  providerSignin: (
+    _provider: string,
+    { ..._args }: { [x: string]: any },
+  ) => Promise<void>
   signOut: () => Promise<void>
   credentials?: boolean
 }) => {
+  const searchParams = useSearchParams()
+  const callbackUrl = searchParams.get('callbackUrl') || '/'
+
   const handleEmailSignin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
     const email = formData.get('email')
-    try {
-      const result = await emailSignin('email', {
-        email,
-      })
-
-      return result
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.error(err)
-    }
+    await emailSignin('email', {
+      email,
+      callbackUrl,
+    })
   }
   return (
     <>
@@ -164,7 +165,11 @@ export const SigninFormCard = ({
                         <Button
                           variant="icon"
                           className="flex w-full"
-                          onClick={() => providerSignin(provider.name)}
+                          onClick={() =>
+                            providerSignin(provider.name, {
+                              callbackUrl,
+                            })
+                          }
                         >
                           <ProviderIcons providerName={provider.name} />
                           Login with {provider.name}

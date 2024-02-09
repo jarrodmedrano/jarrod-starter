@@ -23,7 +23,7 @@ export const Providers = ({
   return (
     <>
       <GlobalStyle />
-      <ThemeProvider attribute="class">{children}</ThemeProvider>
+      <ThemeProvider>{children}</ThemeProvider>
     </>
   )
 }

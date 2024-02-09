@@ -85,15 +85,18 @@ export const authConfig: NextAuthConfig = {
 
       return session
     },
-    authorized(params) {
-      return !!params.auth?.user
-    },
+    // authorized(params) {
+    //   return !!params.auth?.user
+    // },
   },
   pages: {
     signIn: '/auth/signin',
-    signOut: '/auth/signout',
-    error: '/auth/error',
-    verifyRequest: '/auth/verify-request',
+    // signOut: '/auth/signout',
+    // error: '/auth/error',
+    // verifyRequest: '/auth/verify-request',
+  },
+  session: {
+    strategy: 'jwt',
   },
 } satisfies NextAuthConfig
 

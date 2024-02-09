@@ -2,7 +2,6 @@ import { MagicLinkEmail } from '../emails/MagicLinkEmail'
 import sendgrid from '@sendgrid/mail'
 import { render } from '@react-email/components'
 import { SendVerificationRequestParams } from 'next-auth/providers'
-sendgrid.setApiKey(process.env.SENDGRID_API_KEY || '')
 
 export async function sendVerificationRequest(
   params: SendVerificationRequestParams,
@@ -10,6 +9,7 @@ export async function sendVerificationRequest(
   const { identifier, url } = params
   const { host } = new URL(url)
   const emailHtml = render(MagicLinkEmail({ url, host }))
+  sendgrid.setApiKey(process.env.SENDGRID_API_KEY || '')
 
   try {
     await sendgrid.send({
@@ -20,7 +20,7 @@ export async function sendVerificationRequest(
       html: emailHtml,
     })
   } catch (error) {
-    throw new Error('Failed to send the verification Email.')
+    throw new Error(`Failed to send the verification Email., ${error}`)
   }
 }
 
