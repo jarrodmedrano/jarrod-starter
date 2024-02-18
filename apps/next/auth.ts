@@ -6,7 +6,7 @@ import Apple from 'next-auth/providers/apple'
 import EmailProvider, { EmailConfig } from 'next-auth/providers/email'
 import NextAuth from 'next-auth'
 import type { NextAuthConfig } from 'next-auth'
-import GitHub from 'next-auth/providers/github'
+// import GitHub from 'next-auth/providers/github'
 import { sendVerificationRequest } from './utils/sendVerificationRequest'
 import PostgresAdapter from '@auth/pg-adapter'
 import { Pool } from 'pg'
@@ -69,7 +69,7 @@ export const authConfig: NextAuthConfig = {
     }) as EmailConfig & { options: Record<string, unknown> },
     Apple,
     Facebook,
-    GitHub,
+    // GitHub,
     Google,
   ],
   callbacks: {
@@ -85,9 +85,12 @@ export const authConfig: NextAuthConfig = {
 
       return session
     },
-    // authorized(params) {
-    //   return !!params.auth?.user
-    // },
+    authorized({ request, auth }) {
+      const { pathname } = request.nextUrl
+      if (pathname === '/create/*') return !!auth
+
+      return !!auth?.user
+    },
   },
   pages: {
     signIn: '/auth/signin',

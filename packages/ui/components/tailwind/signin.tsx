@@ -4,6 +4,7 @@ import { ProviderIcons } from './providerIcons'
 import { Input } from '../ui/input'
 import { FormEvent } from 'react'
 import { useSearchParams } from 'next/navigation'
+import { Logo } from '../icons/logo'
 
 export type Provider = {
   id: string
@@ -49,18 +50,14 @@ export const SigninFormCard = ({
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
-          <img
-            className="mx-auto h-10 w-auto"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-            alt="Your Company"
-          />
-          <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 dark:text-gray-200">
+          <Logo className="mx-auto h-10 w-auto" />
+          <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-white dark:text-gray-200">
             Sign in to your account
           </h2>
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
-          <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12 dark:bg-gray-800">
+          <div className="bg-white px-6 py-12 shadow dark:bg-gray-800 sm:rounded-lg sm:px-12">
             <form
               className="space-y-6"
               action="#"

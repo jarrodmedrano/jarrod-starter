@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Logo } from '../icons/logo'
 
 export interface HeroProps {
   title: string
@@ -96,11 +97,7 @@ export const Hero = ({
             <div className="flex items-center justify-between">
               <a href="#" className="-m-1.5 p-1.5">
                 <span className="sr-only">{companyName}</span>
-                <img
-                  className="h-8 w-auto"
-                  src="https://tailwindui.com/img/logos/mark.svg?color=primary&shade=500"
-                  alt=""
-                />
+                <Logo className="h-8 w-auto" />
               </a>
               <button
                 type="button"
@@ -159,15 +156,18 @@ export const Hero = ({
         <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
           <div className="hidden sm:mb-8 sm:flex sm:justify-center">
             <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-400 ring-1 ring-white/10 hover:ring-white/20">
-              {heroButtonText}{' '}
-              <a href={heroButtonLink} className="font-semibold text-white">
+              {heroButtonText}
+              <a
+                href={heroButtonLink}
+                className="ml-2 font-semibold  text-white"
+              >
                 <span className="absolute inset-0" aria-hidden="true" />
                 {heroButtonAltText} <span aria-hidden="true">&rarr;</span>
               </a>
             </div>
           </div>
           <div className="text-center">
-            <h1 className="text-4xl font-bold tracking-tight text-black sm:text-6xl  dark:text-white">
+            <h1 className="text-4xl font-bold tracking-tight text-white dark:text-white  sm:text-6xl">
               {title}
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-300">

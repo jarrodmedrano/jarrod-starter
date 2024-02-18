@@ -4,7 +4,8 @@
     "baseUrl": ".",
     "paths": {
       "@app/*": ["./*"],
-      "@ui/*": ["../ui/*"]
+      "@ui/*": ["../ui/*"],
+      "@ui/components/tailwind/*": ["../ui/components/tailwind/*"]
     }
   }
 }

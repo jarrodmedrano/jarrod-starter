@@ -1,0 +1,30 @@
+screens:
+  - name: home
+    title: Home
+    path: /
+    components:
+      - component: hero
+        components:
+          - links:
+              - text: Get Started
+                url: /create
+              - text: Browse
+                url: /stories
+              - text: Features
+                url: /features
+              - text: Pricing
+                url: /pricing
+          - buttons:
+              - text: Your story deserves to be told
+                url: /features
+                style: long
+          - section:
+              - title: Story Bible
+              - description: Craft and organize your narrative effortlessly with Story Bible, the ultimate storytelling companion.
+          - buttons:
+              - text: Get Started
+                url: /create
+                style: primary
+              - text: Learn More
+                url: /features
+                style: alt
