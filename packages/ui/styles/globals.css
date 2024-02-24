@@ -98,5 +98,29 @@
   }
   body {
     @apply bg-background text-foreground;
+
+    /* .parallax-container {
+      overflow: hidden;
+    }
+
+    .parallax > * {
+      animation: parallax linear;
+      animation-timeline: scroll();
+    }
+
+    .parallax-container {
+      overflow: hidden;
+      --parallax-speed: 200;
+    }
+
+    .parallax-img {
+      --parallax-speed: 10;
+    }
+
+    @keyframes parallax {
+      to {
+        transform: translateY(calc(var(--parallax-speed) * 200px));
+      }
+    } */
   }
 }

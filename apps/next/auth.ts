@@ -53,7 +53,6 @@ declare module '@auth/core/adapters' {
 export const authConfig: NextAuthConfig = {
   trustHost: true, // for build
   debug: true,
-  adapter: PostgresAdapter(pool),
   providers: [
     EmailProvider({
       server: {
@@ -73,31 +72,32 @@ export const authConfig: NextAuthConfig = {
     Google,
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger, session }) {
       if (user) token.role = user.role
+      if (trigger === 'update' && session?.name) {
+        token.name = session.name
+      }
       return token
     },
     async session({ session, user }) {
-      if (session?.user) {
-        session.user.id = user.id
-        session.user.role = user.role
-      }
-
+      session.user.id = user.id
+      session.user.role = user.role
       return session
     },
-    authorized({ request, auth }) {
-      const { pathname } = request.nextUrl
-      if (pathname === '/create/*') return !!auth
+    // authorized({ request, auth }) {
+    //   const { pathname } = request.nextUrl
+    //   if (pathname === '/create/*') return !!auth
 
-      return !!auth?.user
-    },
+    //   return !!auth?.user
+    // },
   },
   pages: {
-    signIn: '/auth/signin',
+    signIn: '/signin',
     // signOut: '/auth/signout',
     // error: '/auth/error',
     // verifyRequest: '/auth/verify-request',
   },
+  adapter: PostgresAdapter(pool),
   session: {
     strategy: 'jwt',
   },

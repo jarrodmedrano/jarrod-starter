@@ -33,6 +33,16 @@ const nextConfig = {
     'react-native-gesture-handler',
     'ui',
   ],
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'picsum.photos',
+        port: '',
+        pathname: '/seed/**',
+      },
+    ],
+  },
 }
 
 module.exports = withExpo(nextConfig)
