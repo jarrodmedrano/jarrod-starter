@@ -14,7 +14,6 @@ services:
       context: .
       dockerfile: ./apps/api/Dockerfile.dev
     environment:
-      - VERBECC_API=http://localhost:8000
       - NODE_ENV=development
       - NEXT_PUBLIC_API_URL=http://localhost:8080
   next:
@@ -25,7 +24,6 @@ services:
       context: .
       dockerfile: ./apps/next/Dockerfile.dev
     environment:
-      - VERBECC_API=http://localhost:8000
       - NODE_ENV=development
       - NEXT_PUBLIC_API_URL=http://localhost:8080
     volumes:

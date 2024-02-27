@@ -10,6 +10,7 @@ import type { NextAuthConfig } from 'next-auth'
 import { sendVerificationRequest } from './utils/sendVerificationRequest'
 import PostgresAdapter from '@auth/pg-adapter'
 import { Pool } from 'pg'
+import { getUserByEmail, getUserById } from './utils/user'
 
 const pool = new Pool({
   host: process.env.DATABASE_HOST || 'localhost',
@@ -72,16 +73,33 @@ export const authConfig: NextAuthConfig = {
     Google,
   ],
   callbacks: {
-    async jwt({ token, user, trigger, session }) {
-      if (user) token.role = user.role
-      if (trigger === 'update' && session?.name) {
-        token.name = session.name
-      }
+    async jwt({ token }) {
+      if (!token.sub) return token
+
+      const existingUser = await getUserByEmail(token.sub)
+
+      if (!existingUser) return token
+
+      const existingAccount = await getUserById(existingUser.id)
+
+      token.isOAuth = !!existingAccount
+      token.name = existingUser.name
+      token.email = existingUser.email
+      token.role = existingUser.role
+      // token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled
+
       return token
     },
-    async session({ session, user }) {
-      session.user.id = user.id
-      session.user.role = user.role
+    async session({ token, session }) {
+      if (token.sub && session.user) {
+        session.user.id = token.sub
+      }
+
+      if (session.user) {
+        session.user.name = token.name
+        session.user.email = token.email
+      }
+
       return session
     },
     // authorized({ request, auth }) {

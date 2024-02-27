@@ -20,7 +20,9 @@
       "@app/provider": ["../../packages/app/provider"],
       "@ui/*": ["../../packages/ui/*"],
       "@utils/*": ["./utils"],
-      "auth": ["./auth"]
+      "auth": ["./auth"],
+      "@api/*": ["../../apps/api/*"],
+      "api/*": ["../../apps/api/*"]
     },
     "plugins": [
       {
@@ -35,7 +37,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "next-auth.d.ts",
-    "process.d.ts"
+    "process.d.ts",
+    "./src/**/*/*.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["./node_modules", "./dist", "./.next", "./.turbo"]
 }

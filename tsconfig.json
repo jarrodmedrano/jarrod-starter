@@ -4,9 +4,21 @@
     "noUncheckedIndexedAccess": true,
     "paths": {
       "@app/*": ["./packages/app/*"],
-      "@ui/*": ["./packages/ui/*"]
+      "@ui/*": ["./packages/ui/*"],
+      "@schema/*": ["./packages/schema/*"],
+      "@api/*": ["./apps/api/*"]
     },
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": "."
   },
-  "extends": "expo/tsconfig.base"
+  "extends": "expo/tsconfig.base",
+  "exclude": [
+    "**/*/node_modules",
+    "**/*/dist",
+    "**/*/.next",
+    "**/*/.turbo",
+    "./node_modules",
+    "./dist",
+    "./.turbo"
+  ]
 }

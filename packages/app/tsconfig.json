@@ -5,7 +5,8 @@
     "paths": {
       "@app/*": ["./*"],
       "@ui/*": ["../ui/*"],
-      "@ui/components/tailwind/*": ["../ui/components/tailwind/*"]
+      "@ui/components/tailwind/*": ["../ui/components/tailwind/*"],
+      "@schema/*": ["../schema/*"]
     }
   }
 }

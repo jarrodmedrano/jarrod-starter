@@ -37,9 +37,6 @@
     "tailwindcss-animate": "1.0.6",
     "zod": "3.22.4"
   },
-  "resolutions": {
-    "@types/react": "17.0.40"
-  },
   "peerDependencies": {
     "react": "18.2.0",
     "react-dom": "18.2.0",

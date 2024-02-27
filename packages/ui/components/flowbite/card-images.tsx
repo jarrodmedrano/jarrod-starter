@@ -4,13 +4,13 @@ const ContentCardImagesSection = () => {
       <div className="mx-auto max-w-screen-xl px-4 py-8 lg:px-6 lg:py-16">
         <div className="text-center text-gray-900">
           <h2 className="mb-4 text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white lg:text-5xl">
-            Turn collaboration into innovation
+            AI Driven Story Plotting
           </h2>
           <a
             href="#"
             className="text-primary-600 hover:text-primary-800 dark:text-primary-500 dark:hover:text-primary-700 inline-flex items-center text-lg font-medium"
           >
-            Learn more about inner source
+            Learn more about Story Bible
             <svg
               className="ml-1 h-6 w-6"
               fill="currentColor"
@@ -29,32 +29,33 @@ const ContentCardImagesSection = () => {
           <div className="mb-2 flex md:mb-0 md:flex-col">
             <img
               alt=""
-              src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/content/office-content-1.png"
+              src="/img/features-scroll.png"
               className="mr-4 h-36 w-auto rounded-lg md:h-auto md:w-full"
             />
             <div>
               <h3 className="mb-2.5 text-xl font-bold text-gray-900 dark:text-white md:mt-4">
-                Build as one team
+                Generate your story outline
               </h3>
               <p className="text-gray-500 dark:text-gray-400">
-                Work seamlessly across your organization on a platform designed
-                for collaboration.
+                Start with one of our pre-defined story templates, or roll your
+                own. Our AI wizard will guide you through the process.
               </p>
             </div>
           </div>
           <div className="mb-2 flex md:mb-0 md:flex-col">
             <img
               alt=""
-              src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/content/office-content-2.png"
+              src="/img/features-world.png"
               className="mr-4 h-36 w-auto rounded-lg md:h-auto md:w-full"
             />
             <div>
               <h3 className="mb-2.5 text-xl font-bold text-gray-900 dark:text-white md:mt-4">
-                Transform your culture
+                Build Your World
               </h3>
               <p className="text-gray-500 dark:text-gray-400">
-                Embrace innersource, iterate faster, and ship more frequently
-                using best tools from open source teams.
+                Use our tools to create characters, locations, timelines, and
+                more. Use AI to generate artwork and content, or upload your
+                own.
               </p>
             </div>
           </div>
@@ -66,11 +67,12 @@ const ContentCardImagesSection = () => {
             />
             <div>
               <h3 className="mb-2.5 text-xl font-bold text-gray-900 dark:text-white md:mt-4">
-                Learn as you build
+                Share with our community
               </h3>
               <p className="text-gray-500 dark:text-gray-400">
-                Get insight into how your team builds today with
-                community-backed KPIs.
+                Story Bibles are public by default. Browse our collection for
+                inspiration. Or subscribe today to unlock private stories and
+                other features.
               </p>
             </div>
           </div>
