@@ -27,11 +27,15 @@ WORKDIR /app
 RUN yarn global add pnpm
 # First install dependencies (as they change less often)
 COPY .gitignore .gitignore
+COPY tsconfig.json tsconfig.json
+COPY .eslintignore .eslintignore
+COPY .eslintrc.js .eslintrc.js
 COPY --from=builder /app/out/json/ .
 COPY --from=builder /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
 COPY packages/schema /app/packages/schema
+COPY packages/tsconfig /app/packages/tsconfig
+COPY packages/schema/tsconfig.json /app/packages/schema/tsconfig.json
 COPY apps/api /app/apps/api
-COPY apps/api/tsconfig.json /app/apps/api/tsconfig.json
 
 ## console log the contents of this directory
 RUN pnpm install

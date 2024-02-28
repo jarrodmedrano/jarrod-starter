@@ -29,11 +29,14 @@ ENTRYPOINT ["sh", "./entrypoint.sh"]
 
 # First install the dependencies (as they change less often)
 COPY .gitignore .gitignore
+COPY tsconfig.json tsconfig.json
 COPY --from=builder /app/out/json/ .
 COPY --from=builder /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
 COPY packages/app /app/packages/app
 COPY packages/ui /app/packages/ui
+COPY packages/schema /app/packages/schema
 COPY packages/tsconfig /app/packages/tsconfig
+COPY apps/api /app/apps/api
 COPY packages/eslint-config-custom /app/packages/eslint-config-custom
 
 # COPY packages/database /app/packages/database
