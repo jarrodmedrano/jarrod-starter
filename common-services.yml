@@ -1,6 +1,24 @@
 version: '3'
 
 services:
+  database:
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    container_name: database
+    image: postgres:12
+    restart: always
+    ports:
+      - 5499:5432
+    networks:
+      - starter_app_network
+    env_file:
+      - .env
+    expose:
+      - '5499'
+      - '5432'
+    command: postgres -c max_connections=200
   api:
     container_name: api
     build:

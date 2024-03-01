@@ -34,15 +34,25 @@ const SigninPage = () => {
   const handleEmailSignIn = async (signinType: string, { ...args }) => {
     'use server'
 
-    await signIn(signinType, {
-      ...args,
-    })
+    try {
+      await signIn(signinType, {
+        ...args,
+      })
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error(error)
+    }
   }
 
   const handleProviderSignIn = async (provider: string, { ...args }) => {
     'use server'
 
-    await signIn(provider, { ...args })
+    try {
+      await signIn(provider, { ...args })
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error(error)
+    }
   }
 
   const handleSignOut = async () => {

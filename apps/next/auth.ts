@@ -76,19 +76,23 @@ export const authConfig: NextAuthConfig = {
     async jwt({ token }) {
       if (!token.sub) return token
 
-      const existingUser = await getUserByEmail(token.sub)
+      try {
+        const existingUser = await getUserByEmail(token.sub)
 
-      if (!existingUser) return token
+        if (!existingUser) return token
 
-      const existingAccount = await getUserById(existingUser.id)
+        const existingAccount = await getUserById(existingUser.id)
 
-      token.isOAuth = !!existingAccount
-      token.name = existingUser.name
-      token.email = existingUser.email
-      token.role = existingUser.role
-      // token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled
+        token.isOAuth = !!existingAccount
+        token.name = existingUser.name
+        token.email = existingUser.email
+        token.role = existingUser.role
+        // token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled
 
-      return token
+        return token
+      } catch (error) {
+        return token
+      }
     },
     async session({ token, session }) {
       if (token.sub && session.user) {

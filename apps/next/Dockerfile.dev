@@ -29,7 +29,13 @@ ENTRYPOINT ["sh", "./entrypoint.sh"]
 
 # First install the dependencies (as they change less often)
 COPY .gitignore .gitignore
+COPY .env .env
 COPY tsconfig.json tsconfig.json
+COPY .npmrc .npmrc
+COPY .eslintignore .eslintignore
+COPY .eslintrc.js .eslintrc.js
+COPY .prettierrc.json .prettierrc.json
+COPY .prettierignore .prettierignore
 COPY --from=builder /app/out/json/ .
 COPY --from=builder /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
 COPY packages/app /app/packages/app

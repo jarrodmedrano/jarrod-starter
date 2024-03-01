@@ -168,6 +168,12 @@ importers:
         specifier: workspace:*
         version: link:../../packages/tsconfig
 
+  apps/database:
+    dependencies:
+      pg:
+        specifier: 8.11.3
+        version: 8.11.3
+
   apps/expo:
     dependencies:
       app:
@@ -431,14 +437,14 @@ importers:
   packages/schema:
     dependencies:
       zod:
-        specifier: ^3.20.2
+        specifier: 3.20.2
         version: 3.20.2
     devDependencies:
       tsconfig:
         specifier: workspace:*
         version: link:../tsconfig
       typescript:
-        specifier: ^4.9.4
+        specifier: 4.9.4
         version: 4.9.4
 
   packages/tsconfig: {}
