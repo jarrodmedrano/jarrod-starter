@@ -33,25 +33,49 @@ const SigninPage = () => {
 
   const handleEmailSignIn = async (signinType: string, { ...args }) => {
     'use server'
+    let success = false
 
     try {
       await signIn(signinType, {
         ...args,
       })
+      success = true
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error(error)
+      return {
+        error: 'Something went wrong',
+      }
+    } finally {
+      //Clear resources
+      if (success) {
+        return {
+          success: 'Successfully signed in',
+        }
+      }
     }
   }
 
   const handleProviderSignIn = async (provider: string, { ...args }) => {
     'use server'
+    let success = false
 
     try {
       await signIn(provider, { ...args })
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error(error)
+
+      return {
+        error: 'Something went wrong',
+      }
+    } finally {
+      //Clear resources
+      if (success) {
+        return {
+          success: 'Successfully signed in',
+        }
+      }
     }
   }
 

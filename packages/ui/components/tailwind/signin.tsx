@@ -2,7 +2,7 @@
 import { Button } from '../ui/button'
 import { ProviderIcons } from './providerIcons'
 import { Input } from '../ui/input'
-import { FormEvent } from 'react'
+import { FormEvent, useState, useTransition } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { Logo } from '../icons/logo'
 
@@ -26,24 +26,57 @@ export const SigninFormCard = ({
   emailSignin: (
     _provider: string,
     { ..._args }: { [x: string]: any },
-  ) => Promise<void>
+  ) => Promise<
+    | {
+        error?: string
+        success?: string
+      }
+    | undefined
+  >
   providerSignin: (
     _provider: string,
     { ..._args }: { [x: string]: any },
-  ) => Promise<void>
+  ) => Promise<
+    | {
+        error?: string
+        success?: string
+      }
+    | undefined
+  >
   signOut: () => Promise<void>
   credentials?: boolean
 }) => {
   const searchParams = useSearchParams()
   const callbackUrl = searchParams.get('callbackUrl') || '/'
 
+  const [, startTransition] = useTransition()
+  const [, setError] = useState<string | undefined>('')
+  const [, setSuccess] = useState<string | undefined>('')
+
   const handleEmailSignin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
     const email = formData.get('email')
-    await emailSignin('email', {
-      email,
-      callbackUrl,
+
+    setError('')
+    setSuccess('')
+
+    startTransition(() => {
+      emailSignin('email', {
+        email,
+        callbackUrl,
+        redirectTo: '/create',
+      })
+        .then((data) => {
+          if (data?.error) {
+            setError(data.error)
+          }
+
+          if (data?.success) {
+            setSuccess(data.success)
+          }
+        })
+        .catch(() => setError('Something went wrong'))
     })
   }
   return (

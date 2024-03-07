@@ -6,9 +6,9 @@ import { CreateFastifyContextOptions } from '@trpc/server/adapters/fastify'
 import type fastify from 'fastify'
 
 const pool = new Pool({
-  host: process.env.DATABASE_HOST || 'localhost',
+  host: process.env.DATABASE_HOST || 'database',
   user: process.env.DATABASE_USER || 'root',
-  port: 5499,
+  port: 5498,
   password: process.env.DATABASE_SECRET || 'secret',
   max: 20,
   idleTimeoutMillis: 30000,

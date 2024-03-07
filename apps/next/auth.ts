@@ -13,9 +13,9 @@ import { Pool } from 'pg'
 import { getUserByEmail, getUserById } from './utils/user'
 
 const pool = new Pool({
-  host: process.env.DATABASE_HOST || 'localhost',
+  host: process.env.DATABASE_HOST || 'postgres12',
   user: process.env.DATABASE_USER || 'root',
-  port: 5499,
+  port: 5498,
   password: process.env.DATABASE_SECRET || 'secret',
   max: 20,
   idleTimeoutMillis: 30000,
