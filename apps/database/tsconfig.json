@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "strictNullChecks": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false
+  },
+  "exclude": ["./node_modules", "./dist", "./.turbo"],
+  "extends": "tsconfig/base.json"
+}

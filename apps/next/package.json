@@ -31,7 +31,8 @@
     "react-query": "3.39.3",
     "setimmediate": "1.0.5",
     "superjson": "1.12.1",
-    "ui": "*"
+    "ui": "*",
+    "database": "*"
   },
   "devDependencies": {
     "@types/node": "17.0.21",

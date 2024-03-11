@@ -33,50 +33,44 @@ const SigninPage = () => {
 
   const handleEmailSignIn = async (signinType: string, { ...args }) => {
     'use server'
-    let success = false
+    let response = {}
 
-    try {
-      await signIn(signinType, {
-        ...args,
-      })
-      success = true
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error(error)
-      return {
-        error: 'Something went wrong',
-      }
-    } finally {
-      //Clear resources
-      if (success) {
-        return {
-          success: 'Successfully signed in',
-        }
-      }
+    await signIn(signinType, {
+      ...args,
+    })
+    response = {
+      headline: 'Check your email',
+      success: 'A sign in link has been sent to your email address.',
     }
+
+    // eslint-disable-next-line no-console
+    console.log('args', args)
+
+    return response
   }
 
   const handleProviderSignIn = async (provider: string, { ...args }) => {
     'use server'
-    let success = false
 
-    try {
-      await signIn(provider, { ...args })
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error(error)
+    let response = {}
 
-      return {
-        error: 'Something went wrong',
-      }
-    } finally {
-      //Clear resources
-      if (success) {
-        return {
-          success: 'Successfully signed in',
+    signIn(provider, {
+      ...args,
+    })
+      .then(() => {
+        response = {
+          headline: 'Check your email',
+          success: 'A sign in link has been sent to your email address.',
         }
-      }
-    }
+      })
+      .catch(() => {
+        response = {
+          headline: 'Sign in error',
+          error: 'Something went wrong',
+        }
+      })
+
+    return response
   }
 
   const handleSignOut = async () => {

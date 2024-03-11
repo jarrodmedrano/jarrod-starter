@@ -10,7 +10,10 @@ import type { NextAuthConfig } from 'next-auth'
 import { sendVerificationRequest } from './utils/sendVerificationRequest'
 import PostgresAdapter from '@auth/pg-adapter'
 import { Pool } from 'pg'
-import { getUserByEmail, getUserById } from './utils/user'
+import fetchUser from './utils/fetchUserById'
+import fetchUserByEmail from './utils/fetchUserByEmail'
+import fetchAccount from './utils/fetchAccountById'
+import updateUser from './utils/updateUser'
 
 const pool = new Pool({
   host: process.env.DATABASE_HOST || 'postgres12',
@@ -48,6 +51,7 @@ declare module '@auth/core/adapters' {
     isAdmin: boolean
     id: string
     role: string
+    email: string
   }
 }
 
@@ -72,37 +76,77 @@ export const authConfig: NextAuthConfig = {
     // GitHub,
     Google,
   ],
+  events: {
+    async linkAccount({ user, account }) {
+      if (user && account) {
+        await updateUser({
+          id: Number(user.id),
+          emailverified: new Date(),
+          name: null,
+          email: null,
+          image: null,
+          password: null,
+          role: null,
+          istwofactorenabled: null,
+          twofactorconfirmation: null,
+        })
+      }
+    },
+  },
   callbacks: {
+    async signIn({ user, account }) {
+      // Allow OAuth without email verification
+      if (account?.provider !== 'credentials') return true
+
+      const existingUser = await fetchUserByEmail({
+        email: user.id,
+      })
+
+      // Prevent sign in without email verification
+      if (!existingUser?.emailverified) return false
+
+      return true
+    },
     async jwt({ token }) {
       if (!token.sub) return token
 
-      try {
-        const existingUser = await getUserByEmail(token.sub)
+      const existingUser = await fetchUser({
+        id: Number(token.sub),
+      })
 
-        if (!existingUser) return token
+      if (!existingUser) return token
 
-        const existingAccount = await getUserById(existingUser.id)
+      const existingAccount = await fetchAccount({
+        id: existingUser.id,
+      })
 
-        token.isOAuth = !!existingAccount
-        token.name = existingUser.name
-        token.email = existingUser.email
-        token.role = existingUser.role
-        // token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled
+      // token.isOAuth = !!existingAccount
+      token.isOAuth = !!existingAccount
+      token.name = existingUser.name
+      token.email = existingUser.email
+      token.role = existingUser.role
+      // token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled
 
-        return token
-      } catch (error) {
-        return token
-      }
+      // eslint-disable-next-line no-console
+      console.log('token', token)
+      return token
     },
     async session({ token, session }) {
       if (token.sub && session.user) {
         session.user.id = token.sub
       }
 
+      if (token.role && session.user) {
+        session.user.role = token.role as string
+      }
+
       if (session.user) {
         session.user.name = token.name
         session.user.email = token.email
       }
+
+      // eslint-disable-next-line no-console
+      console.log('session', session)
 
       return session
     },
@@ -115,9 +159,9 @@ export const authConfig: NextAuthConfig = {
   },
   pages: {
     signIn: '/signin',
-    // signOut: '/auth/signout',
     // error: '/auth/error',
-    // verifyRequest: '/auth/verify-request',
+    // signOut: '/auth/signout',
+    verifyRequest: '/verify',
   },
   adapter: PostgresAdapter(pool),
   session: {
