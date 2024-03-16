@@ -18,17 +18,14 @@ export type Provider = {
     text: string
   }
 }
-export const SigninFormCard = ({
+export const RegisterFormCard = ({
   providers,
   providerSignin,
   credentials = false,
-  credentialsSignin,
+  credentialsRegister,
 }: {
   providers: Provider[]
-  credentialsSignin: (
-    _provider: string,
-    { ..._args }: { [x: string]: any },
-  ) => Promise<
+  credentialsRegister: ({ ..._args }: { [x: string]: any }) => Promise<
     | {
         error?: string
         success?: string
@@ -62,7 +59,7 @@ export const SigninFormCard = ({
   credentials?: boolean
 }) => {
   const searchParams = useSearchParams()
-  const callbackUrl = searchParams.get('callbackUrl') || '/'
+  const callbackUrl = searchParams.get('callbackUrl')
 
   const [, startTransition] = useTransition()
 
@@ -84,6 +81,7 @@ export const SigninFormCard = ({
     const formData = new FormData(e.currentTarget)
     const email = formData.get('email')
     const password = formData.get('password')
+    const username = formData.get('name')
 
     setErrorOrSuccess({
       error: '',
@@ -92,33 +90,27 @@ export const SigninFormCard = ({
     })
 
     startTransition(() => {
-      credentialsSignin('credentials', {
+      credentialsRegister({
         email,
         password,
+        name: username,
         callbackUrl,
         redirectTo: callbackUrl || '/create',
-      })
-        .then((data) => {
-          if (data?.success) {
-            setErrorOrSuccess({
-              error: '',
-              success: data?.success,
-              headline: data?.headline,
-            })
-          }
-          if (data?.error) {
-            setErrorOrSuccess({
-              error: data?.error,
-              headline: data?.headline,
-            })
-          }
-        })
-        .catch(() =>
+      }).then((data) => {
+        if (data?.success) {
           setErrorOrSuccess({
-            headline: 'Error',
-            error: 'Something went wrong',
-          }),
-        )
+            error: '',
+            success: data?.success,
+            headline: data?.headline,
+          })
+        }
+        if (data?.error) {
+          setErrorOrSuccess({
+            error: data?.error,
+            headline: data?.headline,
+          })
+        }
+      })
     })
   }
 
@@ -128,14 +120,14 @@ export const SigninFormCard = ({
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <Logo className="mx-auto h-10 w-auto" />
           <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-white dark:text-gray-200">
-            Sign in
+            Register New Account
           </h2>
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
           <div className="bg-white px-6 py-12 shadow dark:bg-gray-800 sm:rounded-lg sm:px-12">
             <p className="text-center text-sm text-gray-500 dark:text-gray-400">
-              Dont have an account? <A href="/register">Sign Up</A>
+              Already have an account? <A href="/signin">Sign In</A>
             </p>
             {!errorOrSuccess?.success ? (
               <>
@@ -150,7 +142,25 @@ export const SigninFormCard = ({
                       htmlFor="email"
                       className="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-200"
                     >
-                      Email
+                      Name
+                    </label>
+                    <div className="mt-2">
+                      <Input
+                        id="name"
+                        name="name"
+                        type="text"
+                        autoComplete="name"
+                        placeholder="choose a unique username"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-200"
+                    >
+                      Email address
                     </label>
                     <div className="mt-2">
                       <Input
@@ -158,6 +168,7 @@ export const SigninFormCard = ({
                         name="email"
                         type="email"
                         autoComplete="email"
+                        placeholder="your email address"
                         required
                       />
                     </div>
@@ -177,7 +188,6 @@ export const SigninFormCard = ({
                             name="password"
                             type="password"
                             autoComplete="current-password"
-                            placeholder="your email address"
                             required
                           />
                         </div>
@@ -192,12 +202,6 @@ export const SigninFormCard = ({
                             Remember me
                           </label>
                         </div>
-
-                        <div className="text-sm leading-6">
-                          <Button variant="link">
-                            <a href="/reset">Forgot password?</a>
-                          </Button>
-                        </div>
                       </div>
                     </>
                   )}
@@ -207,7 +211,7 @@ export const SigninFormCard = ({
                       type="submit"
                       className="rounded-mdpx-3 flex w-full justify-center py-1.5 text-sm font-semibold leading-6 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
                     >
-                      Sign in
+                      Register
                     </Button>
                   </div>
                 </form>
@@ -242,7 +246,7 @@ export const SigninFormCard = ({
                               }
                             >
                               <ProviderIcons providerName={provider.name} />
-                              Login with {provider.name}
+                              Register with {provider.name}
                             </Button>
                           </div>
                         ) : null

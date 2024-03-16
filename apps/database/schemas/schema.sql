@@ -31,7 +31,7 @@ CREATE TABLE sessions (
 
 CREATE TABLE users (
     id SERIAL,
-    name VARCHAR(255),
+    name VARCHAR(255) UNIQUE,
     email VARCHAR(255) UNIQUE,
     "emailVerified" TIMESTAMPTZ,
     image TEXT,
@@ -39,6 +39,7 @@ CREATE TABLE users (
     "role" TEXT,
     "isTwoFactorEnabled" BOOLEAN,
     "twoFactorConfirmation" TEXT,
+    "isAdmin" BOOLEAN,
     PRIMARY KEY (id)
 );
 

@@ -1,7 +1,7 @@
 -- Users
 -- name: CreateUser :one
-INSERT INTO users (name, email, "emailVerified", "isTwoFactorEnabled", "twoFactorConfirmation")
-VALUES ($1, $2, $3, $4, $5)
+INSERT INTO users (name, email, "emailVerified", "isTwoFactorEnabled", "twoFactorConfirmation", "password", "role")
+VALUES ($1, $2, $3, $4, $5, $6, $7)
 RETURNING *;
 
 -- name: GetUser :one
@@ -83,10 +83,10 @@ VALUES ($1, $2, $3)
 RETURNING *;
 
 -- name: GetVerificationToken :one
-SELECT * FROM verification_token WHERE identifier = $1 AND token = $2 LIMIT 1;
+SELECT * FROM verification_token WHERE token = $1 LIMIT 1;
 
 -- name: DeleteVerificationToken :exec
-DELETE FROM verification_token WHERE identifier = $1 AND token = $2;
+DELETE FROM verification_token WHERE identifier = $1;
 
 
 

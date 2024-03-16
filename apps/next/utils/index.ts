@@ -1,1 +1,1 @@
-export * from './sendVerificationRequest'
+export * from '../actions/mail/sendVerificationRequest'

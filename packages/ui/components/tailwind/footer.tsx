@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { Copyright } from '../generic/copyright'
 
 const navigation = {
@@ -90,7 +91,14 @@ const navigation = {
   ],
 }
 
+const name = process.env.COMPANY_NAME || 'Company Name'
+
 export const Footer = () => {
+  const [copyRight, setCopyright] = useState('')
+  useEffect(() => {
+    setCopyright(`&copy; ${new Date().getFullYear()} ${name}. All rights
+    reserved.`)
+  }, [])
   return (
     <footer className="bg-gray-900" aria-labelledby="footer-heading">
       <h2 id="footer-heading" className="sr-only">
@@ -217,9 +225,7 @@ export const Footer = () => {
               </a>
             ))}
           </div>
-          <p className="mt-8 text-xs leading-5 text-gray-400 md:order-1 md:mt-0">
-            <Copyright />
-          </p>
+          <Copyright copyRight={copyRight} />
         </div>
       </div>
     </footer>

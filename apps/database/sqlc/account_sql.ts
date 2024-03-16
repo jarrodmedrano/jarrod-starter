@@ -5,9 +5,9 @@ interface Client {
 }
 
 export const createUserQuery = `-- name: CreateUser :one
-INSERT INTO users (name, email, "emailVerified", "isTwoFactorEnabled", "twoFactorConfirmation")
-VALUES ($1, $2, $3, $4, $5)
-RETURNING id, name, email, "emailVerified", image, password, role, "isTwoFactorEnabled", "twoFactorConfirmation"`
+INSERT INTO users (name, email, "emailVerified", "isTwoFactorEnabled", "twoFactorConfirmation", "password", "role")
+VALUES ($1, $2, $3, $4, $5, $6, $7)
+RETURNING id, name, email, "emailVerified", image, password, role, "isTwoFactorEnabled", "twoFactorConfirmation", "isAdmin"`
 
 export interface CreateUserArgs {
   name: string | null
@@ -15,6 +15,8 @@ export interface CreateUserArgs {
   emailverified: Date | null
   istwofactorenabled: boolean | null
   twofactorconfirmation: string | null
+  password: string | null
+  role: string | null
 }
 
 export interface CreateUserRow {
@@ -27,6 +29,7 @@ export interface CreateUserRow {
   role: string | null
   istwofactorenabled: boolean | null
   twofactorconfirmation: string | null
+  isadmin: boolean | null
 }
 
 export async function createUser(
@@ -41,6 +44,8 @@ export async function createUser(
       args.emailverified,
       args.istwofactorenabled,
       args.twofactorconfirmation,
+      args.password,
+      args.role,
     ],
     rowMode: 'array',
   })
@@ -58,11 +63,12 @@ export async function createUser(
     role: row[6],
     istwofactorenabled: row[7],
     twofactorconfirmation: row[8],
+    isadmin: row[9],
   }
 }
 
 export const getUserQuery = `-- name: GetUser :one
-SELECT id, name, email, "emailVerified", image, password, role, "isTwoFactorEnabled", "twoFactorConfirmation" FROM users WHERE id = $1 LIMIT 1`
+SELECT id, name, email, "emailVerified", image, password, role, "isTwoFactorEnabled", "twoFactorConfirmation", "isAdmin" FROM users WHERE id = $1 LIMIT 1`
 
 export interface GetUserArgs {
   id: number
@@ -78,6 +84,7 @@ export interface GetUserRow {
   role: string | null
   istwofactorenabled: boolean | null
   twofactorconfirmation: string | null
+  isadmin: boolean | null
 }
 
 export async function getUser(
@@ -103,11 +110,12 @@ export async function getUser(
     role: row[6],
     istwofactorenabled: row[7],
     twofactorconfirmation: row[8],
+    isadmin: row[9],
   }
 }
 
 export const getUserByEmailQuery = `-- name: GetUserByEmail :one
-SELECT id, name, email, "emailVerified", image, password, role, "isTwoFactorEnabled", "twoFactorConfirmation" FROM users WHERE email = $1 LIMIT 1`
+SELECT id, name, email, "emailVerified", image, password, role, "isTwoFactorEnabled", "twoFactorConfirmation", "isAdmin" FROM users WHERE email = $1 LIMIT 1`
 
 export interface GetUserByEmailArgs {
   email: string | null
@@ -123,6 +131,7 @@ export interface GetUserByEmailRow {
   role: string | null
   istwofactorenabled: boolean | null
   twofactorconfirmation: string | null
+  isadmin: boolean | null
 }
 
 export async function getUserByEmail(
@@ -148,11 +157,12 @@ export async function getUserByEmail(
     role: row[6],
     istwofactorenabled: row[7],
     twofactorconfirmation: row[8],
+    isadmin: row[9],
   }
 }
 
 export const getUsersByRoleQuery = `-- name: GetUsersByRole :many
-SELECT id, name, email, "emailVerified", image, password, role, "isTwoFactorEnabled", "twoFactorConfirmation" FROM users WHERE "role" = $1 ORDER BY id LIMIT $2 OFFSET $3`
+SELECT id, name, email, "emailVerified", image, password, role, "isTwoFactorEnabled", "twoFactorConfirmation", "isAdmin" FROM users WHERE "role" = $1 ORDER BY id LIMIT $2 OFFSET $3`
 
 export interface GetUsersByRoleArgs {
   role: string | null
@@ -170,6 +180,7 @@ export interface GetUsersByRoleRow {
   role: string | null
   istwofactorenabled: boolean | null
   twofactorconfirmation: string | null
+  isadmin: boolean | null
 }
 
 export async function getUsersByRole(
@@ -192,12 +203,13 @@ export async function getUsersByRole(
       role: row[6],
       istwofactorenabled: row[7],
       twofactorconfirmation: row[8],
+      isadmin: row[9],
     }
   })
 }
 
 export const getUserForUpdateQuery = `-- name: GetUserForUpdate :one
-SELECT id, name, email, "emailVerified", image, password, role, "isTwoFactorEnabled", "twoFactorConfirmation" FROM users WHERE id = $1 LIMIT 1 FOR NO KEY UPDATE`
+SELECT id, name, email, "emailVerified", image, password, role, "isTwoFactorEnabled", "twoFactorConfirmation", "isAdmin" FROM users WHERE id = $1 LIMIT 1 FOR NO KEY UPDATE`
 
 export interface GetUserForUpdateArgs {
   id: number
@@ -213,6 +225,7 @@ export interface GetUserForUpdateRow {
   role: string | null
   istwofactorenabled: boolean | null
   twofactorconfirmation: string | null
+  isadmin: boolean | null
 }
 
 export async function getUserForUpdate(
@@ -238,11 +251,12 @@ export async function getUserForUpdate(
     role: row[6],
     istwofactorenabled: row[7],
     twofactorconfirmation: row[8],
+    isadmin: row[9],
   }
 }
 
 export const listUsersQuery = `-- name: ListUsers :many
-SELECT id, name, email, "emailVerified", image, password, role, "isTwoFactorEnabled", "twoFactorConfirmation" FROM users ORDER BY id LIMIT $1 OFFSET $2`
+SELECT id, name, email, "emailVerified", image, password, role, "isTwoFactorEnabled", "twoFactorConfirmation", "isAdmin" FROM users ORDER BY id LIMIT $1 OFFSET $2`
 
 export interface ListUsersArgs {
   limit: string
@@ -259,6 +273,7 @@ export interface ListUsersRow {
   role: string | null
   istwofactorenabled: boolean | null
   twofactorconfirmation: string | null
+  isadmin: boolean | null
 }
 
 export async function listUsers(
@@ -281,6 +296,7 @@ export async function listUsers(
       role: row[6],
       istwofactorenabled: row[7],
       twofactorconfirmation: row[8],
+      isadmin: row[9],
     }
   })
 }
@@ -296,7 +312,7 @@ UPDATE users SET
   "isTwoFactorEnabled" = COALESCE($8, "isTwoFactorEnabled"),
   "twoFactorConfirmation" = COALESCE($9, "twoFactorConfirmation")
 WHERE id = $1
-RETURNING id, name, email, "emailVerified", image, password, role, "isTwoFactorEnabled", "twoFactorConfirmation"`
+RETURNING id, name, email, "emailVerified", image, password, role, "isTwoFactorEnabled", "twoFactorConfirmation", "isAdmin"`
 
 export interface UpdateUserArgs {
   id: number
@@ -320,6 +336,7 @@ export interface UpdateUserRow {
   role: string | null
   istwofactorenabled: boolean | null
   twofactorconfirmation: string | null
+  isadmin: boolean | null
 }
 
 export async function updateUser(
@@ -355,12 +372,13 @@ export async function updateUser(
     role: row[6],
     istwofactorenabled: row[7],
     twofactorconfirmation: row[8],
+    isadmin: row[9],
   }
 }
 
 export const updateUserEmailQuery = `-- name: UpdateUserEmail :one
 UPDATE users SET email = $2, "emailVerified" = NULL -- reset emailVerified when changing email
-WHERE id = $1 RETURNING id, name, email, "emailVerified", image, password, role, "isTwoFactorEnabled", "twoFactorConfirmation"`
+WHERE id = $1 RETURNING id, name, email, "emailVerified", image, password, role, "isTwoFactorEnabled", "twoFactorConfirmation", "isAdmin"`
 
 export interface UpdateUserEmailArgs {
   id: number
@@ -377,6 +395,7 @@ export interface UpdateUserEmailRow {
   role: string | null
   istwofactorenabled: boolean | null
   twofactorconfirmation: string | null
+  isadmin: boolean | null
 }
 
 export async function updateUserEmail(
@@ -402,6 +421,7 @@ export async function updateUserEmail(
     role: row[6],
     istwofactorenabled: row[7],
     twofactorconfirmation: row[8],
+    isadmin: row[9],
   }
 }
 
@@ -887,10 +907,9 @@ export async function createVerificationToken(
 }
 
 export const getVerificationTokenQuery = `-- name: GetVerificationToken :one
-SELECT identifier, expires, token FROM verification_token WHERE identifier = $1 AND token = $2 LIMIT 1`
+SELECT identifier, expires, token FROM verification_token WHERE token = $1 LIMIT 1`
 
 export interface GetVerificationTokenArgs {
-  identifier: string
   token: string
 }
 
@@ -906,7 +925,7 @@ export async function getVerificationToken(
 ): Promise<GetVerificationTokenRow | null> {
   const result = await client.query({
     text: getVerificationTokenQuery,
-    values: [args.identifier, args.token],
+    values: [args.token],
     rowMode: 'array',
   })
   if (result.rows.length !== 1) {
@@ -921,11 +940,10 @@ export async function getVerificationToken(
 }
 
 export const deleteVerificationTokenQuery = `-- name: DeleteVerificationToken :exec
-DELETE FROM verification_token WHERE identifier = $1 AND token = $2`
+DELETE FROM verification_token WHERE identifier = $1`
 
 export interface DeleteVerificationTokenArgs {
   identifier: string
-  token: string
 }
 
 export async function deleteVerificationToken(
@@ -934,7 +952,7 @@ export async function deleteVerificationToken(
 ): Promise<void> {
   await client.query({
     text: deleteVerificationTokenQuery,
-    values: [args.identifier, args.token],
+    values: [args.identifier],
     rowMode: 'array',
   })
 }

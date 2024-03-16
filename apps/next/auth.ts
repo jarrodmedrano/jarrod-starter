@@ -1,19 +1,26 @@
+import { LoginSchema } from './../../packages/schema/login'
 import { User as DefaultUser } from '@auth/core/types'
 import { AdapterUser as DefaultAdapterUser } from '@auth/core/adapters'
 import Google from 'next-auth/providers/google'
 import Facebook from 'next-auth/providers/facebook'
 import Apple from 'next-auth/providers/apple'
-import EmailProvider, { EmailConfig } from 'next-auth/providers/email'
+// import EmailProvider, {
+//   EmailConfig,
+//   SendVerificationRequestParams,
+// } from 'next-auth/providers/email'
 import NextAuth from 'next-auth'
 import type { NextAuthConfig } from 'next-auth'
+import bcrypt from 'bcrypt'
+import Credentials from 'next-auth/providers/credentials'
+
 // import GitHub from 'next-auth/providers/github'
-import { sendVerificationRequest } from './utils/sendVerificationRequest'
+// import { sendVerificationRequest as sendEmail } from './utils/sendVerificationRequest'
 import PostgresAdapter from '@auth/pg-adapter'
 import { Pool } from 'pg'
-import fetchUser from './utils/fetchUserById'
-import fetchUserByEmail from './utils/fetchUserByEmail'
-import fetchAccount from './utils/fetchAccountById'
-import updateUser from './utils/updateUser'
+import fetchUser from './actions/user/getUserById'
+import fetchUserByEmail from './actions/user/getUserByEmail'
+import fetchAccount from './actions/user/getAccountById'
+import updateUser from './actions/user/updateUser'
 
 const pool = new Pool({
   host: process.env.DATABASE_HOST || 'postgres12',
@@ -55,22 +62,44 @@ declare module '@auth/core/adapters' {
   }
 }
 
+// @ts-ignore email is experimental
 export const authConfig: NextAuthConfig = {
   trustHost: true, // for build
   debug: true,
   providers: [
-    EmailProvider({
-      server: {
-        host: process.env.EMAIL_SERVER_HOST,
-        port: process.env.EMAIL_SERVER_PORT as string,
-        auth: {
-          user: process.env.EMAIL_SERVER_USER,
-          pass: process.env.EMAIL_SERVER_PASSWORD,
-        },
+    Credentials({
+      // @ts-ignore this
+      async authorize(credentials: Partial<Record<string, unknown>>) {
+        const validatedFields = LoginSchema.safeParse(credentials)
+
+        if (validatedFields.success) {
+          const { email, password } = validatedFields.data
+
+          const user = await fetchUserByEmail({
+            email,
+          })
+          if (!user || !user.password) return null
+
+          const passwordsMatch = await bcrypt.compare(password, user.password)
+
+          if (passwordsMatch) return user
+        }
+
+        return null
       },
-      from: process.env.EMAIL_FROM,
-      sendVerificationRequest,
-    }) as EmailConfig & { options: Record<string, unknown> },
+    }),
+    // EmailProvider({
+    //   server: {
+    //     host: process.env.EMAIL_SERVER_HOST,
+    //     port: process.env.EMAIL_SERVER_PORT as string,
+    //     auth: {
+    //       user: process.env.EMAIL_SERVER_USER,
+    //       pass: process.env.EMAIL_SERVER_PASSWORD,
+    //     },
+    //   },
+    //   from: process.env.EMAIL_FROM,
+    //   sendVerificationRequest,
+    // }) as EmailConfig & { options: Record<string, unknown> },
     Apple,
     Facebook,
     // GitHub,

@@ -1,4 +1,4 @@
-import { MagicLinkEmail } from '../emails/MagicLinkEmail'
+import { MagicLinkEmail } from '../../emails/MagicLinkEmail'
 import sendgrid from '@sendgrid/mail'
 import { render } from '@react-email/components'
 import { SendVerificationRequestParams } from 'next-auth/providers'

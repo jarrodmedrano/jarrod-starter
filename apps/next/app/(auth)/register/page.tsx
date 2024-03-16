@@ -1,5 +1,6 @@
-import { SigninFormCard } from '@ui/components/tailwind/signin'
+import { RegisterFormCard } from '@ui/components/tailwind/register'
 import { authConfig, signIn, signOut } from '../../../auth'
+import { register } from '../../../actions/user/registerUser'
 
 export type Provider = {
   id: string
@@ -28,21 +29,35 @@ function getProviders(): Provider[] {
   )
 }
 
-const SigninPage = () => {
+const RegisterPage = () => {
   const providers = getProviders()
 
-  const handleCredentialSignIn = async (signinType: string, { ...args }) => {
+  const handleCredentialRegister = async ({ ...args }) => {
     'use server'
 
     let response = {}
 
-    await signIn(signinType, {
-      ...args,
+    const registerResult = await register({
+      values: {
+        email: args.email,
+        password: args.password,
+        name: args.name,
+      },
+      callbackUrl: args.callbackUrl || 'http://localhost:3000',
     })
-    response = {
-      headline: 'Check your email',
-      success: 'A sign in link has been sent to your email address.',
+    if (registerResult.error) {
+      response = {
+        error: registerResult.error,
+      }
+    } else {
+      response = {
+        headline: 'Check your email',
+        success: 'A sign in link has been sent to your email address.',
+      }
     }
+
+    // eslint-disable-next-line no-console
+    console.log('registerResult', registerResult)
 
     // eslint-disable-next-line no-console
     console.log('args', args)
@@ -98,15 +113,15 @@ const SigninPage = () => {
   }
 
   return (
-    <SigninFormCard
+    <RegisterFormCard
       emailSignin={handleEmailSignIn}
       providerSignin={handleProviderSignIn}
       signOut={handleSignOut}
-      credentialsSignin={handleCredentialSignIn}
+      credentialsRegister={handleCredentialRegister}
       providers={providers}
       credentials
     />
   )
 }
 
-export default SigninPage
+export default RegisterPage
