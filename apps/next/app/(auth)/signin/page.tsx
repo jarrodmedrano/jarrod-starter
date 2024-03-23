@@ -1,5 +1,6 @@
-import { SigninFormCard } from '@ui/components/tailwind/signin'
+import { SigninFormCard } from '@ui/components/pages/signin'
 import { authConfig, signIn, signOut } from '../../../auth'
+import { signInUser } from '../../../actions/user/signinUser'
 
 export type Provider = {
   id: string
@@ -30,43 +31,6 @@ function getProviders(): Provider[] {
 
 const SigninPage = () => {
   const providers = getProviders()
-
-  const handleCredentialSignIn = async (signinType: string, { ...args }) => {
-    'use server'
-
-    let response = {}
-
-    await signIn(signinType, {
-      ...args,
-    })
-    response = {
-      headline: 'Check your email',
-      success: 'A sign in link has been sent to your email address.',
-    }
-
-    // eslint-disable-next-line no-console
-    console.log('args', args)
-
-    return response
-  }
-
-  const handleEmailSignIn = async (signinType: string, { ...args }) => {
-    'use server'
-    let response = {}
-
-    await signIn(signinType, {
-      ...args,
-    })
-    response = {
-      headline: 'Check your email',
-      success: 'A sign in link has been sent to your email address.',
-    }
-
-    // eslint-disable-next-line no-console
-    console.log('args', args)
-
-    return response
-  }
 
   const handleProviderSignIn = async (provider: string, { ...args }) => {
     'use server'
@@ -99,10 +63,9 @@ const SigninPage = () => {
 
   return (
     <SigninFormCard
-      emailSignin={handleEmailSignIn}
       providerSignin={handleProviderSignIn}
       signOut={handleSignOut}
-      credentialsSignin={handleCredentialSignIn}
+      credentialsSignin={signInUser}
       providers={providers}
       credentials
     />

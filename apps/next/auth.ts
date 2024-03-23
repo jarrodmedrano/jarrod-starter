@@ -10,7 +10,7 @@ import Apple from 'next-auth/providers/apple'
 // } from 'next-auth/providers/email'
 import NextAuth from 'next-auth'
 import type { NextAuthConfig } from 'next-auth'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import Credentials from 'next-auth/providers/credentials'
 
 // import GitHub from 'next-auth/providers/github'
@@ -128,7 +128,7 @@ export const authConfig: NextAuthConfig = {
       if (account?.provider !== 'credentials') return true
 
       const existingUser = await fetchUserByEmail({
-        email: user.id,
+        email: user.email || null,
       })
 
       // Prevent sign in without email verification
@@ -156,8 +156,6 @@ export const authConfig: NextAuthConfig = {
       token.role = existingUser.role
       // token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled
 
-      // eslint-disable-next-line no-console
-      console.log('token', token)
       return token
     },
     async session({ token, session }) {
@@ -173,9 +171,6 @@ export const authConfig: NextAuthConfig = {
         session.user.name = token.name
         session.user.email = token.email
       }
-
-      // eslint-disable-next-line no-console
-      console.log('session', session)
 
       return session
     },

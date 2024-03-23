@@ -1,6 +1,6 @@
 'use server'
 
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 
 import fetchUserByEmail from './getUserByEmail'
 import { sendVerificationToken } from '../mail/sendVerificationToken'
@@ -18,12 +18,12 @@ const pool = new Pool({
   connectionTimeoutMillis: 2000,
   database: process.env.DATABASE_NAME || 'starter-app',
 })
-export const register = async ({
+export const registerUser = async ({
   values,
   callbackUrl,
 }: {
   values: registerSchema
-  callbackUrl?: string
+  callbackUrl?: string | null
 }) => {
   const validatedFields = RegisterSchema.safeParse(values)
 
@@ -52,15 +52,11 @@ export const register = async ({
     istwofactorenabled: null,
     twofactorconfirmation: null,
   })
-  // eslint-disable-next-line no-console
-  console.log('the email', email)
 
-  const sentEmail = await sendVerificationToken({
+  await sendVerificationToken({
     identifier: email,
     url: callbackUrl || 'http://localhost:3000',
   })
-  // eslint-disable-next-line no-console
-  console.log('sentEmail', sentEmail)
 
   return { success: 'Confirmation email sent!' }
 }

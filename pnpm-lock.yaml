@@ -251,7 +251,7 @@ importers:
         version: 0.2.12(nodemailer@6.9.8)(pg@8.11.3)
       '@expo/next-adapter':
         specifier: 5.0.2
-        version: 5.0.2(expo@46.0.21)(next@13.4.19)(react-native-web@0.19.6)(react@18.2.0)(webpack@5.89.0)
+        version: 5.0.2(expo@46.0.21)(next@13.4.19)(react-native-web@0.18.12)(react@18.2.0)(webpack@5.89.0)
       '@react-email/components':
         specifier: 0.0.7
         version: 0.0.7
@@ -270,6 +270,9 @@ importers:
       '@types/bcrypt':
         specifier: ^5.0.2
         version: 5.0.2
+      '@types/bcryptjs':
+        specifier: ^2.4.6
+        version: 2.4.6
       '@types/uuid':
         specifier: ^9.0.8
         version: 9.0.8
@@ -285,6 +288,9 @@ importers:
       bcrypt:
         specifier: 5.1.1
         version: 5.1.1
+      bcryptjs:
+        specifier: ^2.4.3
+        version: 2.4.3
       database:
         specifier: '*'
         version: link:../database
@@ -335,10 +341,10 @@ importers:
         version: 3.22.0(react-native@0.72.4)(react@18.2.0)
       react-native-web:
         specifier: 0.19.6
-        version: 0.19.6(react-dom@18.2.0)(react@18.2.0)
+        version: 0.18.12(react-dom@18.2.0)(react@18.2.0)
       react-query:
         specifier: 3.39.3
-        version: 3.39.3(react-dom@18.2.0)(react-native@0.72.4)(react@18.2.0)
+        version: 3.39.3(react-dom@18.2.0)(react@18.2.0)
       schema:
         specifier: '*'
         version: link:../../packages/schema
@@ -3086,7 +3092,7 @@ packages:
       react-native: 0.72.6(@babel/core@7.23.7)(@babel/preset-env@7.23.6)(react@18.2.0)
     dev: false
 
-  /@expo/next-adapter@5.0.2(expo@46.0.21)(next@13.4.19)(react-native-web@0.19.6)(react@18.2.0)(webpack@5.89.0):
+  /@expo/next-adapter@5.0.2(expo@46.0.21)(next@13.4.19)(react-native-web@0.18.12)(react@18.2.0)(webpack@5.89.0):
     resolution: {integrity: sha512-xo95f1U96HwcIyp1+X9NRS/48Sfh7fZsgKWJgV11uGo7amLInpu0wqf/mi6Wto3qC7BLMXghqCD0h16CjCP3gg==}
     peerDependencies:
       expo: ^46
@@ -3098,7 +3104,7 @@ packages:
       expo: 46.0.21(@babel/core@7.23.7)
       next: 13.4.19(@babel/core@7.23.7)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
-      react-native-web: 0.19.6(react-dom@18.2.0)(react@18.2.0)
+      react-native-web: 0.18.12(react-dom@18.2.0)(react@18.2.0)
       webpack: 5.89.0
     dev: false
 
@@ -5478,7 +5484,7 @@ packages:
       '@trpc/server': 10.7.0
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      react-query: 3.39.3(react-dom@18.2.0)(react-native@0.72.4)(react@18.2.0)
+      react-query: 3.39.3(react-dom@18.2.0)(react@18.2.0)
     dev: false
 
   /@trpc/server@10.7.0:
@@ -5514,6 +5520,10 @@ packages:
     resolution: {integrity: sha512-6atioO8Y75fNcbmj0G7UjI9lXN2pQ/IGJ2FWT4a/btd0Lk9lQalHLKhkgKVZ3r+spnmWUKfbMi1GEe9wyHQfNQ==}
     dependencies:
       '@types/node': 18.14.6
+    dev: false
+
+  /@types/bcryptjs@2.4.6:
+    resolution: {integrity: sha512-9xlo6R2qDs5uixm0bcIqCeMCE6HiQsIyel9KQySStiyqNl2tnj2mP3DX1Nf56MD6KMenNNlBBsy3LJ7gUEQPXQ==}
     dev: false
 
   /@types/chai-subset@1.3.5:
@@ -6810,6 +6820,10 @@ packages:
       - supports-color
     dev: false
 
+  /bcryptjs@2.4.3:
+    resolution: {integrity: sha512-V/Hy/X9Vt7f3BbPJEi8BdVFMByHi+jNXrYkW3huaybV/kQ0KJg0Y6PkEMbn+zeT+i+SiKZ/HMqJGIIt4LZDqNQ==}
+    dev: false
+
   /before-after-hook@2.2.3:
     resolution: {integrity: sha512-NzUnlZexiaH/46WDhANlyR2bXRopNg4F/zuSA3OpZnllCUgRaOF2znDioDWrmbNVsuZk6l9pMquQB38cfBZwkQ==}
     dev: false
@@ -7564,6 +7578,13 @@ packages:
       is-directory: 0.3.1
       js-yaml: 3.14.1
       parse-json: 4.0.0
+
+  /create-react-class@15.7.0:
+    resolution: {integrity: sha512-QZv4sFWG9S5RUvkTYWbflxeZX+JG7Cz0Tn33rQBJ+WFQTqTfUTjMjiv9tnfXazjsO5r0KhPs+AqCjyrQX6h2ng==}
+    dependencies:
+      loose-envify: 1.4.0
+      object-assign: 4.1.1
+    dev: false
 
   /create-require@1.1.1:
     resolution: {integrity: sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==}
@@ -12827,6 +12848,10 @@ packages:
       abbrev: 2.0.0
     dev: false
 
+  /normalize-css-color@1.0.2:
+    resolution: {integrity: sha512-jPJ/V7Cp1UytdidsPqviKEElFQJs22hUUgK5BOPHTwOonNCk7/2qOxhhqzEajmFrWJowADFfOFh1V+aWkRfy+w==}
+    dev: false
+
   /normalize-package-data@2.5.0:
     resolution: {integrity: sha512-/5CMN3T0R4XTj4DcGaexo+roZSdSFW/0AOOTROrjxzCG1wrWXEsGbRKevjlIL+ZDE4sZlJr5ED4YW0yqmkK+eA==}
     dependencies:
@@ -14472,6 +14497,25 @@ packages:
       warn-once: 0.1.1
     dev: false
 
+  /react-native-web@0.18.12(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-fboP7yqobJ8InSr4fP+bQ3scOtSQtUoPcR+HWasH8b/fk/RO+mWcJs/8n+lewy9WTZc2D68ha7VwRDviUshEWA==}
+    peerDependencies:
+      react: ^17.0.2 || ^18.0.0
+      react-dom: ^17.0.2 || ^18.0.0
+    dependencies:
+      '@babel/runtime': 7.23.9
+      create-react-class: 15.7.0
+      fbjs: 3.0.5
+      inline-style-prefixer: 6.0.4
+      normalize-css-color: 1.0.2
+      postcss-value-parser: 4.2.0
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      styleq: 0.1.3
+    transitivePeerDependencies:
+      - encoding
+    dev: false
+
   /react-native-web@0.19.6(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-lk0X4y4DhZxc2e7Wdc1NkvJVObZZOLAz9l7S5a5awLI5SsZoF5L0WZhiU/+qWu5cpV0wMkME9qx7CvegmO4snw==}
     peerDependencies:
@@ -14601,7 +14645,7 @@ packages:
     resolution: {integrity: sha512-kzmNjIgU32mO4mmH5+iUyrqlpFQhF8K2k7eZ4fdLSOPFrD1XgEuSBv9LDEgxRXTMBqMd8ppT0x6TIzqE5pdGdw==}
     dev: false
 
-  /react-query@3.39.3(react-dom@18.2.0)(react-native@0.72.4)(react@18.2.0):
+  /react-query@3.39.3(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-nLfLz7GiohKTJDuT4us4X3h/8unOh+00MLb2yJoGTPjxKs2bc1iDhkNx2bd5MKklXnOD3NrVZ+J2UXujA5In4g==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -14618,7 +14662,6 @@ packages:
       match-sorter: 6.3.4
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      react-native: 0.72.4(@babel/core@7.23.7)(@babel/preset-env@7.23.6)(react@18.2.0)
     dev: false
 
   /react-refresh@0.14.0:

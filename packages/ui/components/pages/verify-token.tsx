@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
+import { CardWrapper } from '../card/card-wrapper'
+import { A } from '../generic/link'
 
 export const NewVerificationForm = ({
   newVerification,
@@ -42,9 +44,15 @@ export const NewVerificationForm = ({
   }, [onSubmit])
 
   return (
-    <div className="flex w-full items-center justify-center">
-      {success}
-      {error}
-    </div>
+    <CardWrapper
+      headerLabel="Verify Token"
+      backButtonLabel="Don't have an account?"
+      backButtonHref="/register"
+    >
+      <p className="mt-5 text-center text-sm text-gray-500 dark:text-gray-400">
+        {success}
+        {error} <A href="/signin">Sign in again</A>
+      </p>
+    </CardWrapper>
   )
 }

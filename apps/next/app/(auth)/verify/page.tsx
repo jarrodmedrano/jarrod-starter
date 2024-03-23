@@ -1,4 +1,4 @@
-import { VerifyCard } from '@ui/components/tailwind/verify'
+import { VerifyCard } from '@ui/components/pages/verify'
 
 const VerifyPage = () => {
   return <VerifyCard />

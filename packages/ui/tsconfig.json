@@ -10,7 +10,8 @@
       "@app/*": ["./packages/app/*"],
       "@ui/*": ["./*"],
       "@ui/components/ui*": ["./components/ui*"],
-      "@ui/components/tailwind*": ["./components/tailwind*"]
+      "@ui/components/tailwind*": ["./components/tailwind*"],
+      "@/*": ["./*"]
     }
   }
 }

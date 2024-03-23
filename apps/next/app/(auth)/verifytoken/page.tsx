@@ -1,4 +1,4 @@
-import { NewVerificationForm } from '@ui/components/tailwind/verification'
+import { NewVerificationForm } from '@ui/components/pages/verify-token'
 import { newVerification } from '../../../actions/user/verifyUser'
 
 const VerifyTokenPage = () => {

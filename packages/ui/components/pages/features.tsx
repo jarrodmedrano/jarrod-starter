@@ -1,8 +1,6 @@
 import ContentCardImagesSection from '../flowbite/card-images'
 
-export const Features = ({ ...props }) => {
-  // eslint-disable-next-line no-console
-  console.log('props', props)
+export const Features = () => {
   return (
     <div className="bg-gray-900">
       <main>

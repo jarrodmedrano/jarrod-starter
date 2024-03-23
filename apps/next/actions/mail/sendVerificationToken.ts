@@ -8,17 +8,16 @@ export async function sendVerificationToken(params: {
 }) {
   const { identifier, url } = params
   const { host } = new URL(url)
-  // eslint-disable-next-line no-console
-  console.log('host', host)
-  const emailHtml = render(MagicLinkEmail({ url, host }))
-  // eslint-disable-next-line no-console
-  console.log('email', emailHtml)
   sendgrid.setApiKey(process.env.SENDGRID_API_KEY || '')
 
   const token = await generateVerificationToken(identifier)
 
+  const emailHtml = render(
+    MagicLinkEmail({ url: `${url}/verifytoken?token=${token}`, host }),
+  )
+
   try {
-    const result = await sendgrid.send({
+    await sendgrid.send({
       from: `${process.env.APP_NAME} <${process.env.EMAIL_FROM}>`,
       to: [identifier],
       subject: `Log in to ${host}`,
@@ -28,11 +27,7 @@ export async function sendVerificationToken(params: {
       }),
       html: emailHtml,
     })
-    // eslint-disable-next-line no-console
-    console.log('result', result)
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log('url', url)
     throw new Error(`Failed to send the verification Email., ${error}`)
   }
 }

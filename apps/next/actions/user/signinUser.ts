@@ -5,13 +5,15 @@ import { sendVerificationToken } from '../mail/sendVerificationToken'
 import { LoginSchema, loginSchema } from '@schema/login'
 import { generateVerificationToken } from './generateVerificationToken'
 import { signIn } from '../../auth'
-import { AuthError } from 'next-auth'
+// import { AuthError } from 'next-auth'
 import { DEFAULT_LOGIN_REDIRECT } from '../../routes'
 
-export const signinUser = async ({
+export const signInUser = async ({
+  signInType,
   values,
   callbackUrl,
 }: {
+  signInType: string
   values: loginSchema
   callbackUrl?: string
 }) => {
@@ -36,28 +38,35 @@ export const signinUser = async ({
 
     await sendVerificationToken({
       identifier: email,
-      url: 'http://localhost:3000',
+      url: callbackUrl || DEFAULT_LOGIN_REDIRECT,
     })
 
-    return { success: 'Confirmation email sent!' }
-  }
-
-  try {
-    await signIn('credentials', {
-      email,
-      password,
-      redirectTo: callbackUrl || DEFAULT_LOGIN_REDIRECT,
-    })
-  } catch (error) {
-    if (error instanceof AuthError) {
-      switch (error.type) {
-        case 'CredentialsSignin':
-          return { error: 'Invalid credentials!' }
-        default:
-          return { error: 'Something went wrong!' }
-      }
+    return {
+      headline: 'Check your email',
+      success:
+        'Your email is not yet verified. Check your email and click on the link to get verified!',
     }
-
-    throw error
   }
+
+  await signIn(signInType, {
+    email,
+    password,
+    redirectTo: callbackUrl || DEFAULT_LOGIN_REDIRECT,
+    callbackUrl: callbackUrl || DEFAULT_LOGIN_REDIRECT,
+    redirect: true,
+  })
+  // } catch (error) {
+  // eslint-disable-next-line no-console
+  // console.log('the error', error)
+  // if (error instanceof AuthError) {
+  //   switch (error.type) {
+  //     case 'CredentialsSignin':
+  //       return { error: 'Invalid credentials!' }
+  //     default:
+  //       return { error: 'Something went wrong!' }
+  //   }
+  // }
+
+  // throw error
+  // }
 }

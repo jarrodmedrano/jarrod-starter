@@ -3,7 +3,20 @@
  * These routes do not require authentication
  * @type {string[]}
  */
-export const publicRoutes = ['/', '/new-verification', '/about', '/signin']
+export const publicRoutes = [
+  '/',
+  '/verify',
+  '/verifytoken',
+  '/about',
+  '/signin',
+]
+
+/**
+ * An array of routes that are used for authentication
+ * These routes will redirect logged in users to /settings
+ * @type {string[]}
+ */
+export const privateRoutes = ['/admin']
 
 /**
  * An array of routes that are used for authentication
@@ -16,8 +29,6 @@ export const authRoutes = [
   '/error',
   '/reset',
   '/new-password',
-  '/verify',
-  '/verifytoken',
 ]
 
 /**

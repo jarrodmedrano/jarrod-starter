@@ -9,8 +9,10 @@ import {
   DEFAULT_LOGIN_REDIRECT,
   apiAuthPrefix,
   authRoutes,
-  publicRoutes,
+  privateRoutes,
 } from './routes'
+// const { auth } = NextAuth(authConfig)
+
 // import { auth } from './auth'
 // import { NextAuthRequest } from 'next-auth/lib'
 
@@ -50,19 +52,16 @@ import {
 
 //   return NextResponse.next()
 // })
-export async function middleware(req: NextAuthRequest): Promise<Response> {
+export default async function middleware(
+  req: NextAuthRequest,
+): Promise<Response> {
   const { nextUrl } = req
   const isLoggedIn = !!req.auth
 
-  // // eslint-disable-next-line no-console
-  // console.log('request', req)
-  // // eslint-disable-next-line no-console
-  // console.log('reqiest auth', req.auth)
-  // // eslint-disable-next-line no-console
-  // console.log('next url', nextUrl)
-
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix)
-  const isPublicRoute = publicRoutes.includes(nextUrl.pathname)
+  // const _isPublicRoute = publicRoutes.includes(nextUrl.pathname)
+  const isPrivateRoute = privateRoutes.includes(nextUrl.pathname)
+
   const isAuthRoute = authRoutes.includes(nextUrl.pathname)
 
   if (isApiAuthRoute) {
@@ -80,7 +79,7 @@ export async function middleware(req: NextAuthRequest): Promise<Response> {
     return NextResponse.next()
   }
 
-  if (!isLoggedIn && !isPublicRoute) {
+  if (!isLoggedIn && isPrivateRoute) {
     let callbackUrl = nextUrl.pathname
     if (nextUrl.search) {
       callbackUrl += nextUrl.search
