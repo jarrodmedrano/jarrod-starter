@@ -1,5 +1,5 @@
 import { SigninFormCard } from '@ui/components/pages/signin'
-import { authConfig, signIn, signOut } from '../../../auth'
+import { authConfig, signOut } from '../../../auth'
 import { signInUser } from '../../../actions/user/signinUser'
 
 export type Provider = {
@@ -32,30 +32,6 @@ function getProviders(): Provider[] {
 const SigninPage = () => {
   const providers = getProviders()
 
-  const handleProviderSignIn = async (provider: string, { ...args }) => {
-    'use server'
-
-    let response = {}
-
-    signIn(provider, {
-      ...args,
-    })
-      .then(() => {
-        response = {
-          headline: 'Check your email',
-          success: 'A sign in link has been sent to your email address.',
-        }
-      })
-      .catch(() => {
-        response = {
-          headline: 'Sign in error',
-          error: 'Something went wrong',
-        }
-      })
-
-    return response
-  }
-
   const handleSignOut = async () => {
     'use server'
     await signOut()
@@ -63,7 +39,6 @@ const SigninPage = () => {
 
   return (
     <SigninFormCard
-      providerSignin={handleProviderSignIn}
       signOut={handleSignOut}
       credentialsSignin={signInUser}
       providers={providers}

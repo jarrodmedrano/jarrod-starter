@@ -103,7 +103,10 @@ export const authConfig: NextAuthConfig = {
     Apple,
     Facebook,
     // GitHub,
-    Google,
+    Google({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
   ],
   events: {
     async linkAccount({ user, account }) {

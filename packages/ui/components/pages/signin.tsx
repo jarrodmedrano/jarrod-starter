@@ -7,6 +7,7 @@ import { useSearchParams } from 'next/navigation'
 import { Checkbox } from '../ui/checkbox'
 import { A } from '../generic/link'
 import { CardWrapper } from '../card/card-wrapper'
+import { signIn as nextSignIn } from 'next-auth/react'
 
 export type Provider = {
   id: string
@@ -20,7 +21,6 @@ export type Provider = {
 }
 export const SigninFormCard = ({
   providers,
-  providerSignin,
   credentials = false,
   credentialsSignin,
 }: {
@@ -40,17 +40,6 @@ export const SigninFormCard = ({
     | undefined
   >
   emailSignin?: (
-    _provider: string,
-    { ..._args }: { [x: string]: any },
-  ) => Promise<
-    | {
-        error?: string
-        success?: string
-        headline?: string
-      }
-    | undefined
-  >
-  providerSignin: (
     _provider: string,
     { ..._args }: { [x: string]: any },
   ) => Promise<
@@ -126,6 +115,28 @@ export const SigninFormCard = ({
         })
       }
     })
+  }
+
+  const handleProviderSignIn = async (provider: string, { ...args }) => {
+    let response = {}
+
+    await nextSignIn(provider?.toLowerCase(), {
+      ...args,
+    })
+      .then(() => {
+        response = {
+          headline: 'Check your email',
+          success: 'A sign in link has been sent to your email address.',
+        }
+      })
+      .catch(() => {
+        response = {
+          headline: 'Sign in error',
+          error: 'Something went wrong',
+        }
+      })
+
+    return response
   }
 
   return (
@@ -238,7 +249,7 @@ export const SigninFormCard = ({
                         variant="icon"
                         className="flex w-full"
                         onClick={() =>
-                          providerSignin(provider.name, {
+                          handleProviderSignIn(provider.name, {
                             callbackUrl,
                           })
                         }
