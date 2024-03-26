@@ -6,6 +6,7 @@ import { FormEvent, useState, useTransition } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { Checkbox } from '../ui/checkbox'
 import { CardWrapper } from '../card/card-wrapper'
+import { ProviderSignin } from '../auth/providers'
 
 export type Provider = {
   id: string
@@ -220,26 +221,10 @@ export const RegisterFormCard = ({
               </div>
 
               <div className="mt-6 grid grid-cols-1  gap-4">
-                {providers != null &&
-                  Object.values(providers).map((provider: any) => {
-                    return provider.name !== 'Email' &&
-                      provider.name !== 'Credentials' ? (
-                      <div key={provider.name}>
-                        {/* <Button
-                              variant="icon"
-                              className="flex w-full"
-                              onClick={() =>
-                                providerSignin(provider.name, {
-                                  callbackUrl,
-                                })
-                              }
-                            >
-                              <ProviderIcons providerName={provider.name} />
-                              Register with {provider.name}
-                            </Button> */}
-                      </div>
-                    ) : null
-                  })}
+                <ProviderSignin
+                  providers={providers}
+                  callbackUrl={callbackUrl}
+                />
               </div>
             </div>
           </>

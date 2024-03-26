@@ -1,13 +1,12 @@
 'use client'
 import { Button } from '../ui/button'
-import { ProviderIcons } from '../tailwind/providerIcons'
 import { Input } from '../ui/input'
 import { FormEvent, useState, useTransition } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { Checkbox } from '../ui/checkbox'
 import { A } from '../generic/link'
 import { CardWrapper } from '../card/card-wrapper'
-import { signIn as nextSignIn } from 'next-auth/react'
+import { ProviderSignin } from '../auth/providers'
 
 export type Provider = {
   id: string
@@ -117,28 +116,6 @@ export const SigninFormCard = ({
     })
   }
 
-  const handleProviderSignIn = async (provider: string, { ...args }) => {
-    let response = {}
-
-    await nextSignIn(provider?.toLowerCase(), {
-      ...args,
-    })
-      .then(() => {
-        response = {
-          headline: 'Check your email',
-          success: 'A sign in link has been sent to your email address.',
-        }
-      })
-      .catch(() => {
-        response = {
-          headline: 'Sign in error',
-          error: 'Something went wrong',
-        }
-      })
-
-    return response
-  }
-
   return (
     <CardWrapper
       headerLabel="Sign In"
@@ -240,26 +217,8 @@ export const SigninFormCard = ({
             </div>
 
             <div className="mt-6 grid grid-cols-1  gap-4">
-              {providers != null &&
-                Object.values(providers).map((provider: any) => {
-                  return provider.name !== 'Email' &&
-                    provider.name !== 'Credentials' ? (
-                    <div key={provider.name}>
-                      <Button
-                        variant="icon"
-                        className="flex w-full"
-                        onClick={() =>
-                          handleProviderSignIn(provider.name, {
-                            callbackUrl,
-                          })
-                        }
-                      >
-                        <ProviderIcons providerName={provider.name} />
-                        Login with {provider.name}
-                      </Button>
-                    </div>
-                  ) : null
-                })}
+              {' '}
+              <ProviderSignin providers={providers} callbackUrl={callbackUrl} />
             </div>
           </div>
         </>
