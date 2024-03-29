@@ -5,6 +5,10 @@ import { useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Logo } from '../icons/logo'
+import { useSession } from 'next-auth/react'
+import UserDropdown from './user-dropdown'
+import { signOut } from 'next-auth/react'
+
 export const Header = ({
   companyLink,
   companyName,
@@ -16,6 +20,8 @@ export const Header = ({
   navigation: { name: string; href: string }[]
   companyLogo: React.ReactElement
 }) => {
+  const { data: session } = useSession()
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
@@ -52,12 +58,16 @@ export const Header = ({
           ))}
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a
-            href="/api/signin"
-            className="text-sm font-semibold leading-6 text-white"
-          >
-            Log in <span aria-hidden="true">&rarr;</span>
-          </a>
+          {session?.user ? (
+            <UserDropdown user={session.user} logOut={signOut} />
+          ) : (
+            <a
+              href="/signin"
+              className="text-sm font-semibold leading-6 text-white"
+            >
+              Log in <span aria-hidden="true">&rarr;</span>
+            </a>
+          )}
         </div>
       </nav>
       <Dialog

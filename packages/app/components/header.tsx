@@ -1,4 +1,4 @@
-import { Header as HeaderNav } from '@ui/components/tailwind/header'
+import { Header as HeaderNav } from '@ui/components/header/header'
 import { Logo } from '@ui/components/icons/logo'
 import { navigation } from '../utils/constants'
 
