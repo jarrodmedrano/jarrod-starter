@@ -1,15 +1,13 @@
 'use client'
 
-import { View } from '../../design/view'
+import Layout from '../../components/dashboard-layout'
 import React from 'react'
-import { SiteHeader } from '../../../ui/components/header/internal/site-header'
-
-import '@ui/styles/globals.css'
-
-export function CreateScreen() {
+const CreateScreen = function () {
   return (
-    <View>
-      <SiteHeader />
-    </View>
+    <Layout>
+      <div>here</div>
+    </Layout>
   )
 }
+
+export default CreateScreen
