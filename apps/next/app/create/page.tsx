@@ -1,12 +1,8 @@
 import withAuth from '../utils/withAuth'
+import { CreateScreen } from '@app/features/create/screen'
 
 const CreatePage = (props: any) => {
-  return (
-    <>
-      <h2 className="mt-4 font-medium">You are logged in as:</h2>
-      <p className="mt-4">{props?.session?.user?.name}</p>
-    </>
-  )
+  return <CreateScreen {...props} />
 }
 
 export default withAuth(CreatePage)
