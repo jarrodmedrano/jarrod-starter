@@ -1,7 +1,10 @@
 import withDashboard from '../../ui/components/wrappers/with-dashboard'
-import React from 'react'
 import { View } from '../design/view'
-const Layout = ({ children }: { children: React.ReactNode }) => {
+
+import React, { ReactNode } from 'react'
+const Layout = ({ children }: { children: ReactNode }) => {
+  // eslint-disable-next-line no-console
+  // console.log('layout props', props)
   return <View>{children}</View>
 }
 
