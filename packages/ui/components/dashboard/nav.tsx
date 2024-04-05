@@ -7,14 +7,16 @@ import { cn } from '@/lib/utils'
 import { buttonVariants } from '../ui/button'
 import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip'
 
-interface NavProps {
+export interface NapPropsLinks {
+  title: string
+  label?: string
+  icon: LucideIcon
+  variant: 'default' | 'ghost'
+  href: string
+}
+export interface NavProps {
   isCollapsed: boolean
-  links: {
-    title: string
-    label?: string
-    icon: LucideIcon
-    variant: 'default' | 'ghost'
-  }[]
+  links: NapPropsLinks[]
 }
 
 export function Nav({ links, isCollapsed }: NavProps) {

@@ -6,24 +6,12 @@ import {
   ResizablePanelGroup,
 } from '../ui/resizable'
 import { Separator } from '@radix-ui/react-select'
-import { Nav } from '../dashboard/nav'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs'
-import { AccountSwitcher } from '../dashboard/account-switcher'
 import { cn } from '@ui/lib/utils'
-import {
-  AlertCircle,
-  Archive,
-  File,
-  Inbox,
-  MessagesSquare,
-  Send,
-  ShoppingCart,
-  Trash2,
-  Users2,
-} from 'lucide-react'
 import { Input } from '../ui/input'
 import { Search } from '../search/search'
 import { SiteHeader } from '../header/internal/site-header'
+import { Sidebar } from './sidebar/sidebar'
 
 const withDashboard = (Component: ElementType<any>) => {
   const WrappedComponent = ({
@@ -38,8 +26,10 @@ const withDashboard = (Component: ElementType<any>) => {
     defaultCollapsed?: boolean
     navCollapsedSize?: number
   }) => {
-    // // eslint-disable-next-line no-console
-    // console.log('the wrapper props', defaultLayout)
+    //@ts-ignore this line
+    const { session } = props
+    // eslint-disable-next-line no-console
+    // console.log('the wrapper props', props)
 
     const [isCollapsed, setIsCollapsed] = useState<boolean>(defaultCollapsed)
 
@@ -52,7 +42,7 @@ const withDashboard = (Component: ElementType<any>) => {
 
     return (
       <>
-        <SiteHeader />
+        <SiteHeader session={session} signOut={() => {}} />
         <main className="flex-1">
           <TooltipProvider delayDuration={0}>
             <ResizablePanelGroup
@@ -85,95 +75,16 @@ const withDashboard = (Component: ElementType<any>) => {
                     'min-w-[50px] transition-all duration-300 ease-in-out',
                 )}
               >
-                <div
-                  className={cn(
-                    'flex h-[52px] items-center justify-center',
-                    isCollapsed ? 'h-[52px]' : 'px-2',
-                  )}
+                <Sidebar
+                  defaultLayout={defaultLayout}
+                  session={session}
+                  isCollapsed={isCollapsed}
+                  setIsCollapsed={function (_isCollapsed: boolean): void {
+                    throw new Error('Function not implemented.')
+                  }}
                 >
-                  <AccountSwitcher
-                    isCollapsed={isCollapsed}
-                    accounts={[
-                      {
-                        label: 'Account 1',
-                        email: 'XVj9H@example.com',
-                        icon: <MessagesSquare size={20} />,
-                      },
-                    ]}
-                  />
-                </div>
-                <Separator />
-                <Nav
-                  isCollapsed={isCollapsed}
-                  links={[
-                    {
-                      title: 'Inbox',
-                      label: '128',
-                      icon: Inbox,
-                      variant: 'default',
-                    },
-                    {
-                      title: 'Drafts',
-                      label: '9',
-                      icon: File,
-                      variant: 'ghost',
-                    },
-                    {
-                      title: 'Sent',
-                      label: '',
-                      icon: Send,
-                      variant: 'ghost',
-                    },
-                    {
-                      title: 'Trash',
-                      label: '',
-                      icon: Trash2,
-                      variant: 'ghost',
-                    },
-                    {
-                      title: 'Archive',
-                      label: '',
-                      icon: Archive,
-                      variant: 'ghost',
-                    },
-                  ]}
-                />
-                <Separator />
-                <Nav
-                  isCollapsed={isCollapsed}
-                  links={[
-                    {
-                      title: 'Social',
-                      label: '972',
-                      icon: Users2,
-                      variant: 'ghost',
-                    },
-                    {
-                      title: 'Updates',
-                      label: '342',
-                      icon: AlertCircle,
-                      variant: 'ghost',
-                    },
-                    {
-                      title: 'Forums',
-                      label: '128',
-                      icon: MessagesSquare,
-                      variant: 'ghost',
-                    },
-                    {
-                      title: 'Shopping',
-                      label: '8',
-                      icon: ShoppingCart,
-                      variant: 'ghost',
-                    },
-                    {
-                      title: 'Promotions',
-                      label: '21',
-                      icon: Archive,
-                      variant: 'ghost',
-                    },
-                  ]}
-                />
+                  test
+                </Sidebar>
               </ResizablePanel>
               <ResizableHandle withHandle />
               <ResizablePanel defaultSize={defaultLayout[1]} minSize={30}>

@@ -1,4 +1,4 @@
-import withDashboard from '../../ui/components/wrappers/with-dashboard'
+import withDashboard from '../../ui/components/dashboard/with-dashboard'
 import { View } from '../design/view'
 
 import React, { ReactNode } from 'react'

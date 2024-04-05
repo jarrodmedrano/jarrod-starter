@@ -1,5 +1,5 @@
 export const siteConfig = {
-  name: 'shadcn/ui',
+  name: process.env.NEXT_PUBLIC_APP_NAME,
   url: 'https://ui.shadcn.com',
   ogImage: 'https://ui.shadcn.com/og.jpg',
   description:

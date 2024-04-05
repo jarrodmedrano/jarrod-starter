@@ -1,0 +1,99 @@
+{
+  "sitemap": [
+    {
+      "page": {
+        "name": "home",
+        "loc": "/"
+      }
+    },
+    {
+      "page": {
+        "loc": "/about",
+        "children": [
+          {
+            "page": {
+              "name": "features",
+              "loc": "/about/features"
+            }
+          },
+          {
+            "page": {
+              "name": "pricing",
+              "loc": "/about/pricing"
+            }
+          },
+          {
+            "page": {
+              "name": "contact",
+              "loc": "/about/contact"
+            }
+          },
+          {
+            "page": {
+              "name": "privacy",
+              "loc": "/about/privacy"
+            }
+          },
+          {
+            "page": {
+              "name": "terms",
+              "loc": "/about/terms"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "collection": {
+        "name": "stories",
+        "loc": "/stories",
+        "items": [
+          {
+            "page": {
+              "loc": "/stories/:user/:slug"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "collection": {
+        "name": "characters",
+        "loc": "/characters",
+        "items": [
+          {
+            "page": {
+              "loc": "/characters/:user/:slug"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "collection": {
+        "name": "locations",
+        "loc": "/locations",
+        "items": [
+          {
+            "page": {
+              "loc": "/locations/:user/:slug"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "collection": {
+        "name": "timelines",
+        "loc": "/timelines",
+        "items": [
+          {
+            "page": {
+              "loc": "/timelines/:user/:slug"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

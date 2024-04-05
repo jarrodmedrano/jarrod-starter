@@ -6,7 +6,8 @@
       "@app/*": ["./packages/app/*"],
       "@ui/*": ["./packages/ui/*"],
       "@schema/*": ["./packages/schema/*"],
-      "@api/*": ["./apps/api/*"]
+      "@api/*": ["./apps/api/*"],
+      "@sitemap/*": ["./packages/sitemap/*"]
     },
     "jsx": "react-jsx",
     "baseUrl": "."

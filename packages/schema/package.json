@@ -8,7 +8,7 @@
     "build": "npx tsc"
   },
   "keywords": [],
-  "author": "maybemaby",
+  "author": "jarrodmedrano",
   "license": "ISC",
   "devDependencies": {
     "typescript": "4.9.4",

@@ -6,11 +6,15 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "baseUrl": ".",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+
     "paths": {
       "@app/*": ["./packages/app/*"],
       "@ui/*": ["./*"],
       "@ui/components/ui*": ["./components/ui*"],
       "@ui/components/tailwind*": ["./components/tailwind*"],
+      "@sitemap/*": ["./packages/sitemap/*"],
       "@/*": ["./*"]
     }
   }
