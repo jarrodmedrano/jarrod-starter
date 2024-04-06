@@ -8,7 +8,73 @@
     },
     {
       "page": {
+        "loc": "/create",
+        "name": "create",
+        "children": [
+          {
+            "page": {
+              "name": "stories",
+              "loc": "/create/stories"
+            }
+          },
+          {
+            "page": {
+              "name": "characters",
+              "loc": "/create/characters"
+            }
+          },
+          {
+            "page": {
+              "name": "locations",
+              "loc": "/create/locations"
+            }
+          },
+          {
+            "page": {
+              "name": "timelines",
+              "loc": "/create/timelines"
+            }
+          }
+        ]
+      }
+    },
+
+    {
+      "page": {
+        "loc": "/browse",
+        "name": "browse",
+        "children": [
+          {
+            "page": {
+              "name": "stories",
+              "loc": "/:user/stories/:slug"
+            }
+          },
+          {
+            "page": {
+              "name": "characters",
+              "loc": "/:user/characters/:slug"
+            }
+          },
+          {
+            "page": {
+              "name": "locations",
+              "loc": "/:user/locations/:slug"
+            }
+          },
+          {
+            "page": {
+              "name": "timelines",
+              "loc": "/:user/timelines/:slug"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "page": {
         "loc": "/about",
+        "name": "about",
         "children": [
           {
             "page": {

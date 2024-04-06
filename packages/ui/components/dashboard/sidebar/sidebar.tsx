@@ -6,7 +6,7 @@ import { ReactNode, useEffect, useState } from 'react'
 import { cn } from '@ui/lib/utils'
 import { NapPropsLinks, Nav } from '../nav'
 import { sitemap } from '../../../../../packages/sitemap/sitemap.json'
-import { createKeyIndex } from '../utils/index'
+import { createKeyIndex } from '../utils/build-nav'
 
 export const Sidebar = ({
   session,
