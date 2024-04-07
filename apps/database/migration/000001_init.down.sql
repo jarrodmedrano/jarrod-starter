@@ -1,0 +1,10 @@
+DROP TABLE verification_token;
+DROP TABLE accounts;
+DROP TABLE sessions;
+DROP TABLE users;
+DROP TABLE two_factor_confirmation;
+DROP TABLE two_factor_token;
+DROP TABLE timelines;
+DROP TABLE stories;
+DROP TABLE characters
+DROP TABLE locations;

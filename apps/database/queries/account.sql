@@ -112,3 +112,81 @@ SELECT * FROM two_factor_confirmation WHERE "userId" = $1 AND confirmation = $2 
 
 -- name: DeleteTwoFactorConfirmation :exec
 DELETE FROM two_factor_confirmation WHERE "userId" = $1 AND confirmation = $2;
+
+
+-- Stories
+-- name: CreateStory :one
+INSERT INTO stories ("userId", title, content)
+VALUES ($1, $2, $3)
+RETURNING *;
+
+-- name: GetStory :one
+SELECT * FROM stories WHERE id = $1 LIMIT 1;
+
+-- name: ListStoriesForUser :many
+SELECT * FROM stories WHERE "userId" = $1 ORDER BY id LIMIT $2 OFFSET $3;
+
+-- name: UpdateStory :one
+UPDATE stories SET title = $2, content = $3
+WHERE id = $1 RETURNING *;
+
+-- name: DeleteStory :exec
+DELETE FROM stories WHERE id = $1;
+
+-- Characters
+-- name: CreateCharacter :one
+INSERT INTO characters ("userId", name, description)
+VALUES ($1, $2, $3)
+RETURNING *;
+
+-- name: GetCharacter :one
+SELECT * FROM characters WHERE id = $1 LIMIT 1;
+
+-- name: ListCharactersForUser :many
+SELECT * FROM characters WHERE "userId" = $1 ORDER BY id LIMIT $2 OFFSET $3;
+
+-- name: UpdateCharacter :one
+UPDATE characters SET name = $2, description = $3
+WHERE id = $1 RETURNING *;
+
+-- name: DeleteCharacter :exec
+DELETE FROM characters WHERE id = $1;
+
+-- Locations
+-- name: CreateLocation :one
+INSERT INTO locations ("userId", name, description)
+VALUES ($1, $2, $3)
+RETURNING *;
+
+-- name: GetLocation :one
+SELECT * FROM locations WHERE id = $1 LIMIT 1;
+
+-- name: ListLocationsForUser :many 
+SELECT * FROM locations WHERE "userId" = $1 ORDER BY id LIMIT $2 OFFSET $3;
+
+-- name: UpdateLocation :one
+UPDATE locations SET name = $2, description = $3
+WHERE id = $1 RETURNING *;
+
+-- name: DeleteLocation :exec
+DELETE FROM locations WHERE id = $1;
+
+
+-- Timelines
+-- name: CreateTimeline :one
+INSERT INTO timelines ("userId", name, description)
+VALUES ($1, $2, $3)
+RETURNING *;
+
+-- name: GetTimeline :one
+SELECT * FROM timelines WHERE id = $1 LIMIT 1;
+
+-- name: ListTimelinesForUser :many
+SELECT * FROM timelines WHERE "userId" = $1 ORDER BY id LIMIT $2 OFFSET $3;
+
+-- name: UpdateTimeline :one
+UPDATE timelines SET name = $2, description = $3
+WHERE id = $1 RETURNING *;
+
+-- name: DeleteTimeline :exec
+DELETE FROM timelines WHERE id = $1;

@@ -1,5 +1,10 @@
 brew install golang-migrate
 
+make postgres
+
+make createdb
+
 make create
 
-add schema to migrate up and drop table to migrate down
+add schema into the migrate up sql file
+add schema to drop tables in the migrate down

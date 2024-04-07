@@ -1136,3 +1136,727 @@ export async function deleteTwoFactorConfirmation(
     rowMode: 'array',
   })
 }
+
+export const createStoryQuery = `-- name: CreateStory :one
+INSERT INTO stories ("userId", title, content)
+VALUES ($1, $2, $3)
+RETURNING id, "userId", title, content, created_at, updated_at`
+
+export interface CreateStoryArgs {
+  userid: number
+  title: string
+  content: string
+}
+
+export interface CreateStoryRow {
+  id: number
+  userid: number
+  title: string
+  content: string
+  createdAt: Date | null
+  updatedAt: Date | null
+}
+
+export async function createStory(
+  client: Client,
+  args: CreateStoryArgs,
+): Promise<CreateStoryRow | null> {
+  const result = await client.query({
+    text: createStoryQuery,
+    values: [args.userid, args.title, args.content],
+    rowMode: 'array',
+  })
+  if (result.rows.length !== 1) {
+    return null
+  }
+  const row = result.rows[0]
+  return {
+    id: row[0],
+    userid: row[1],
+    title: row[2],
+    content: row[3],
+    createdAt: row[4],
+    updatedAt: row[5],
+  }
+}
+
+export const getStoryQuery = `-- name: GetStory :one
+SELECT id, "userId", title, content, created_at, updated_at FROM stories WHERE id = $1 LIMIT 1`
+
+export interface GetStoryArgs {
+  id: number
+}
+
+export interface GetStoryRow {
+  id: number
+  userid: number
+  title: string
+  content: string
+  createdAt: Date | null
+  updatedAt: Date | null
+}
+
+export async function getStory(
+  client: Client,
+  args: GetStoryArgs,
+): Promise<GetStoryRow | null> {
+  const result = await client.query({
+    text: getStoryQuery,
+    values: [args.id],
+    rowMode: 'array',
+  })
+  if (result.rows.length !== 1) {
+    return null
+  }
+  const row = result.rows[0]
+  return {
+    id: row[0],
+    userid: row[1],
+    title: row[2],
+    content: row[3],
+    createdAt: row[4],
+    updatedAt: row[5],
+  }
+}
+
+export const listStoriesForUserQuery = `-- name: ListStoriesForUser :many
+SELECT id, "userId", title, content, created_at, updated_at FROM stories WHERE "userId" = $1 ORDER BY id LIMIT $2 OFFSET $3`
+
+export interface ListStoriesForUserArgs {
+  userid: number
+  limit: string
+  offset: string
+}
+
+export interface ListStoriesForUserRow {
+  id: number
+  userid: number
+  title: string
+  content: string
+  createdAt: Date | null
+  updatedAt: Date | null
+}
+
+export async function listStoriesForUser(
+  client: Client,
+  args: ListStoriesForUserArgs,
+): Promise<ListStoriesForUserRow[]> {
+  const result = await client.query({
+    text: listStoriesForUserQuery,
+    values: [args.userid, args.limit, args.offset],
+    rowMode: 'array',
+  })
+  return result.rows.map((row) => {
+    return {
+      id: row[0],
+      userid: row[1],
+      title: row[2],
+      content: row[3],
+      createdAt: row[4],
+      updatedAt: row[5],
+    }
+  })
+}
+
+export const updateStoryQuery = `-- name: UpdateStory :one
+UPDATE stories SET title = $2, content = $3
+WHERE id = $1 RETURNING id, "userId", title, content, created_at, updated_at`
+
+export interface UpdateStoryArgs {
+  id: number
+  title: string
+  content: string
+}
+
+export interface UpdateStoryRow {
+  id: number
+  userid: number
+  title: string
+  content: string
+  createdAt: Date | null
+  updatedAt: Date | null
+}
+
+export async function updateStory(
+  client: Client,
+  args: UpdateStoryArgs,
+): Promise<UpdateStoryRow | null> {
+  const result = await client.query({
+    text: updateStoryQuery,
+    values: [args.id, args.title, args.content],
+    rowMode: 'array',
+  })
+  if (result.rows.length !== 1) {
+    return null
+  }
+  const row = result.rows[0]
+  return {
+    id: row[0],
+    userid: row[1],
+    title: row[2],
+    content: row[3],
+    createdAt: row[4],
+    updatedAt: row[5],
+  }
+}
+
+export const deleteStoryQuery = `-- name: DeleteStory :exec
+DELETE FROM stories WHERE id = $1`
+
+export interface DeleteStoryArgs {
+  id: number
+}
+
+export async function deleteStory(
+  client: Client,
+  args: DeleteStoryArgs,
+): Promise<void> {
+  await client.query({
+    text: deleteStoryQuery,
+    values: [args.id],
+    rowMode: 'array',
+  })
+}
+
+export const createCharacterQuery = `-- name: CreateCharacter :one
+INSERT INTO characters ("userId", name, description)
+VALUES ($1, $2, $3)
+RETURNING id, "userId", name, description, created_at, updated_at`
+
+export interface CreateCharacterArgs {
+  userid: number
+  name: string
+  description: string | null
+}
+
+export interface CreateCharacterRow {
+  id: number
+  userid: number
+  name: string
+  description: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
+}
+
+export async function createCharacter(
+  client: Client,
+  args: CreateCharacterArgs,
+): Promise<CreateCharacterRow | null> {
+  const result = await client.query({
+    text: createCharacterQuery,
+    values: [args.userid, args.name, args.description],
+    rowMode: 'array',
+  })
+  if (result.rows.length !== 1) {
+    return null
+  }
+  const row = result.rows[0]
+  return {
+    id: row[0],
+    userid: row[1],
+    name: row[2],
+    description: row[3],
+    createdAt: row[4],
+    updatedAt: row[5],
+  }
+}
+
+export const getCharacterQuery = `-- name: GetCharacter :one
+SELECT id, "userId", name, description, created_at, updated_at FROM characters WHERE id = $1 LIMIT 1`
+
+export interface GetCharacterArgs {
+  id: number
+}
+
+export interface GetCharacterRow {
+  id: number
+  userid: number
+  name: string
+  description: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
+}
+
+export async function getCharacter(
+  client: Client,
+  args: GetCharacterArgs,
+): Promise<GetCharacterRow | null> {
+  const result = await client.query({
+    text: getCharacterQuery,
+    values: [args.id],
+    rowMode: 'array',
+  })
+  if (result.rows.length !== 1) {
+    return null
+  }
+  const row = result.rows[0]
+  return {
+    id: row[0],
+    userid: row[1],
+    name: row[2],
+    description: row[3],
+    createdAt: row[4],
+    updatedAt: row[5],
+  }
+}
+
+export const listCharactersForUserQuery = `-- name: ListCharactersForUser :many
+SELECT id, "userId", name, description, created_at, updated_at FROM characters WHERE "userId" = $1 ORDER BY id LIMIT $2 OFFSET $3`
+
+export interface ListCharactersForUserArgs {
+  userid: number
+  limit: string
+  offset: string
+}
+
+export interface ListCharactersForUserRow {
+  id: number
+  userid: number
+  name: string
+  description: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
+}
+
+export async function listCharactersForUser(
+  client: Client,
+  args: ListCharactersForUserArgs,
+): Promise<ListCharactersForUserRow[]> {
+  const result = await client.query({
+    text: listCharactersForUserQuery,
+    values: [args.userid, args.limit, args.offset],
+    rowMode: 'array',
+  })
+  return result.rows.map((row) => {
+    return {
+      id: row[0],
+      userid: row[1],
+      name: row[2],
+      description: row[3],
+      createdAt: row[4],
+      updatedAt: row[5],
+    }
+  })
+}
+
+export const updateCharacterQuery = `-- name: UpdateCharacter :one
+UPDATE characters SET name = $2, description = $3
+WHERE id = $1 RETURNING id, "userId", name, description, created_at, updated_at`
+
+export interface UpdateCharacterArgs {
+  id: number
+  name: string
+  description: string | null
+}
+
+export interface UpdateCharacterRow {
+  id: number
+  userid: number
+  name: string
+  description: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
+}
+
+export async function updateCharacter(
+  client: Client,
+  args: UpdateCharacterArgs,
+): Promise<UpdateCharacterRow | null> {
+  const result = await client.query({
+    text: updateCharacterQuery,
+    values: [args.id, args.name, args.description],
+    rowMode: 'array',
+  })
+  if (result.rows.length !== 1) {
+    return null
+  }
+  const row = result.rows[0]
+  return {
+    id: row[0],
+    userid: row[1],
+    name: row[2],
+    description: row[3],
+    createdAt: row[4],
+    updatedAt: row[5],
+  }
+}
+
+export const deleteCharacterQuery = `-- name: DeleteCharacter :exec
+DELETE FROM characters WHERE id = $1`
+
+export interface DeleteCharacterArgs {
+  id: number
+}
+
+export async function deleteCharacter(
+  client: Client,
+  args: DeleteCharacterArgs,
+): Promise<void> {
+  await client.query({
+    text: deleteCharacterQuery,
+    values: [args.id],
+    rowMode: 'array',
+  })
+}
+
+export const createLocationQuery = `-- name: CreateLocation :one
+INSERT INTO locations ("userId", name, description)
+VALUES ($1, $2, $3)
+RETURNING id, "userId", name, description, created_at, updated_at`
+
+export interface CreateLocationArgs {
+  userid: number
+  name: string
+  description: string | null
+}
+
+export interface CreateLocationRow {
+  id: number
+  userid: number
+  name: string
+  description: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
+}
+
+export async function createLocation(
+  client: Client,
+  args: CreateLocationArgs,
+): Promise<CreateLocationRow | null> {
+  const result = await client.query({
+    text: createLocationQuery,
+    values: [args.userid, args.name, args.description],
+    rowMode: 'array',
+  })
+  if (result.rows.length !== 1) {
+    return null
+  }
+  const row = result.rows[0]
+  return {
+    id: row[0],
+    userid: row[1],
+    name: row[2],
+    description: row[3],
+    createdAt: row[4],
+    updatedAt: row[5],
+  }
+}
+
+export const getLocationQuery = `-- name: GetLocation :one
+SELECT id, "userId", name, description, created_at, updated_at FROM locations WHERE id = $1 LIMIT 1`
+
+export interface GetLocationArgs {
+  id: number
+}
+
+export interface GetLocationRow {
+  id: number
+  userid: number
+  name: string
+  description: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
+}
+
+export async function getLocation(
+  client: Client,
+  args: GetLocationArgs,
+): Promise<GetLocationRow | null> {
+  const result = await client.query({
+    text: getLocationQuery,
+    values: [args.id],
+    rowMode: 'array',
+  })
+  if (result.rows.length !== 1) {
+    return null
+  }
+  const row = result.rows[0]
+  return {
+    id: row[0],
+    userid: row[1],
+    name: row[2],
+    description: row[3],
+    createdAt: row[4],
+    updatedAt: row[5],
+  }
+}
+
+export const listLocationsForUserQuery = `-- name: ListLocationsForUser :many
+SELECT id, "userId", name, description, created_at, updated_at FROM locations WHERE "userId" = $1 ORDER BY id LIMIT $2 OFFSET $3`
+
+export interface ListLocationsForUserArgs {
+  userid: number
+  limit: string
+  offset: string
+}
+
+export interface ListLocationsForUserRow {
+  id: number
+  userid: number
+  name: string
+  description: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
+}
+
+export async function listLocationsForUser(
+  client: Client,
+  args: ListLocationsForUserArgs,
+): Promise<ListLocationsForUserRow[]> {
+  const result = await client.query({
+    text: listLocationsForUserQuery,
+    values: [args.userid, args.limit, args.offset],
+    rowMode: 'array',
+  })
+  return result.rows.map((row) => {
+    return {
+      id: row[0],
+      userid: row[1],
+      name: row[2],
+      description: row[3],
+      createdAt: row[4],
+      updatedAt: row[5],
+    }
+  })
+}
+
+export const updateLocationQuery = `-- name: UpdateLocation :one
+UPDATE locations SET name = $2, description = $3
+WHERE id = $1 RETURNING id, "userId", name, description, created_at, updated_at`
+
+export interface UpdateLocationArgs {
+  id: number
+  name: string
+  description: string | null
+}
+
+export interface UpdateLocationRow {
+  id: number
+  userid: number
+  name: string
+  description: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
+}
+
+export async function updateLocation(
+  client: Client,
+  args: UpdateLocationArgs,
+): Promise<UpdateLocationRow | null> {
+  const result = await client.query({
+    text: updateLocationQuery,
+    values: [args.id, args.name, args.description],
+    rowMode: 'array',
+  })
+  if (result.rows.length !== 1) {
+    return null
+  }
+  const row = result.rows[0]
+  return {
+    id: row[0],
+    userid: row[1],
+    name: row[2],
+    description: row[3],
+    createdAt: row[4],
+    updatedAt: row[5],
+  }
+}
+
+export const deleteLocationQuery = `-- name: DeleteLocation :exec
+DELETE FROM locations WHERE id = $1`
+
+export interface DeleteLocationArgs {
+  id: number
+}
+
+export async function deleteLocation(
+  client: Client,
+  args: DeleteLocationArgs,
+): Promise<void> {
+  await client.query({
+    text: deleteLocationQuery,
+    values: [args.id],
+    rowMode: 'array',
+  })
+}
+
+export const createTimelineQuery = `-- name: CreateTimeline :one
+INSERT INTO timelines ("userId", name, description)
+VALUES ($1, $2, $3)
+RETURNING id, "userId", name, description, created_at, updated_at`
+
+export interface CreateTimelineArgs {
+  userid: number
+  name: string
+  description: string | null
+}
+
+export interface CreateTimelineRow {
+  id: number
+  userid: number
+  name: string
+  description: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
+}
+
+export async function createTimeline(
+  client: Client,
+  args: CreateTimelineArgs,
+): Promise<CreateTimelineRow | null> {
+  const result = await client.query({
+    text: createTimelineQuery,
+    values: [args.userid, args.name, args.description],
+    rowMode: 'array',
+  })
+  if (result.rows.length !== 1) {
+    return null
+  }
+  const row = result.rows[0]
+  return {
+    id: row[0],
+    userid: row[1],
+    name: row[2],
+    description: row[3],
+    createdAt: row[4],
+    updatedAt: row[5],
+  }
+}
+
+export const getTimelineQuery = `-- name: GetTimeline :one
+SELECT id, "userId", name, description, created_at, updated_at FROM timelines WHERE id = $1 LIMIT 1`
+
+export interface GetTimelineArgs {
+  id: number
+}
+
+export interface GetTimelineRow {
+  id: number
+  userid: number
+  name: string
+  description: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
+}
+
+export async function getTimeline(
+  client: Client,
+  args: GetTimelineArgs,
+): Promise<GetTimelineRow | null> {
+  const result = await client.query({
+    text: getTimelineQuery,
+    values: [args.id],
+    rowMode: 'array',
+  })
+  if (result.rows.length !== 1) {
+    return null
+  }
+  const row = result.rows[0]
+  return {
+    id: row[0],
+    userid: row[1],
+    name: row[2],
+    description: row[3],
+    createdAt: row[4],
+    updatedAt: row[5],
+  }
+}
+
+export const listTimelinesForUserQuery = `-- name: ListTimelinesForUser :many
+SELECT id, "userId", name, description, created_at, updated_at FROM timelines WHERE "userId" = $1 ORDER BY id LIMIT $2 OFFSET $3`
+
+export interface ListTimelinesForUserArgs {
+  userid: number
+  limit: string
+  offset: string
+}
+
+export interface ListTimelinesForUserRow {
+  id: number
+  userid: number
+  name: string
+  description: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
+}
+
+export async function listTimelinesForUser(
+  client: Client,
+  args: ListTimelinesForUserArgs,
+): Promise<ListTimelinesForUserRow[]> {
+  const result = await client.query({
+    text: listTimelinesForUserQuery,
+    values: [args.userid, args.limit, args.offset],
+    rowMode: 'array',
+  })
+  return result.rows.map((row) => {
+    return {
+      id: row[0],
+      userid: row[1],
+      name: row[2],
+      description: row[3],
+      createdAt: row[4],
+      updatedAt: row[5],
+    }
+  })
+}
+
+export const updateTimelineQuery = `-- name: UpdateTimeline :one
+UPDATE timelines SET name = $2, description = $3
+WHERE id = $1 RETURNING id, "userId", name, description, created_at, updated_at`
+
+export interface UpdateTimelineArgs {
+  id: number
+  name: string
+  description: string | null
+}
+
+export interface UpdateTimelineRow {
+  id: number
+  userid: number
+  name: string
+  description: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
+}
+
+export async function updateTimeline(
+  client: Client,
+  args: UpdateTimelineArgs,
+): Promise<UpdateTimelineRow | null> {
+  const result = await client.query({
+    text: updateTimelineQuery,
+    values: [args.id, args.name, args.description],
+    rowMode: 'array',
+  })
+  if (result.rows.length !== 1) {
+    return null
+  }
+  const row = result.rows[0]
+  return {
+    id: row[0],
+    userid: row[1],
+    name: row[2],
+    description: row[3],
+    createdAt: row[4],
+    updatedAt: row[5],
+  }
+}
+
+export const deleteTimelineQuery = `-- name: DeleteTimeline :exec
+DELETE FROM timelines WHERE id = $1`
+
+export interface DeleteTimelineArgs {
+  id: number
+}
+
+export async function deleteTimeline(
+  client: Client,
+  args: DeleteTimelineArgs,
+): Promise<void> {
+  await client.query({
+    text: deleteTimelineQuery,
+    values: [args.id],
+    rowMode: 'array',
+  })
+}
