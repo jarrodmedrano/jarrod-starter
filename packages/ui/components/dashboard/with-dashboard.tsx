@@ -25,7 +25,7 @@ const withDashboard = (Component: ElementType<any>) => {
     //@ts-ignore this line
     const { session } = props
     // eslint-disable-next-line no-console
-    // console.log('the wrapper props', props)
+    console.log('the wrapper props', props)
 
     const [isCollapsed, setIsCollapsed] = useState<boolean>(defaultCollapsed)
 
@@ -78,9 +78,7 @@ const withDashboard = (Component: ElementType<any>) => {
                   setIsCollapsed={function (_isCollapsed: boolean): void {
                     throw new Error('Function not implemented.')
                   }}
-                >
-                  test
-                </Sidebar>
+                />
               </ResizablePanel>
               <ResizableHandle withHandle />
               <ResizablePanel defaultSize={defaultLayout[1]} minSize={30}>

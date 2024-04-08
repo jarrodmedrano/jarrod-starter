@@ -21,7 +21,7 @@ export const Sidebar = ({
   navCollapsedSize?: number
   isCollapsed: boolean
   setIsCollapsed: (_isCollapsed: boolean) => void
-  children: ReactNode
+  children?: ReactNode
 }) => {
   const [collectionsNav, setCollectionsNav] = useState<NapPropsLinks[]>([])
 

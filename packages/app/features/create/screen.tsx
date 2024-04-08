@@ -1,14 +1,16 @@
 'use client'
 
-import Layout from '../../components/dashboard-layout'
+import { ScreenProps } from '../../common/interfaces'
+import DashboardLayout from '../../components/dashboard-layout'
 import React from 'react'
-const CreateScreen = function (props: any) {
+
+const CreateScreen = function (props: ScreenProps) {
   // eslint-disable-next-line no-console
-  // console.log('create screen the props', props)
+  console.log('create screen the props', props)
   return (
-    <Layout {...props}>
-      <div>here</div>
-    </Layout>
+    <DashboardLayout {...props}>
+      <div>here boy</div>
+    </DashboardLayout>
   )
 }
 

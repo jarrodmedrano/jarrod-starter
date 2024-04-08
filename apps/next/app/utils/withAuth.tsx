@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation'
 import { NextRequest } from 'next/server'
 import { headers } from 'next/headers'
 import { signinRoute } from '../../routes'
+import CookieWrapper from '../CookieWrapper'
 
 const withAuth = (Component: ElementType<any>) => {
   const AuthenticatedComponent = async ({
@@ -31,9 +32,11 @@ const withAuth = (Component: ElementType<any>) => {
     }
 
     return (
-      <Component session={session} {...props}>
-        {children}
-      </Component>
+      <CookieWrapper>
+        <Component session={session} {...props}>
+          {children}
+        </Component>
+      </CookieWrapper>
     )
   }
 
