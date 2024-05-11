@@ -1,5 +1,5 @@
 import { createStory } from 'database'
-import pool from '../../utils/pools-open'
+import pool from '../../utils/open-pool'
 
 export async function POST(request: Request) {
   const body = await request.json()

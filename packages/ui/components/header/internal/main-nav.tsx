@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation'
 import { Logo } from '@ui/components/icons/logo'
 import { siteConfig } from '@/config/site'
 import { sitemap } from '../../../../../packages/sitemap/sitemap.json'
-import { usePageNav } from './use-page-nav'
+import { usePageNav } from '../../hooks/use-page-nav'
 
 export function MainNav() {
   const pathname = usePathname()

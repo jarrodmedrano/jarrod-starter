@@ -13,5 +13,6 @@ export interface ScreenProps {
     }
     expires: string
   }
+  data: any
   children: React.ReactNode
 }

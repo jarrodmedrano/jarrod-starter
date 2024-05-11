@@ -1,5 +1,5 @@
 import { listStoriesForUser } from 'database'
-import pool from '../../../../utils/pools-open'
+import pool from '../../../../utils/open-pool'
 export async function GET(
   _request: Request,
   { params }: { params: { slug: number } },

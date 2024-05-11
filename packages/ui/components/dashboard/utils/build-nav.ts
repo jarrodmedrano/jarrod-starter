@@ -22,11 +22,34 @@ export const createKeyIndex = (sitemap: any): KeyIndex => {
   }
 }
 
-export const createSubNav = (keyIndex: any) => {
-  return keyIndex?.pages?.reduce((acc: any, curr: any) => {
+export const createPagesSubNav = (
+  keyIndex: any,
+  type: 'pages' | 'collections',
+  data: any,
+) => {
+  return keyIndex?.[type]?.reduce((acc: any, curr: any) => {
+    if (curr && curr?.name && data?.[curr.name]) {
+      return [
+        ...acc,
+        {
+          title: curr.name || curr.loc,
+          label: curr.label || curr.loc,
+          href: curr.loc,
+          icon: Inbox,
+          variant: 'ghost',
+          children: data?.[curr?.name]?.map((child: any) => {
+            return {
+              title: child.title,
+              label: child.title,
+              icon: Inbox,
+              variant: 'ghost',
+              href: child?.slug || curr?.loc,
+            }
+          }),
+        },
+      ]
+    }
     if (curr && curr?.children) {
-      // eslint-disable-next-line no-console
-      console.log('curr', curr)
       return [
         ...acc,
         {
@@ -36,8 +59,6 @@ export const createSubNav = (keyIndex: any) => {
           icon: Inbox,
           variant: 'ghost',
           children: curr.children.map((child: any) => {
-            // eslint-disable-next-line no-console
-            console.log('curr', curr)
             return {
               title: child.page.name || child.page.loc,
               label: child.page.label || child.page.loc,

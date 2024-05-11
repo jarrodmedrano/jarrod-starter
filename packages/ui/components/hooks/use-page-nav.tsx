@@ -1,4 +1,4 @@
-import { createSubNav } from '@ui/components/dashboard/utils/build-nav'
+import { createPagesSubNav } from '@ui/components/dashboard/utils/build-nav'
 import { createKeyIndex } from '@ui/components/dashboard/utils/build-nav'
 import { cn } from '@ui/lib/utils'
 import Link from 'next/link'
@@ -9,12 +9,12 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '../../ui/dropdown-menu'
+} from '../ui/dropdown-menu'
 export const usePageNav = (sitemap: any, pathname: string) => {
   const [pages, setPages] = useState([])
   useEffect(() => {
     const keyIndex = createKeyIndex(sitemap)
-    const reducedPages = createSubNav(keyIndex)
+    const reducedPages = createPagesSubNav(keyIndex, 'pages', {})
     setPages(reducedPages)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

@@ -1,18 +1,22 @@
 'use server'
-import { getAccount, GetAccountArgs, GetAccountRow } from 'database'
+import {
+  GetLocationArgs,
+  GetLocationRow,
+  getLocation as getLocationDb,
+} from 'database'
 import pool from '../../app/utils/open-pool'
 
-export default async function fetchAccount(
-  args: GetAccountArgs,
-): Promise<GetAccountRow | null> {
+export default async function getLocation(
+  args: GetLocationArgs,
+): Promise<GetLocationRow | null> {
   const { id: userId } = args
 
   try {
     const client = await pool.connect()
     try {
-      const args: GetAccountArgs = { id: userId }
-      const account = await getAccount(client, args)
-      return account
+      const args: GetLocationArgs = { id: userId }
+      const story = await getLocationDb(client, args)
+      return story
     } finally {
       client.release()
     }

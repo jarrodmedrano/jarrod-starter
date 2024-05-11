@@ -23,7 +23,7 @@ const withDashboard = (Component: ElementType<any>) => {
     navCollapsedSize?: number
   }) => {
     //@ts-ignore this line
-    const { session } = props
+    const { session, data } = props
     // eslint-disable-next-line no-console
     console.log('the wrapper props', props)
 
@@ -78,6 +78,7 @@ const withDashboard = (Component: ElementType<any>) => {
                   setIsCollapsed={function (_isCollapsed: boolean): void {
                     throw new Error('Function not implemented.')
                   }}
+                  data={data}
                 />
               </ResizablePanel>
               <ResizableHandle withHandle />

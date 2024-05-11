@@ -28,6 +28,7 @@
     "@radix-ui/react-label": "2.0.2",
     "@radix-ui/react-menubar": "^1.0.4",
     "@radix-ui/react-navigation-menu": "^1.1.4",
+    "@radix-ui/react-popover": "^1.0.7",
     "@radix-ui/react-scroll-area": "^1.0.5",
     "@radix-ui/react-select": "2.0.0",
     "@radix-ui/react-slot": "1.0.2",
@@ -49,10 +50,11 @@
     "react-hook-form": "7.49.3",
     "react-resizable-panels": "^2.0.16",
     "schema": "workspace:*",
+    "sitemap": "workspace:*",
     "tailwind-merge": "1.13.2",
     "tailwindcss-animate": "1.0.6",
-    "zod": "3.22.4",
-    "sitemap": "workspace:*"
+    "vaul": "^0.9.0",
+    "zod": "3.22.4"
   },
   "peerDependencies": {
     "react": "18.2.0",
