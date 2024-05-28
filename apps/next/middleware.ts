@@ -2,8 +2,7 @@
 // import { NextResponse } from 'next/server'
 
 import { NextAuthRequest } from 'next-auth/lib'
-import { NextRequest, NextResponse } from 'next/server'
-import { clerkMiddleware } from '@clerk/nextjs/server'
+import { NextResponse } from 'next/server'
 
 // import { authConfig } from './auth'
 import {
@@ -53,8 +52,9 @@ import {
 
 //   return NextResponse.next()
 // })
-
-const middleware = async function (req: NextAuthRequest): Promise<Response> {
+export default async function middleware(
+  req: NextAuthRequest,
+): Promise<Response> {
   const { nextUrl } = req
   const isLoggedIn = !!req.auth
 
@@ -94,11 +94,6 @@ const middleware = async function (req: NextAuthRequest): Promise<Response> {
 
   return NextResponse.next()
 }
-
-export default clerkMiddleware((auth, req: NextRequest) => {
-  //@ts-ignore this error
-  return middleware(req)
-})
 // Optionally, don't invoke Middleware on some paths
 // export const config = {
 //   matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)'],
