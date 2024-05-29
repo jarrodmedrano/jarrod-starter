@@ -1,7 +1,6 @@
 import { ResizablePanel } from '@ui/components/ui/resizable'
 import { Separator } from '@radix-ui/react-select'
-import { Inbox, User2 } from 'lucide-react'
-import { StorySelect } from '../story-select'
+import { Inbox } from 'lucide-react'
 import { ReactNode, useEffect, useState } from 'react'
 import { cn } from '@ui/lib/utils'
 import { NapPropsLinks, SidebarNav } from '../sidebar-nav'
@@ -9,7 +8,6 @@ import { sitemap } from '../../../../../packages/sitemap/sitemap.json'
 import { createKeyIndex } from '../utils/build-nav'
 
 export const Sidebar = ({
-  session,
   defaultLayout = [265, 440, 655],
   navCollapsedSize = 50,
   isCollapsed,
@@ -63,7 +61,7 @@ export const Sidebar = ({
         isCollapsed && 'min-w-[50px] transition-all duration-300 ease-in-out',
       )}
     >
-      <StorySelect
+      {/* <AccountSelect
         isCollapsed={isCollapsed}
         accounts={[
           {
@@ -72,7 +70,7 @@ export const Sidebar = ({
             icon: <User2 />,
           },
         ]}
-      />
+      /> */}
       <Separator />
       <SidebarNav
         data={data}

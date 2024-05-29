@@ -96,6 +96,10 @@
   * {
     @apply border-border;
   }
+  *[role='button']:not([disabled]),
+  *[role='option']:not([disabled]) {
+    cursor: pointer !important;
+  }
   body {
     @apply bg-background text-foreground;
 

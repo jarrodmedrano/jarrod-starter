@@ -11,7 +11,7 @@ import {
   SelectValue,
 } from '../ui/select'
 
-interface StorySelectProps {
+interface AccountSelectProps {
   isCollapsed: boolean
   accounts: {
     label: string
@@ -20,13 +20,13 @@ interface StorySelectProps {
   }[]
 }
 
-export function StorySelect({ isCollapsed, accounts }: StorySelectProps) {
-  const [selectedStory, setSelectedAccount] = React.useState<string>(
+export function AccountSelect({ isCollapsed, accounts }: AccountSelectProps) {
+  const [selectedAccount, setSelectedAccount] = React.useState<string>(
     accounts[0].email,
   )
 
   return (
-    <Select defaultValue={selectedStory} onValueChange={setSelectedAccount}>
+    <Select defaultValue={selectedAccount} onValueChange={setSelectedAccount}>
       <SelectTrigger
         className={cn(
           'flex items-center gap-2 [&>span]:line-clamp-1 [&>span]:flex [&>span]:w-full [&>span]:items-center [&>span]:gap-1 [&>span]:truncate [&_svg]:h-4 [&_svg]:w-4 [&_svg]:shrink-0',
@@ -37,8 +37,14 @@ export function StorySelect({ isCollapsed, accounts }: StorySelectProps) {
       >
         <SelectValue placeholder="Select an account">
           <div className="[&_svg]:text-foreground flex items-center gap-3 [&_svg]:h-4 [&_svg]:w-4 [&_svg]:shrink-0">
-            {accounts.find((account) => account.email === selectedStory)?.icon}
-            {accounts.find((account) => account.email === selectedStory)?.label}
+            {
+              accounts.find((account) => account.email === selectedAccount)
+                ?.icon
+            }
+            {
+              accounts.find((account) => account.email === selectedAccount)
+                ?.label
+            }
           </div>
         </SelectValue>
       </SelectTrigger>

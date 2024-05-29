@@ -39,7 +39,7 @@ const withDashboard = (Component: ElementType<any>) => {
     return (
       <>
         <SiteHeader session={session} signOut={() => {}} />
-        <main className="flex-1">
+        <main className="h-screen flex-1">
           <TooltipProvider delayDuration={0}>
             <ResizablePanelGroup
               direction="horizontal"
@@ -48,7 +48,7 @@ const withDashboard = (Component: ElementType<any>) => {
                   sizes,
                 )}`
               }}
-              className="h-full max-h-[800px] items-stretch"
+              className="h-full items-stretch"
             >
               <ResizablePanel
                 defaultSize={defaultLayout[0]}
