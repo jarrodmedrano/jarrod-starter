@@ -4,7 +4,9 @@
   "description": "Create template for jarrod-starter",
   "main": "index.ts",
   "scripts": {
-    "build": "tsc",
+    "build:ts": "tsc",
+    "build:babel": "babel dist --out-dir dist",
+    "build": "npm run build:ts && npm run build:babel",
     "start": "ts-node src/index.ts"
   },
   "bin": {
@@ -14,11 +16,18 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@clack/prompts": "0.7.0",
     "@types/node": "20.14.0",
-    "fs-extra": "^11.2.0"
+    "fs-extra": "11.2.0",
+    "picocolors": "1.0.1"
   },
   "devDependencies": {
-    "ts-node": "^10.9.2",
-    "typescript": "^5.4.5"
+    "@babel/cli": "^7.24.6",
+    "@babel/core": "^7.24.6",
+    "@babel/plugin-transform-modules-commonjs": "^7.24.6",
+    "@babel/preset-env": "^7.24.6",
+    "@babel/preset-typescript": "^7.24.6",
+    "ts-node": "10.9.2",
+    "typescript": "5.4.5"
   }
 }
