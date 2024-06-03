@@ -3,7 +3,7 @@ import {
   GetCharacterArgs,
   GetCharacterRow,
   getCharacter as getCharacterDb,
-} from 'database'
+} from '@database/dist'
 import pool from '../../app/utils/open-pool'
 
 export default async function getCharacter(

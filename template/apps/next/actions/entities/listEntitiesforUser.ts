@@ -5,7 +5,7 @@ import {
   ListStoriesForUserArgs,
   ListStoriesForUserRow,
   ListTimelinesForUserRow,
-} from 'database'
+} from '@database/dist'
 import pool from '../../app/utils/open-pool'
 import getCharacters from '../character/getCharacters'
 import getTimelines from '../timeline/getTimelines'

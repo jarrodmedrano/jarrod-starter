@@ -1,5 +1,9 @@
 'use server'
-import { getUserByEmail, GetUserByEmailArgs, GetUserByEmailRow } from 'database'
+import {
+  getUserByEmail,
+  GetUserByEmailArgs,
+  GetUserByEmailRow,
+} from '@database/dist'
 import pool from '../../app/utils/open-pool'
 
 export default async function fetchUserByEmail(

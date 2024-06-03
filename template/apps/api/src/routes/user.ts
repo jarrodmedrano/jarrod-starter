@@ -1,7 +1,7 @@
 import { router, publicProcedure } from './trpc'
 import { z } from 'zod'
 import { selectUserByEmail } from './queries'
-import { RegisterSchema } from 'schema'
+import { RegisterSchema } from '@schema/dist'
 
 export const userRouter = router({
   register: publicProcedure.input(RegisterSchema).query(({ ctx, input }) => {

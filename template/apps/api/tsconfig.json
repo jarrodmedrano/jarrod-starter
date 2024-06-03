@@ -70,7 +70,7 @@
     "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */,
     "baseUrl": "./",
     "paths": {
-      "@schema/*": ["./packages/schema/*"],
+      "@schema/*": ["../../packages/schema/*"],
       "@api/*": ["./*"]
     }
   },

@@ -1,4 +1,4 @@
-import { getUser } from 'database'
+import { getUser } from '@database/dist'
 import pool from '../../../utils/open-pool'
 export async function GET(
   _request: Request,

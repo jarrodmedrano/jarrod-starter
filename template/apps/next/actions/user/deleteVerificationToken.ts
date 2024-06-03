@@ -1,5 +1,8 @@
 'use server'
-import { deleteVerificationToken, DeleteVerificationTokenArgs } from 'database'
+import {
+  deleteVerificationToken,
+  DeleteVerificationTokenArgs,
+} from '@database/dist'
 import pool from '../../app/utils/open-pool'
 
 export default async function deleteToken(

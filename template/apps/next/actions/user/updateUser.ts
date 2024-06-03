@@ -3,7 +3,7 @@ import {
   updateUser as updateUserDB,
   GetUserRow,
   UpdateUserArgs,
-} from 'database'
+} from '@database/dist'
 import pool from '../../app/utils/open-pool'
 
 export default async function updateUser(

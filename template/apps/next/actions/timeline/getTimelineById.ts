@@ -3,7 +3,7 @@ import {
   GetLocationArgs,
   GetLocationRow,
   getLocation as getLocationDb,
-} from 'database'
+} from '@database/dist'
 import pool from '../../app/utils/open-pool'
 
 export default async function getLocation(

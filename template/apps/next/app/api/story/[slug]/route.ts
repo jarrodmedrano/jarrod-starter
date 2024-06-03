@@ -1,4 +1,4 @@
-import { getStory } from 'database'
+import { getStory } from '@database/dist'
 import pool from '../../../utils/open-pool'
 export async function GET(
   _request: Request,
