@@ -1,25 +1,13 @@
 {
-  "compilerOptions": {
-    "strictNullChecks": true,
-    "noUncheckedIndexedAccess": true,
-    "paths": {
-      "@app/*": ["./packages/app/*"],
-      "@ui/*": ["./packages/ui/*"],
-      "@schema/*": ["./packages/schema/*"],
-      "@api/*": ["./apps/api/*"],
-      "@sitemap/*": ["./packages/sitemap/*"]
+    "compilerOptions": {
+        "target": "ES2020",
+        "module": "CommonJS",
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "outDir": "dist"
     },
-    "jsx": "react-jsx",
-    "baseUrl": "."
-  },
-  "extends": "expo/tsconfig.base",
-  "exclude": [
-    "**/*/node_modules",
-    "**/*/dist",
-    "**/*/.next",
-    "**/*/.turbo",
-    "./node_modules",
-    "./dist",
-    "./.turbo"
-  ]
+    "include": ["src/**/*"],
+    "exclude": ["**/*.spec.ts"]  
 }
