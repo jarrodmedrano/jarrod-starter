@@ -1,0 +1,85 @@
+{
+  "name": "slashclick-starter-app",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "android": "expo run:android",
+    "api": "cd apps/api && pnpm start",
+    "prebuild": "nps prebuild",
+    "build": "nps build",
+    "dev": "turbo run dev --parallel --force",
+    "eslint": "eslint \"**/*.+(js|jsx|ts|tsx)\"",
+    "eslint:fix": "eslint --fix \"**/*.+(js|jsx|ts|tsx)\"",
+    "preinstall": "npx only-allow pnpm",
+    "ios": "expo run:ios",
+    "native": "cd apps/expo && pnpm start",
+    "precommit": "nps precommit",
+    "prepare": "npx husky install",
+    "prettier": "prettier --check \"**/*.+(js|jsx|ts|tsx|json|yml|yaml|md|css)\"",
+    "prettier:fix": "prettier --write \"**/*.+(js|jsx|ts|tsx|json|yml|yaml|md|css)\"",
+    "web": "cd apps/next && pnpm next"
+  },
+  "lint-staged": {
+    "./*/**/*.{js,jsx,ts,tsx}": [
+      "pnpm run prettier:fix",
+      "pnpm run eslint:fix"
+    ],
+    "*.{json,md}": [
+      "pnpm run prettier:fix"
+    ]
+  },
+  "resolutions": {
+    "metro": "~0.76.7",
+    "metro-resolver": "~0.76.7"
+  },
+  "dependencies": {
+    "expo": "~49.0.18",
+    "expo-splash-screen": "~0.20.5",
+    "expo-status-bar": "~1.6.0",
+    "husky": "8.0.3",
+    "react": "18.2.0",
+    "react-native": "0.72.6"
+  },
+  "devDependencies": {
+    "@babel/core": "7.23.7",
+    "@types/react": "18.2.25",
+    "@types/react-native": "0.72.2",
+    "@vitejs/plugin-react": "3.1.0",
+    "@vitest/coverage-istanbul": "0.28.3",
+    "@vitest/ui": "0.28.4",
+    "eslint": "8.21.0",
+    "jsdom": "20.0.3",
+    "nps": "5.10.0",
+    "prettier": "3.0.3",
+    "prettier-plugin-tailwindcss": "0.5.4",
+    "turbo": "1.10.16",
+    "typescript": "5.2.2",
+    "vite-plugin-istanbul": "4.0.0",
+    "vitest": "0.26.2"
+  },
+  "peerDependencies": {
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-native": "0.72.4",
+    "react-native-gesture-handler": "2.12.0",
+    "react-native-reanimated": "3.3.0",
+    "react-native-safe-area-context": "4.6.3",
+    "react-native-screens": "3.22.0",
+    "react-native-web": "0.19.6"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "nohoist": [
+    "**/expo-router",
+    "**/expo-router/**",
+    "**/react-native",
+    "**/react-native/**",
+    "**/react-native-codegen"
+  ]
+}

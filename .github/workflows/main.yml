@@ -1,0 +1,116 @@
+---
+name: Build and Push Image to AWS ECR
+on:
+  push:
+    branches: [main]
+jobs:
+  build-and-push:
+    name: Build and Push to ECR
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: chmod
+        run: chmod -R +x ./.github
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'yarn'
+      - name: Install dependencies
+        run: yarn
+
+      - name: Build
+        run: npx nps build
+
+      - name: Test
+        run: npx nps test
+      - name: Automatic Tagging of Releases
+        id: increment-git-tag
+        run: |
+          bash ./.github/scripts/build.sh -v major
+      - name: Create ECR Repo if it doesn't exist yet
+        id: ecr
+        uses: int128/create-ecr-repository-action@v1
+        with:
+          repository: ${{ secrets.ECR_REPOSITORY }}
+      - name: Build, Tag, and Push the Image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
+          IMAGE_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
+          CLIENT_PATH: ./packages/client
+          API_PATH: ./packages/api
+        run: |
+          echo "Building the Docker image to $ECR_REGISTRY..."
+          docker build -t $ECR_REGISTRY/${ECR_REPOSITORY}:${IMAGE_TAG}-client . -f ${CLIENT_PATH}/Dockerfile
+          docker push $ECR_REGISTRY/${ECR_REPOSITORY}:${IMAGE_TAG}-client
+          docker build -t $ECR_REGISTRY/${ECR_REPOSITORY}:${IMAGE_TAG}-api . -f ${API_PATH}/Dockerfile
+          docker push $ECR_REGISTRY/${ECR_REPOSITORY}:${IMAGE_TAG}-api
+          docker pull bretttolbert/verbecc-svc:latest
+          docker tag bretttolbert/verbecc-svc:latest $ECR_REGISTRY/${ECR_REPOSITORY}:${IMAGE_TAG}-verbecc
+          docker push $ECR_REGISTRY/${ECR_REPOSITORY}:${IMAGE_TAG}-verbecc
+          docker pull nginx:latest
+          docker tag nginx:latest $ECR_REGISTRY/${ECR_REPOSITORY}:${IMAGE_TAG}-nginx
+          docker push $ECR_REGISTRY/${ECR_REPOSITORY}:${IMAGE_TAG}-nginx
+
+      - name: Render Amazon ECS task definition for first container
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
+          IMAGE_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
+        id: render-client-container
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: .github/workflows/task-definition.json
+          container-name: client
+          image: $ECR_REGISTRY/${ECR_REPOSITORY}-client
+
+      - name: Modify Amazon ECS task definition with second container
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
+          IMAGE_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
+        id: render-api-container
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: ${{ steps.render-client-container.outputs.task-definition }}
+          container-name: api
+          image: $ECR_REGISTRY/${ECR_REPOSITORY}-api
+
+      - name: Modify Amazon ECS task definition with third
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
+          IMAGE_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
+        id: render-verbecc-container
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: ${{ steps.render-api-container.outputs.task-definition }}
+          container-name: verbecc
+          image: $ECR_REGISTRY/${ECR_REPOSITORY}-verbecc
+
+      - name: Modify Amazon ECS task definition with fourth
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
+          IMAGE_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
+        id: render-nginx-container
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: ${{ steps.render-verbecc-container.outputs.task-definition }}
+          container-name: nginx
+          image: $ECR_REGISTRY/${ECR_REPOSITORY}-nginx

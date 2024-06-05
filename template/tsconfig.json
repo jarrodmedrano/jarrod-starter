@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "strictNullChecks": true,
+    "noUncheckedIndexedAccess": true,
+    "paths": {
+      "@app/*": ["./packages/app/*"],
+      "@ui/*": ["./packages/ui/*"],
+      "@schema/*": ["./packages/schema/*"],
+      "@api/*": ["./apps/api/*"],
+      "@sitemap/*": ["./packages/sitemap/*"]
+    },
+    "jsx": "react-jsx",
+    "baseUrl": "."
+  },
+  "extends": "expo/tsconfig.base",
+  "exclude": [
+    "**/*/node_modules",
+    "**/*/dist",
+    "**/*/.next",
+    "**/*/.turbo",
+    "./node_modules",
+    "./dist",
+    "./.turbo"
+  ]
+}

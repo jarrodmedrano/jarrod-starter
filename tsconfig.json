@@ -1,25 +1,15 @@
 {
-  "compilerOptions": {
-    "strictNullChecks": true,
-    "noUncheckedIndexedAccess": true,
-    "paths": {
-      "@app/*": ["./packages/app/*"],
-      "@ui/*": ["./packages/ui/*"],
-      "@schema/*": ["./packages/schema/*"],
-      "@api/*": ["./apps/api/*"],
-      "@sitemap/*": ["./packages/sitemap/*"]
+    "compilerOptions": {
+        "target": "ES6",
+        "module": "ESNext",
+        "outDir": "./dist",
+        "rootDir": "./src",
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "moduleResolution": "node"
     },
-    "jsx": "react-jsx",
-    "baseUrl": "."
-  },
-  "extends": "expo/tsconfig.base",
-  "exclude": [
-    "**/*/node_modules",
-    "**/*/dist",
-    "**/*/.next",
-    "**/*/.turbo",
-    "./node_modules",
-    "./dist",
-    "./.turbo"
-  ]
+    "include": ["src/**/*"],
+    "exclude": ["**/*.spec.ts"]  
 }
