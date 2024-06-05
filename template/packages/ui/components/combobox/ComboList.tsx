@@ -53,9 +53,9 @@ export const ComboList = ({
               <CommandItem
                 key={item.name}
                 value={item.name}
-                onSelect={(value) => {
+                onSelect={(_value) => {
                   setOpen(false)
-                  item.onSelect(value)
+                  item.onSelect(item.href)
                 }}
               >
                 <Icon className="mr-2 h-4 w-4" />

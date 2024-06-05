@@ -14,24 +14,36 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 const links = ['stories', 'characters', 'locations', 'timelines']
 
-const UserLinks = ({ user }: { user: any }) => {
-  return links.map((link) => {
-    return (
-      <a key={'user' + link} href={`/user/${user?.id}/${link}`}>
-        <DropdownMenuItem>{link}</DropdownMenuItem>
-      </a>
-    )
-  })
+const UserLinks: ({ user }: { user: any }) => JSX.Element = ({
+  user,
+}: {
+  user: any
+}) => {
+  return (
+    <>
+      {links.map((link) => {
+        return (
+          <a key={'user' + link} href={`/user/${user?.id}/${link}`}>
+            <DropdownMenuItem>{link}</DropdownMenuItem>
+          </a>
+        )
+      })}
+    </>
+  )
 }
 
 const CreateLinks = () => {
-  return links.map((link) => {
-    return (
-      <a key={'create' + link} href={`/create/${link}`}>
-        <DropdownMenuItem>{link}</DropdownMenuItem>
-      </a>
-    )
-  })
+  return (
+    <>
+      {links.map((link) => {
+        return (
+          <a key={'create' + link} href={`/create/${link}`}>
+            <DropdownMenuItem>{link}</DropdownMenuItem>
+          </a>
+        )
+      })}
+    </>
+  )
 }
 
 const UserDropdown = ({ user, logOut }: { user: any; logOut: () => void }) => {

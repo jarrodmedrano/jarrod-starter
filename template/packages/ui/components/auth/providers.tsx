@@ -33,23 +33,28 @@ export const ProviderSignin = ({
   callbackUrl?: string | null
 }) => {
   {
-    return Object.values(providers).map((provider: any) => {
-      return provider.name !== 'Email' && provider.name !== 'Credentials' ? (
-        <div key={provider.name}>
-          <Button
-            variant="icon"
-            className="flex w-full"
-            onClick={() =>
-              handleProviderSignIn(provider.name, {
-                callbackUrl,
-              })
-            }
-          >
-            <ProviderIcons providerName={provider.name} />
-            Login with {provider.name}
-          </Button>
-        </div>
-      ) : null
-    })
+    return (
+      <>
+        {Object.values(providers).map((provider: any) => {
+          return provider.name !== 'Email' &&
+            provider.name !== 'Credentials' ? (
+            <div key={provider.name}>
+              <Button
+                variant="icon"
+                className="flex w-full"
+                onClick={() =>
+                  handleProviderSignIn(provider.name, {
+                    callbackUrl,
+                  })
+                }
+              >
+                <ProviderIcons providerName={provider.name} />
+                Login with {provider.name}
+              </Button>
+            </div>
+          ) : null
+        })}
+      </>
+    )
   }
 }

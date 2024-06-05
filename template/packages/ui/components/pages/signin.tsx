@@ -217,7 +217,6 @@ export const SigninFormCard = ({
             </div>
 
             <div className="mt-6 grid grid-cols-1  gap-4">
-              {' '}
               <ProviderSignin providers={providers} callbackUrl={callbackUrl} />
             </div>
           </div>

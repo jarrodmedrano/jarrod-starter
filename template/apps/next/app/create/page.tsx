@@ -2,14 +2,14 @@ import listEntitiesForUser from '../../actions/entities/listEntitiesforUser'
 import withAuth from '../utils/withAuth'
 import CreateScreen from '@app/features/create/screen'
 
-const CreatePage = async (props: any) => {
+const CreatePage = (props: any) => {
   const { session } = props
 
   // if (!session) {
   //   return null
   // }
 
-  const data = await listEntitiesForUser({
+  const data = listEntitiesForUser({
     userid: session?.user.id,
     limit: '10',
     offset: '0',
