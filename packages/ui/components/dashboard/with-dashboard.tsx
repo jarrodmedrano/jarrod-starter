@@ -24,17 +24,19 @@ const withDashboard = (Component: ElementType<any>) => {
   }) => {
     //@ts-ignore this line
     const { session, data } = props
-    // eslint-disable-next-line no-console
-    console.log('the wrapper props', props)
 
     const [isCollapsed, setIsCollapsed] = useState<boolean>(defaultCollapsed)
 
-    // const handleCollapse = (isCollapsed): void => {
-    //   setIsCollapsed(isCollapsed)
-    //   document.cookie = `react-resizable-panels:collapsed=${JSON.stringify(
-    //     isCollapsed,
-    //   )}`
-    // }
+    const handleCollapse = (isCollapsed: boolean): void => {
+      setIsCollapsed(isCollapsed)
+      document.cookie = `react-resizable-panels:collapsed=${JSON.stringify(
+        isCollapsed,
+      )}`
+    }
+
+    const handleLayout = (sizes: number[]) => {
+      document.cookie = `react-resizable-panels:layout=${JSON.stringify(sizes)}`
+    }
 
     return (
       <>
@@ -43,11 +45,7 @@ const withDashboard = (Component: ElementType<any>) => {
           <TooltipProvider delayDuration={0}>
             <ResizablePanelGroup
               direction="horizontal"
-              onLayout={(sizes: number[]) => {
-                document.cookie = `react-resizable-panels:layout=${JSON.stringify(
-                  sizes,
-                )}`
-              }}
+              onLayout={handleLayout}
               className="h-full items-stretch"
             >
               <ResizablePanel
@@ -56,16 +54,7 @@ const withDashboard = (Component: ElementType<any>) => {
                 collapsible={true}
                 minSize={15}
                 maxSize={20}
-                //@ts-ignore this line
-                onCollapse={(collapsed) => {
-                  // eslint-disable-next-line no-console
-                  // console.log('the wrapper props', collapsed)
-
-                  setIsCollapsed(collapsed)
-                  document.cookie = `react-resizable-panels:collapsed=${JSON.stringify(
-                    collapsed,
-                  )}`
-                }}
+                onCollapse={() => handleCollapse}
                 className={cn(
                   isCollapsed &&
                     'min-w-[50px] transition-all duration-300 ease-in-out',
@@ -75,9 +64,7 @@ const withDashboard = (Component: ElementType<any>) => {
                   defaultLayout={defaultLayout}
                   session={session}
                   isCollapsed={isCollapsed}
-                  setIsCollapsed={function (_isCollapsed: boolean): void {
-                    throw new Error('Function not implemented.')
-                  }}
+                  setIsCollapsed={handleCollapse}
                   data={data}
                 />
               </ResizablePanel>
@@ -86,7 +73,6 @@ const withDashboard = (Component: ElementType<any>) => {
                 <Component {...props} isCollapsed={isCollapsed} />
                 {children}
               </ResizablePanel>
-              <ResizableHandle withHandle />
             </ResizablePanelGroup>
           </TooltipProvider>
         </main>

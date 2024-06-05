@@ -97,7 +97,9 @@
     @apply border-border;
   }
   *[role='button']:not([disabled]),
-  *[role='option']:not([disabled]) {
+  *[role='option']:not([disabled]),
+  *[role='menuitem']:not([disabled]),
+  *[aria-role='button']:not([disabled]) {
     cursor: pointer !important;
   }
   body {

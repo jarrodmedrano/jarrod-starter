@@ -14,7 +14,13 @@ const extraItems = [
     onSelect: () => {},
   },
 ]
-export function ComboBoxResponsive({ page }: { page: any }) {
+export function ComboBoxResponsive({
+  page,
+  onAdd,
+}: {
+  page: any
+  onAdd: (_pageName: string) => void
+}) {
   const [open, setOpen] = useState(false)
   const isDesktop = true
   const [selectedStatus, setSelectedItem] = useState<any | null>(null)
@@ -32,7 +38,12 @@ export function ComboBoxResponsive({ page }: { page: any }) {
             page={page}
             setOpen={setOpen}
             setSelectedItem={setSelectedItem}
-            items={extraItems}
+            items={extraItems.map((item) => ({
+              ...item,
+              onSelect: onAdd,
+              href: `/create/${page.href}`,
+              name: page.title,
+            }))}
           />
         </PopoverContent>
       </Popover>
@@ -52,7 +63,12 @@ export function ComboBoxResponsive({ page }: { page: any }) {
             page={page}
             setOpen={setOpen}
             setSelectedItem={setSelectedItem}
-            items={extraItems}
+            items={extraItems.map((item) => ({
+              ...item,
+              onSelect: onAdd,
+              href: `/create/${page.href}`,
+              name: page.title,
+            }))}
           />
         </div>
       </DrawerContent>

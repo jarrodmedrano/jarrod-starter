@@ -9,7 +9,9 @@ const CreateScreen = function (props: ScreenProps) {
   console.log('create screen the props', props)
   return (
     <DashboardLayout {...props}>
-      <div>here boy</div>
+      <main className="py-10">
+        <div className="px-4 sm:px-6 lg:px-8">Test</div>
+      </main>
     </DashboardLayout>
   )
 }
