@@ -59,6 +59,7 @@ async function main() {
           options: [
             { value: "psql", label: "Postgresql & Golang" },
             { value: "sqlite", label: "SQLite" },
+            { value: "", label: "None" },
           ],
         }),
       install: () =>

@@ -45,7 +45,7 @@ var targetDir = process.cwd();
 function main() {
   return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
     var _this = this;
-    var copyFiles, copyApp, project, s, nextSteps;
+    var copyFiles, copyDb, project, s, nextSteps;
     return _regeneratorRuntime().wrap(function _callee3$(_context3) {
       while (1) switch (_context3.prev = _context3.next) {
         case 0:
@@ -72,7 +72,7 @@ function main() {
               }, _callee);
             }));
           };
-          copyApp = function copyApp(app) {
+          copyDb = function copyDb(app) {
             return __awaiter(_this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
               var paths;
               return _regeneratorRuntime().wrap(function _callee2$(_context2) {
@@ -81,9 +81,9 @@ function main() {
                     paths = path.join(__dirname, "../templates/apps/".concat(app));
                     _context2.prev = 1;
                     _context2.next = 4;
-                    return fs.copy(paths, targetDir + "/apps/".concat(app));
+                    return fs.copy(paths, targetDir + "/apps/database");
                   case 4:
-                    console.log("Directory copied successfully!");
+                    console.log("Database copied successfully!");
                     _context2.next = 10;
                     break;
                   case 7:
@@ -157,7 +157,7 @@ function main() {
             break;
           }
           _context3.next = 20;
-          return copyApp(project.database);
+          return copyDb(project.database);
         case 20:
           nextSteps = "cd ".concat(project.path, "        \n").concat(project.install ? "" : "pnpm install\n", "pnpm dev");
           p.note(nextSteps, "Next steps.");

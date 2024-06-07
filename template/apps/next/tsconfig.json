@@ -25,7 +25,8 @@
       "api/*": ["../../apps/api/*"],
       "@schema/*": ["../../packages/schema/*"],
       "@/*": ["./*"],
-      "@database/*": ["../../apps/database/*"]
+      "@database/*": ["../../apps/database/*"],
+      "@database": ["../../apps/database"]
     },
     "plugins": [
       {
