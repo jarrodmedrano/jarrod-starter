@@ -1,4 +1,4 @@
-import { listStoriesForUser } from '@database/dist'
+import { listStoriesForUser } from '@database'
 import pool from '../../../../utils/open-pool'
 export async function GET(
   _request: Request,

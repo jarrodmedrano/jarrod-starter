@@ -1,9 +1,6 @@
 import { v4 as uuidv4 } from 'uuid'
 import fetchVerificationToken from './getVerificationToken'
-import {
-  createVerificationToken,
-  deleteVerificationToken,
-} from '@database/dist'
+import { createVerificationToken, deleteVerificationToken } from '@database'
 import pool from '../../app/utils/open-pool'
 
 export const generateVerificationToken = async (

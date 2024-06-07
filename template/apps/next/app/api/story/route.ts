@@ -1,4 +1,4 @@
-import { createStory } from '@database/dist'
+import { createStory } from '@database'
 import pool from '../../utils/open-pool'
 
 export async function POST(request: Request) {

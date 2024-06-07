@@ -3,7 +3,7 @@ import {
   listCharactersForUser,
   ListCharactersForUserArgs,
   ListCharactersForUserRow,
-} from '@database/dist'
+} from '@database'
 import pool from '../../app/utils/open-pool'
 
 export default async function getCharacters(
