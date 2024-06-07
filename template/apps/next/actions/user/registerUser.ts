@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs'
 
 import fetchUserByEmail from './getUserByEmail'
 import { sendVerificationToken } from '../mail/sendVerificationToken'
-import { createUser } from '@database'
+import { createUser } from '@repo/database'
 import { RegisterSchema, registerSchema } from '@schema/register'
 import pool from '../../app/utils/open-pool'
 

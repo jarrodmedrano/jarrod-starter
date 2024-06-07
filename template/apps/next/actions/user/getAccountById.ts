@@ -1,5 +1,5 @@
 'use server'
-import { getAccount, GetAccountArgs, GetAccountRow } from '@database'
+import { getAccount, GetAccountArgs, GetAccountRow } from '@repo/database'
 import pool from '../../app/utils/open-pool'
 
 export default async function fetchAccount(

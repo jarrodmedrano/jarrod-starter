@@ -3,7 +3,7 @@ import {
   getUsersByRole,
   GetUsersByRoleArgs,
   GetUsersByRoleRow,
-} from '@database'
+} from '@repo/database'
 import pool from '../../app/utils/open-pool'
 
 export default async function fetchUserByRole(
