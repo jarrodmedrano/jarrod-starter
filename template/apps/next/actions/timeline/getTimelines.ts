@@ -3,7 +3,7 @@ import {
   ListCharactersForUserArgs,
   ListCharactersForUserRow,
   listTimelinesForUser,
-} from '@database/dist'
+} from '@database'
 import pool from '../../app/utils/open-pool'
 
 export default async function getTimelines(

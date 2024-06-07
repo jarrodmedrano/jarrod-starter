@@ -1,5 +1,5 @@
 'use server'
-import { getUser, GetUserArgs, GetUserRow } from '@database/dist'
+import { getUser, GetUserArgs, GetUserRow } from '@database'
 import pool from '../../app/utils/open-pool'
 
 export default async function fetchUser(

@@ -36,24 +36,24 @@ var __awaiter = void 0 && (void 0).__awaiter || function (thisArg, _arguments, P
     step((generator = generator.apply(thisArg, _arguments || [])).next());
   });
 };
-var path = require('path');
-var fs = require('fs-extra');
-var _require = require('child_process'),
+var path = require("path");
+var fs = require("fs-extra");
+var _require = require("child_process"),
   execSync = _require.execSync;
-var templateDir = path.join(__dirname, '../template');
+var templateDir = path.join(__dirname, "../template");
 var targetDir = process.cwd();
 function main() {
-  return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+  return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
     var _this = this;
-    var copyFiles, project, s, nextSteps;
-    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-      while (1) switch (_context2.prev = _context2.next) {
+    var copyFiles, copyApp, project, s, nextSteps;
+    return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+      while (1) switch (_context3.prev = _context3.next) {
         case 0:
           console.clear();
-          _context2.next = 3;
+          _context3.next = 3;
           return (0, _promises.setTimeout)(1000);
         case 3:
-          p.intro("".concat(_picocolors["default"].bgCyan(_picocolors["default"].black(' create-app '))));
+          p.intro("".concat(_picocolors["default"].bgCyan(_picocolors["default"].black(" create-app "))));
           copyFiles = function copyFiles() {
             return __awaiter(_this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
               return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -61,9 +61,9 @@ function main() {
                   case 0:
                     _context.next = 2;
                     return fs.copy(templateDir, targetDir).then(function () {
-                      console.log('Project created successfully.');
+                      console.log("Project created successfully.");
                     })["catch"](function (err) {
-                      console.error('Error creating project:', err);
+                      console.error("Error creating project:", err);
                     });
                   case 2:
                   case "end":
@@ -72,15 +72,40 @@ function main() {
               }, _callee);
             }));
           };
-          _context2.next = 7;
+          copyApp = function copyApp(app) {
+            return __awaiter(_this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+              var paths;
+              return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+                while (1) switch (_context2.prev = _context2.next) {
+                  case 0:
+                    paths = path.join(__dirname, "../templates/apps/".concat(app));
+                    _context2.prev = 1;
+                    _context2.next = 4;
+                    return fs.copy(paths, targetDir + "/apps/".concat(app));
+                  case 4:
+                    console.log("Directory copied successfully!");
+                    _context2.next = 10;
+                    break;
+                  case 7:
+                    _context2.prev = 7;
+                    _context2.t0 = _context2["catch"](1);
+                    console.error("Error copying directory:", _context2.t0);
+                  case 10:
+                  case "end":
+                    return _context2.stop();
+                }
+              }, _callee2, null, [[1, 7]]);
+            }));
+          };
+          _context3.next = 8;
           return p.group({
             path: function path() {
               return p.text({
-                message: 'Where should we create your project?',
-                placeholder: './sparkling-solid',
+                message: "Where should we create your project?",
+                placeholder: "./sparkling-solid",
                 validate: function validate(value) {
-                  if (!value) return 'Please enter a path.';
-                  if (value[0] !== '.') return 'Please enter a relative path.';
+                  if (!value) return "Please enter a path.";
+                  if (value[0] !== ".") return "Please enter a relative path.";
                 }
               });
             },
@@ -88,53 +113,60 @@ function main() {
               var results = _ref.results;
               return p.select({
                 message: "Pick a database type within \"".concat(results.path, "\""),
-                initialValue: 'psql',
+                initialValue: "psql",
                 maxItems: 1,
                 options: [{
-                  value: 'psql',
-                  label: 'Postgresql'
+                  value: "psql",
+                  label: "Postgresql & Golang"
                 }, {
-                  value: 'sqlite',
-                  label: 'SQLite'
+                  value: "sqlite",
+                  label: "SQLite"
                 }]
               });
             },
             install: function install() {
               return p.confirm({
-                message: 'Install dependencies?',
+                message: "Install dependencies?",
                 initialValue: false
               });
             }
           }, {
             onCancel: function onCancel() {
-              p.cancel('Operation cancelled.');
+              p.cancel("Operation cancelled.");
               process.exit(0);
             }
           });
-        case 7:
-          project = _context2.sent;
+        case 8:
+          project = _context3.sent;
           if (!project.install) {
-            _context2.next = 14;
+            _context3.next = 15;
             break;
           }
           s = p.spinner();
-          s.start('Installing via pnpm');
-          _context2.next = 13;
+          s.start("Installing via pnpm");
+          _context3.next = 14;
           return (0, _promises.setTimeout)(2500);
-        case 13:
-          s.stop('Installed via pnpm');
         case 14:
-          _context2.next = 16;
+          s.stop("Installed via pnpm");
+        case 15:
+          _context3.next = 17;
           return copyFiles();
-        case 16:
-          nextSteps = "cd ".concat(project.path, "        \n").concat(project.install ? '' : 'pnpm install\n', "pnpm dev");
-          p.note(nextSteps, 'Next steps.');
-          p.outro("Problems? ".concat(_picocolors["default"].underline(_picocolors["default"].cyan('https://example.com/issues'))));
-        case 19:
+        case 17:
+          if (!project.database) {
+            _context3.next = 20;
+            break;
+          }
+          _context3.next = 20;
+          return copyApp(project.database);
+        case 20:
+          nextSteps = "cd ".concat(project.path, "        \n").concat(project.install ? "" : "pnpm install\n", "pnpm dev");
+          p.note(nextSteps, "Next steps.");
+          p.outro("Problems? ".concat(_picocolors["default"].underline(_picocolors["default"].cyan("https://example.com/issues"))));
+        case 23:
         case "end":
-          return _context2.stop();
+          return _context3.stop();
       }
-    }, _callee2);
+    }, _callee3);
   }));
 }
 main()["catch"](console.error);

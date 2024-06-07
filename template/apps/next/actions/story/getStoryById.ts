@@ -1,9 +1,5 @@
 'use server'
-import {
-  getStory as getStoryDb,
-  GetStoryArgs,
-  GetStoryRow,
-} from '@database/dist'
+import { getStory as getStoryDb, GetStoryArgs, GetStoryRow } from '@database'
 import pool from '../../app/utils/open-pool'
 
 export default async function fetchStory(
