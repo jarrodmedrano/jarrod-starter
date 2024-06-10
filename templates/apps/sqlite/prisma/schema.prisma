@@ -1,0 +1,123 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "linux-arm64-openssl-1.1.x", "debian-openssl-1.1.x"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id                     Int        @id @default(autoincrement())
+  name                   String?    
+  email                  String?    @unique
+  emailVerified          DateTime?  @map("emailVerified")
+  image                  String?
+  password               String?
+  role                   String?
+  isTwoFactorEnabled     Boolean?   @map("isTwoFactorEnabled")
+  twoFactorConfirmation  String?    @map("twoFactorConfirmation")
+  isAdmin                Boolean?   @default(false) @map("isAdmin")
+  sessions               Session[]
+  accounts               Account[]
+  stories                Story[]
+  characters             Character[]
+  locations              Location[]
+  timelines              Timeline[]
+  twoFactorTokens        TwoFactorToken[]
+  twoFactorConfirmations TwoFactorConfirmation[]
+  verificationTokens     VerificationToken[]
+}
+
+
+model Session {
+  id           Int      @id @default(autoincrement())
+  userId       Int
+  user         User     @relation(fields: [userId], references: [id])
+  sessionToken String   @unique @map("sessionToken")
+  expires      DateTime
+}
+
+model Account {
+  id                Int      @id @default(autoincrement())
+  userId            Int
+  user              User     @relation(fields: [userId], references: [id])
+  type              String
+  provider          String
+  providerAccountId String   @map("providerAccountId")
+  refreshToken      String?  @map("refresh_token")
+  accessToken       String?  @map("access_token")
+  expiresAt         DateTime?@map("expires_at")
+  idToken           String?  @map("id_token")
+  scope             String?
+  sessionState      String?  @map("session_state")
+  tokenType         String?  @map("token_type")
+}
+
+model VerificationToken {
+  identifier String
+  token      String  @unique
+  expires    DateTime
+  user       User    @relation(fields: [identifier], references: [email])
+  @@id([identifier, token])
+}
+
+model TwoFactorToken {
+  userId Int
+  user   User     @relation(fields: [userId], references: [id])
+  token  String   @unique
+  expires DateTime
+  @@id([userId, token])
+}
+
+model TwoFactorConfirmation {
+  userId       Int
+  user         User     @relation(fields: [userId], references: [id])
+  confirmation String   @unique
+  expires      DateTime
+  @@id([userId, confirmation])
+}
+
+model Story {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  title     String
+  content   String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+}
+
+model Character {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id])
+  name        String
+  description String?
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+}
+
+model Location {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id])
+  name        String
+  description String?
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+}
+
+model Timeline {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id])
+  name        String
+  description String?
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+}
