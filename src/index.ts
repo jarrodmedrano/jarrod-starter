@@ -96,7 +96,9 @@ async function main() {
   p.note(nextSteps, "Next steps.");
 
   p.outro(
-    `Problems? ${color.underline(color.cyan("https://example.com/issues"))}`
+    `Done! Don't forget to set your environment vars! Problems? ${color.underline(
+      color.cyan("https://github.com/jarrodmedrano/jarrod-starter/issues")
+    )}`
   );
 }
 
