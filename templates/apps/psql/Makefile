@@ -1,7 +1,7 @@
 #!make
 include .env
 postgres:
-	docker run --name postgres12 -p ${DATABASE_PORTS} -e POSTGRES_USER=${DATABASE_USER} -e POSTGRES_PASSWORD=${DATABASE_SECRET} -d postgres:12-alpine
+	docker run --name postgres12 -p ${DATABASE_PORTS} -e DATABASE_USER=${DATABASE_USER} -e DATABASE_PASSWORD=${DATABASE_SECRET} -d postgres:12-alpine
 createdb:
 	docker exec -it postgres12 createdb --username=${DATABASE_USER} --owner=root ${DATABASE_NAME}
 create:
