@@ -2,12 +2,13 @@
 import * as p from "@clack/prompts";
 import color from "picocolors";
 import { setTimeout } from "node:timers/promises";
+import { exec } from "child_process";
 
 const path = require("path");
 const fs = require("fs-extra");
 const { execSync } = require("child_process");
 
-const templateDir = path.join(__dirname, "../template");
+const templateDir = path.join(__dirname, "../template_main");
 const targetDir = process.cwd();
 
 async function main() {
@@ -40,6 +41,19 @@ async function main() {
     }
   };
 
+  const copyMobile = async () => {
+    const expoPaths = path.join(__dirname, `../templates/apps/expo`);
+    const iosPaths = path.join(__dirname, `../templates/ios`);
+
+    try {
+      await fs.copy(expoPaths, targetDir + `/apps/expo`);
+      await fs.copy(iosPaths, targetDir + `/ios`);
+      console.log("Expo copied successfully!");
+    } catch (err) {
+      console.error("Error copying directory:", err);
+    }
+  };
+
   const project = await p.group(
     {
       path: () =>
@@ -50,6 +64,11 @@ async function main() {
             if (!value) return "Please enter a path.";
             if (value[0] !== ".") return "Please enter a relative path.";
           },
+        }),
+      mobile: () =>
+        p.confirm({
+          message: "Is this a mobile project?",
+          initialValue: false,
         }),
       database: ({ results }: { results: any }) =>
         p.select({
@@ -76,17 +95,33 @@ async function main() {
     }
   );
 
-  if (project.install) {
-    const s = p.spinner();
-    s.start("Installing via pnpm");
-    await setTimeout(2500);
-    s.stop("Installed via pnpm");
-  }
-
   await copyFiles();
+
+  if (project.mobile) {
+    await copyMobile();
+  }
 
   if (project.database) {
     await copyDb(project.database);
+  }
+
+  if (project.install) {
+    const s = p.spinner();
+    s.start("Installing via pnpm");
+    exec("pnpm install", (error, stdout, stderr) => {
+      if (error) {
+        console.error(`Error executing pnpm install: ${error.message}`);
+        return;
+      }
+
+      if (stderr) {
+        console.error(`Error output: ${stderr}`);
+        return;
+      }
+
+      console.log(`Output: ${stdout}`);
+    });
+    s.stop("Installed via pnpm");
   }
 
   let nextSteps = `cd ${project.path}        \n${
