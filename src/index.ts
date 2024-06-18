@@ -70,6 +70,16 @@ async function main() {
           message: "Is this a mobile project?",
           initialValue: false,
         }),
+      auth: ({ results }: { results: any }) =>
+        p.select({
+          message: `Pick an auth type within "${results.path}"`,
+          initialValue: "nextauth",
+          maxItems: 1,
+          options: [
+            { value: "nextauth", label: "Next Auth" },
+            { value: "clerk", label: "Clerk" },
+          ],
+        }),
       database: ({ results }: { results: any }) =>
         p.select({
           message: `Pick a database type within "${results.path}"`,
@@ -105,10 +115,23 @@ async function main() {
     await copyDb(project.database);
   }
 
-  if (project.install) {
+  if (project.auth) {
     const s = p.spinner();
-    s.start("Installing via pnpm");
+    s.start("Adding Auth");
+    execSync(
+      `mv ${targetDir}/apps/next/middleware_${project.auth}.ts ${targetDir}/apps/next/middleware.ts`
+    );
+    execSync(
+      `mv ${targetDir}/apps/next/app/layout_${project.auth}.tsx ${targetDir}/apps/next/app/layout.tsx`
+    );
+    s.stop("Added Auth");
+  }
+
+  if (project.install) {
     exec("pnpm install", (error, stdout, stderr) => {
+      const s = p.spinner();
+      s.start("Installing via pnpm");
+
       if (error) {
         console.error(`Error executing pnpm install: ${error.message}`);
         return;
@@ -120,8 +143,8 @@ async function main() {
       }
 
       console.log(`Output: ${stdout}`);
+      s.stop("Installed via pnpm");
     });
-    s.stop("Installed via pnpm");
   }
 
   let nextSteps = `cd ${project.path}        \n${

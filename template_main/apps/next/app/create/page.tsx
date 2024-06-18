@@ -10,7 +10,7 @@ const CreatePage = (props: any) => {
   // }
 
   const data = listEntitiesForUser({
-    userid: session?.user.id,
+    userid: session?.user?.id,
     limit: '10',
     offset: '0',
   })

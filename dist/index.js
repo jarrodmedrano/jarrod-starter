@@ -113,7 +113,7 @@ function main() {
                     _context3.next = 7;
                     return fs.copy(iosPaths, targetDir + "/ios");
                   case 7:
-                    console.log("Database copied successfully!");
+                    console.log("Expo copied successfully!");
                     _context3.next = 13;
                     break;
                   case 10:
@@ -145,8 +145,23 @@ function main() {
                 initialValue: false
               });
             },
-            database: function database(_ref) {
+            auth: function auth(_ref) {
               var results = _ref.results;
+              return p.select({
+                message: "Pick an auth type within \"".concat(results.path, "\""),
+                initialValue: "nextauth",
+                maxItems: 1,
+                options: [{
+                  value: "nextauth",
+                  label: "Next Auth"
+                }, {
+                  value: "clerk",
+                  label: "Clerk"
+                }]
+              });
+            },
+            database: function database(_ref2) {
+              var results = _ref2.results;
               return p.select({
                 message: "Pick a database type within \"".concat(results.path, "\""),
                 initialValue: "psql",
@@ -194,10 +209,17 @@ function main() {
           _context4.next = 18;
           return copyDb(project.database);
         case 18:
-          if (project.install) {
+          if (project.auth) {
             s = p.spinner();
-            s.start("Installing via pnpm");
+            s.start("Adding Auth");
+            execSync("mv ".concat(targetDir, "/apps/next/middleware_").concat(project.auth, ".ts ").concat(targetDir, "/apps/next/middleware.ts"));
+            execSync("mv ".concat(targetDir, "/apps/next/app/layout_").concat(project.auth, ".tsx ").concat(targetDir, "/apps/next/app/layout.tsx"));
+            s.stop("Added Auth");
+          }
+          if (project.install) {
             (0, _child_process.exec)("pnpm install", function (error, stdout, stderr) {
+              var s = p.spinner();
+              s.start("Installing via pnpm");
               if (error) {
                 console.error("Error executing pnpm install: ".concat(error.message));
                 return;
@@ -207,13 +229,13 @@ function main() {
                 return;
               }
               console.log("Output: ".concat(stdout));
+              s.stop("Installed via pnpm");
             });
-            s.stop("Installed via pnpm");
           }
           nextSteps = "cd ".concat(project.path, "        \n").concat(project.install ? "" : "pnpm install\n", "pnpm dev");
           p.note(nextSteps, "Next steps.");
           p.outro("Done! Don't forget to set your environment vars! Problems? ".concat(_picocolors["default"].underline(_picocolors["default"].cyan("https://github.com/jarrodmedrano/jarrod-starter/issues"))));
-        case 22:
+        case 23:
         case "end":
           return _context4.stop();
       }
