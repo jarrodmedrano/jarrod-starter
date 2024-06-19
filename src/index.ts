@@ -124,6 +124,12 @@ async function main() {
     execSync(
       `mv ${targetDir}/apps/next/app/layout_${project.auth}.tsx ${targetDir}/apps/next/app/layout.tsx`
     );
+    execSync(
+      `mv "${targetDir}/apps/next/app/(auth)/signin/[[...rest]]/page_${project.auth}.tsx" "${targetDir}/apps/next/app/(auth)/signin/[[...rest]]/page.tsx"`
+    );
+    execSync(
+      `mv "${targetDir}/apps/next/app/(auth)/register/[[...rest]]/page_${project.auth}.tsx" "${targetDir}/apps/next/app/(auth)/register/[[...rest]]/page.tsx"`
+    );
     s.stop("Added Auth");
   }
 

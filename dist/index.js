@@ -214,6 +214,8 @@ function main() {
             s.start("Adding Auth");
             execSync("mv ".concat(targetDir, "/apps/next/middleware_").concat(project.auth, ".ts ").concat(targetDir, "/apps/next/middleware.ts"));
             execSync("mv ".concat(targetDir, "/apps/next/app/layout_").concat(project.auth, ".tsx ").concat(targetDir, "/apps/next/app/layout.tsx"));
+            execSync("mv \"".concat(targetDir, "/apps/next/app/(auth)/signin/[[...rest]]/page_").concat(project.auth, ".tsx\" \"").concat(targetDir, "/apps/next/app/(auth)/signin/[[...rest]]/page.tsx\""));
+            execSync("mv \"".concat(targetDir, "/apps/next/app/(auth)/register/[[...rest]]/page_").concat(project.auth, ".tsx\" \"").concat(targetDir, "/apps/next/app/(auth)/register/[[...rest]]/page.tsx\""));
             s.stop("Added Auth");
           }
           if (project.install) {

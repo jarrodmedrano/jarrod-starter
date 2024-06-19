@@ -1,6 +1,6 @@
-import { SigninFormCard } from '@ui/components/pages/signin'
-import { authConfig, signOut } from '../../../auth'
-import { signInUser } from '../../../actions/user/signinUser'
+import { RegisterFormCard } from '@ui/components/pages/register'
+import { authConfig, signOut } from '../../../../auth'
+import { registerUser } from '../../../../actions/user/registerUser'
 
 export type Provider = {
   id: string
@@ -29,7 +29,7 @@ function getProviders(): Provider[] {
   )
 }
 
-const SigninPage = () => {
+const RegisterPage = () => {
   const providers = getProviders()
 
   const handleSignOut = async () => {
@@ -38,13 +38,13 @@ const SigninPage = () => {
   }
 
   return (
-    <SigninFormCard
+    <RegisterFormCard
       signOut={handleSignOut}
-      credentialsSignin={signInUser}
+      credentialsRegister={registerUser}
       providers={providers}
       credentials
     />
   )
 }
 
-export default SigninPage
+export default RegisterPage
