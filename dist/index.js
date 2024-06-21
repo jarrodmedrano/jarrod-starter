@@ -209,13 +209,15 @@ function main() {
           _context4.next = 18;
           return copyDb(project.database);
         case 18:
+          s = p.spinner();
           if (project.auth) {
-            s = p.spinner();
             s.start("Adding Auth");
             execSync("mv ".concat(targetDir, "/apps/next/middleware_").concat(project.auth, ".ts ").concat(targetDir, "/apps/next/middleware.ts"));
             execSync("mv ".concat(targetDir, "/apps/next/app/layout_").concat(project.auth, ".tsx ").concat(targetDir, "/apps/next/app/layout.tsx"));
             execSync("mv \"".concat(targetDir, "/apps/next/app/(auth)/signin/[[...rest]]/page_").concat(project.auth, ".tsx\" \"").concat(targetDir, "/apps/next/app/(auth)/signin/[[...rest]]/page.tsx\""));
             execSync("mv \"".concat(targetDir, "/apps/next/app/(auth)/register/[[...rest]]/page_").concat(project.auth, ".tsx\" \"").concat(targetDir, "/apps/next/app/(auth)/register/[[...rest]]/page.tsx\""));
+            // rename packages/ui/components/header/loginbutton/userbutton_${project.auth}.tsx to userbutton.tsx
+            execSync("mv \"".concat(targetDir, "/packages/ui/components/header/loginbutton/userbutton_").concat(project.auth, ".tsx\" \"").concat(targetDir, "/packages/ui/components/header/loginbutton/userbutton.tsx\""));
             s.stop("Added Auth");
           }
           if (project.install) {
@@ -237,7 +239,7 @@ function main() {
           nextSteps = "cd ".concat(project.path, "        \n").concat(project.install ? "" : "pnpm install\n", "pnpm dev");
           p.note(nextSteps, "Next steps.");
           p.outro("Done! Don't forget to set your environment vars! Problems? ".concat(_picocolors["default"].underline(_picocolors["default"].cyan("https://github.com/jarrodmedrano/jarrod-starter/issues"))));
-        case 23:
+        case 24:
         case "end":
           return _context4.stop();
       }

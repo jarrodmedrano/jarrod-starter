@@ -10,8 +10,8 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from '../ui/dropdown-menu'
-import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
+} from '../../ui/dropdown-menu'
+import { Avatar, AvatarFallback, AvatarImage } from '../../ui/avatar'
 const links = ['stories', 'characters', 'locations', 'timelines']
 
 const UserLinks: ({ user }: { user: any }) => JSX.Element = ({

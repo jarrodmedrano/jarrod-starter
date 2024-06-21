@@ -114,10 +114,10 @@ async function main() {
   if (project.database) {
     await copyDb(project.database);
   }
-
+  const s = p.spinner();
   if (project.auth) {
-    const s = p.spinner();
     s.start("Adding Auth");
+
     execSync(
       `mv ${targetDir}/apps/next/middleware_${project.auth}.ts ${targetDir}/apps/next/middleware.ts`
     );
@@ -129,6 +129,10 @@ async function main() {
     );
     execSync(
       `mv "${targetDir}/apps/next/app/(auth)/register/[[...rest]]/page_${project.auth}.tsx" "${targetDir}/apps/next/app/(auth)/register/[[...rest]]/page.tsx"`
+    );
+    // rename packages/ui/components/header/loginbutton/userbutton_${project.auth}.tsx to userbutton.tsx
+    execSync(
+      `mv "${targetDir}/packages/ui/components/header/loginbutton/userbutton_${project.auth}.tsx" "${targetDir}/packages/ui/components/header/loginbutton/userbutton.tsx"`
     );
     s.stop("Added Auth");
   }
