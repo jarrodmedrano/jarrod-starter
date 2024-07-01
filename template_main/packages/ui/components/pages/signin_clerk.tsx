@@ -12,15 +12,22 @@ export type Provider = {
   }
 }
 export const SigninFormClerk = ({
+  headerLabel,
+  backButtonLabel,
+  backButtonHref,
   children,
 }: {
+  headerLabel: string
+  backButtonLabel: string
+  backButtonHref: string
   children: React.ReactNode
 }) => {
   return (
     <CardWrapper
-      headerLabel="Sign In"
-      backButtonLabel="Don't have an account?"
-      backButtonHref="/register"
+      headerLabel={headerLabel}
+      backButtonLabel={backButtonLabel}
+      backButtonHref={backButtonHref}
+      slim
     >
       {children}
     </CardWrapper>
