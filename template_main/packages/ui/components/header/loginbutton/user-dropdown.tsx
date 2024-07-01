@@ -51,12 +51,14 @@ const UserDropdown = ({ user, logOut }: { user: any; logOut: () => void }) => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Avatar>
-          <AvatarImage src={user?.image} />
-          <AvatarFallback>{user?.name[0] + user?.name[1]}</AvatarFallback>
+          <AvatarImage src={user?.image || user?.imageUrl} />
+          <AvatarFallback>
+            {user?.name[0] + user?.name[1] || user?.firstName}
+          </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
-        <DropdownMenuLabel>{user?.name}</DropdownMenuLabel>
+        <DropdownMenuLabel>{user?.name || user?.firstName}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <a href={`/user/${user?.id}`}>
