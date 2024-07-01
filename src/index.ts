@@ -2,19 +2,18 @@
 import * as p from "@clack/prompts";
 import color from "picocolors";
 import { setTimeout } from "node:timers/promises";
-import { exec } from "child_process";
 
 const path = require("path");
 const fs = require("fs-extra");
-const { execSync } = require("child_process");
+const { exec } = require("child_process");
+const util = require("util");
+const execPromise = util.promisify(exec);
 
 const templateDir = path.join(__dirname, "../template_main");
 const targetDir = process.cwd();
 
 async function main() {
   console.clear();
-
-  await setTimeout(1000);
 
   p.intro(`${color.bgCyan(color.black(" create-app "))}`);
 
@@ -60,7 +59,7 @@ async function main() {
         p.text({
           message: "Where should we create your project?",
           placeholder: "./sparkling-solid",
-          validate: (value: any) => {
+          validate: (value) => {
             if (!value) return "Please enter a path.";
             if (value[0] !== ".") return "Please enter a relative path.";
           },
@@ -70,7 +69,7 @@ async function main() {
           message: "Is this a mobile project?",
           initialValue: false,
         }),
-      auth: ({ results }: { results: any }) =>
+      auth: ({ results }) =>
         p.select({
           message: `Pick an auth type within "${results.path}"`,
           initialValue: "nextauth",
@@ -80,7 +79,7 @@ async function main() {
             { value: "clerk", label: "Clerk" },
           ],
         }),
-      database: ({ results }: { results: any }) =>
+      database: ({ results }) =>
         p.select({
           message: `Pick a database type within "${results.path}"`,
           initialValue: "psql",
@@ -112,49 +111,47 @@ async function main() {
   }
 
   if (project.database) {
-    await copyDb(project.database);
+    await copyDb(project.database as string);
   }
+
   const s = p.spinner();
+
   if (project.auth) {
     s.start("Adding Auth");
 
-    execSync(
-      `mv ${targetDir}/apps/next/middleware_${project.auth}.ts ${targetDir}/apps/next/middleware.ts`
-    );
-    execSync(
-      `mv ${targetDir}/apps/next/app/layout_${project.auth}.tsx ${targetDir}/apps/next/app/layout.tsx`
-    );
-    execSync(
-      `mv "${targetDir}/apps/next/app/(auth)/signin/[[...rest]]/page_${project.auth}.tsx" "${targetDir}/apps/next/app/(auth)/signin/[[...rest]]/page.tsx"`
-    );
-    execSync(
-      `mv "${targetDir}/apps/next/app/(auth)/register/[[...rest]]/page_${project.auth}.tsx" "${targetDir}/apps/next/app/(auth)/register/[[...rest]]/page.tsx"`
-    );
-    // rename packages/ui/components/header/loginbutton/userbutton_${project.auth}.tsx to userbutton.tsx
-    execSync(
-      `mv "${targetDir}/packages/ui/components/header/loginbutton/userbutton_${project.auth}.tsx" "${targetDir}/packages/ui/components/header/loginbutton/userbutton.tsx"`
-    );
-    s.stop("Added Auth");
+    try {
+      await execPromise(
+        `mv ${targetDir}/apps/next/middleware_${project.auth}.ts ${targetDir}/apps/next/middleware.ts`
+      );
+      await execPromise(
+        `mv ${targetDir}/apps/next/app/layout_${project.auth}.tsx ${targetDir}/apps/next/app/layout.tsx`
+      );
+      await execPromise(
+        `mv "${targetDir}/apps/next/app/(auth)/signin/[[...rest]]/page_${project.auth}.tsx" "${targetDir}/apps/next/app/(auth)/signin/[[...rest]]/page.tsx"`
+      );
+      await execPromise(
+        `mv "${targetDir}/apps/next/app/(auth)/register/[[...rest]]/page_${project.auth}.tsx" "${targetDir}/apps/next/app/(auth)/register/[[...rest]]/page.tsx"`
+      );
+      await execPromise(
+        `mv "${targetDir}/packages/ui/components/header/loginbutton/userbutton_${project.auth}.tsx" "${targetDir}/packages/ui/components/header/loginbutton/userbutton.tsx"`
+      );
+      s.stop("Added Auth");
+    } catch (error: any) {
+      console.error(`Error adding auth: ${error.message}`);
+      s.stop("Failed to add Auth");
+    }
   }
 
   if (project.install) {
-    exec("pnpm install", (error, stdout, stderr) => {
-      const s = p.spinner();
-      s.start("Installing via pnpm");
+    s.start("Installing via pnpm");
 
-      if (error) {
-        console.error(`Error executing pnpm install: ${error.message}`);
-        return;
-      }
-
-      if (stderr) {
-        console.error(`Error output: ${stderr}`);
-        return;
-      }
-
-      console.log(`Output: ${stdout}`);
-      s.stop("Installed via pnpm");
-    });
+    try {
+      await execPromise("pnpm install");
+      console.log("Installed via pnpm");
+    } catch (error: any) {
+      console.error(`Error executing pnpm install: ${error.message}`);
+    }
+    s.stop();
   }
 
   let nextSteps = `cd ${project.path}        \n${

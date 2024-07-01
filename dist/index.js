@@ -3,8 +3,6 @@
 
 var p = _interopRequireWildcard(require("@clack/prompts"));
 var _picocolors = _interopRequireDefault(require("picocolors"));
-var _promises = require("node:timers/promises");
-var _child_process = require("child_process");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { "default": e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n["default"] = e, t && t.set(e, n), n; }
@@ -40,7 +38,9 @@ var __awaiter = void 0 && (void 0).__awaiter || function (thisArg, _arguments, P
 var path = require("path");
 var fs = require("fs-extra");
 var _require = require("child_process"),
-  execSync = _require.execSync;
+  exec = _require.exec;
+var util = require("util");
+var execPromise = util.promisify(exec);
 var templateDir = path.join(__dirname, "../template_main");
 var targetDir = process.cwd();
 function main() {
@@ -51,9 +51,6 @@ function main() {
       while (1) switch (_context4.prev = _context4.next) {
         case 0:
           console.clear();
-          _context4.next = 3;
-          return (0, _promises.setTimeout)(1000);
-        case 3:
           p.intro("".concat(_picocolors["default"].bgCyan(_picocolors["default"].black(" create-app "))));
           copyFiles = function copyFiles() {
             return __awaiter(_this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -127,7 +124,7 @@ function main() {
               }, _callee3, null, [[2, 10]]);
             }));
           };
-          _context4.next = 9;
+          _context4.next = 7;
           return p.group({
             path: function path() {
               return p.text({
@@ -190,60 +187,83 @@ function main() {
               process.exit(0);
             }
           });
-        case 9:
+        case 7:
           project = _context4.sent;
-          _context4.next = 12;
+          _context4.next = 10;
           return copyFiles();
-        case 12:
+        case 10:
           if (!project.mobile) {
-            _context4.next = 15;
+            _context4.next = 13;
             break;
           }
-          _context4.next = 15;
+          _context4.next = 13;
           return copyMobile();
-        case 15:
+        case 13:
           if (!project.database) {
-            _context4.next = 18;
+            _context4.next = 16;
             break;
           }
-          _context4.next = 18;
+          _context4.next = 16;
           return copyDb(project.database);
-        case 18:
+        case 16:
           s = p.spinner();
-          if (project.auth) {
-            s.start("Adding Auth");
-            execSync("mv ".concat(targetDir, "/apps/next/middleware_").concat(project.auth, ".ts ").concat(targetDir, "/apps/next/middleware.ts"));
-            execSync("mv ".concat(targetDir, "/apps/next/app/layout_").concat(project.auth, ".tsx ").concat(targetDir, "/apps/next/app/layout.tsx"));
-            execSync("mv \"".concat(targetDir, "/apps/next/app/(auth)/signin/[[...rest]]/page_").concat(project.auth, ".tsx\" \"").concat(targetDir, "/apps/next/app/(auth)/signin/[[...rest]]/page.tsx\""));
-            execSync("mv \"".concat(targetDir, "/apps/next/app/(auth)/register/[[...rest]]/page_").concat(project.auth, ".tsx\" \"").concat(targetDir, "/apps/next/app/(auth)/register/[[...rest]]/page.tsx\""));
-            // rename packages/ui/components/header/loginbutton/userbutton_${project.auth}.tsx to userbutton.tsx
-            execSync("mv \"".concat(targetDir, "/packages/ui/components/header/loginbutton/userbutton_").concat(project.auth, ".tsx\" \"").concat(targetDir, "/packages/ui/components/header/loginbutton/userbutton.tsx\""));
-            s.stop("Added Auth");
+          if (!project.auth) {
+            _context4.next = 37;
+            break;
           }
-          if (project.install) {
-            (0, _child_process.exec)("pnpm install", function (error, stdout, stderr) {
-              var s = p.spinner();
-              s.start("Installing via pnpm");
-              if (error) {
-                console.error("Error executing pnpm install: ".concat(error.message));
-                return;
-              }
-              if (stderr) {
-                console.error("Error output: ".concat(stderr));
-                return;
-              }
-              console.log("Output: ".concat(stdout));
-              s.stop("Installed via pnpm");
-            });
+          s.start("Adding Auth");
+          _context4.prev = 19;
+          _context4.next = 22;
+          return execPromise("mv ".concat(targetDir, "/apps/next/middleware_").concat(project.auth, ".ts ").concat(targetDir, "/apps/next/middleware.ts"));
+        case 22:
+          _context4.next = 24;
+          return execPromise("mv ".concat(targetDir, "/apps/next/app/layout_").concat(project.auth, ".tsx ").concat(targetDir, "/apps/next/app/layout.tsx"));
+        case 24:
+          _context4.next = 26;
+          return execPromise("mv \"".concat(targetDir, "/apps/next/app/(auth)/signin/[[...rest]]/page_").concat(project.auth, ".tsx\" \"").concat(targetDir, "/apps/next/app/(auth)/signin/[[...rest]]/page.tsx\""));
+        case 26:
+          _context4.next = 28;
+          return execPromise("mv \"".concat(targetDir, "/apps/next/app/(auth)/register/[[...rest]]/page_").concat(project.auth, ".tsx\" \"").concat(targetDir, "/apps/next/app/(auth)/register/[[...rest]]/page.tsx\""));
+        case 28:
+          _context4.next = 30;
+          return execPromise("mv \"".concat(targetDir, "/packages/ui/components/header/loginbutton/userbutton_").concat(project.auth, ".tsx\" \"").concat(targetDir, "/packages/ui/components/header/loginbutton/userbutton.tsx\""));
+        case 30:
+          s.stop("Added Auth");
+          _context4.next = 37;
+          break;
+        case 33:
+          _context4.prev = 33;
+          _context4.t0 = _context4["catch"](19);
+          console.error("Error adding auth: ".concat(_context4.t0.message));
+          s.stop("Failed to add Auth");
+        case 37:
+          if (!project.install) {
+            _context4.next = 49;
+            break;
           }
+          s.start("Installing via pnpm");
+          _context4.prev = 39;
+          _context4.next = 42;
+          return execPromise("pnpm install");
+        case 42:
+          console.log("Installed via pnpm");
+          _context4.next = 48;
+          break;
+        case 45:
+          _context4.prev = 45;
+          _context4.t1 = _context4["catch"](39);
+          console.error("Error executing pnpm install: ".concat(_context4.t1.message));
+        case 48:
+          s.stop();
+        case 49:
           nextSteps = "cd ".concat(project.path, "        \n").concat(project.install ? "" : "pnpm install\n", "pnpm dev");
           p.note(nextSteps, "Next steps.");
           p.outro("Done! Don't forget to set your environment vars! Problems? ".concat(_picocolors["default"].underline(_picocolors["default"].cyan("https://github.com/jarrodmedrano/jarrod-starter/issues"))));
-        case 24:
+        case 52:
         case "end":
           return _context4.stop();
       }
-    }, _callee4);
+    }, _callee4, null, [[19, 33], [39, 45]]);
   }));
 }
 main()["catch"](console.error);
