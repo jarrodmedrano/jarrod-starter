@@ -1,5 +1,6 @@
 import { SignIn } from '@clerk/nextjs'
+import { SigninFormClerk } from '@ui/components/pages/signin_clerk'
 
 export default function Page() {
-  return <SignIn path="/signin" />
+  return <SigninFormClerk children={<SignIn path="/signin" />} />
 }
