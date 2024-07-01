@@ -6,8 +6,8 @@ import { Clerk } from '@clerk/clerk-js'
 // Initialize Clerk with your Clerk publishable key
 const clerk = new Clerk('pk_test_Z3Jvd24tcGlnLTgwLmNsZXJrLmFjY291bnRzLmRldiQ')
 
-export const UserButton = async () => {
-  await clerk.load()
+export const UserButton = () => {
+  clerk.load()
 
   return clerk?.user ? (
     <UserDropdown user={clerk.user} logOut={signOut} />
