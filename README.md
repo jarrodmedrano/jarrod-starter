@@ -1,5 +1,7 @@
 # Jarrod Starter Template
 
+<img src="robot-helper.jpg" width="500" height="auto" alt="Turbo Repo starter"  />
+
 This is a starter for setting up your own turborepo project.
 For convenience you can select which auth type you want (`next-auth` or `clerk`) and which database you want (`psql` or `sqlite`).
 
