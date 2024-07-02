@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Logo } from '../icons/logo'
-import { LoginButton } from './loginbutton/loginbutton'
+import { UserButton } from './userbutton/userbutton'
 
 export const Header = ({
   companyLink,
@@ -54,12 +54,7 @@ export const Header = ({
           ))}
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <LoginButton
-            companyLink={companyLink}
-            companyName={companyName}
-            navigation={navigation}
-            companyLogo={companyLogo}
-          />
+          <UserButton />
         </div>
       </nav>
       <Dialog
@@ -98,12 +93,7 @@ export const Header = ({
                 ))}
               </div>
               <div className="py-6">
-                <LoginButton
-                  companyLink={companyLink}
-                  companyName={companyName}
-                  navigation={navigation}
-                  companyLogo={companyLogo}
-                />
+                <UserButton />
               </div>
             </div>
           </div>

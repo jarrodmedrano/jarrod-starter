@@ -1,16 +1,13 @@
 'use client'
 import UserDropdown from './user-dropdown'
 import { signOut } from 'next-auth/react'
-import { Clerk } from '@clerk/clerk-js'
-
-// Initialize Clerk with your Clerk publishable key
-const clerk = new Clerk('pk_test_Z3Jvd24tcGlnLTgwLmNsZXJrLmFjY291bnRzLmRldiQ')
+import { useAuthType } from '@ui/components/hooks/useAuthType'
 
 export const UserButton = () => {
-  clerk.load()
+  const { user } = useAuthType(process.env.authtype || 'clerk')
 
-  return clerk?.user ? (
-    <UserDropdown user={clerk.user} logOut={signOut} />
+  return user ? (
+    <UserDropdown user={user} logOut={signOut} />
   ) : (
     <a href="/signin" className="text-sm font-semibold leading-6 text-white">
       Log in <span aria-hidden="true">&rarr;</span>

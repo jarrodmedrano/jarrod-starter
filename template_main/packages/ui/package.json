@@ -40,7 +40,7 @@
     "@react-spring/web": "9.7.3",
     "@tailwindcss/forms": "0.5.7",
     "class-variance-authority": "0.6.0",
-    "@clerk/clerk-js": "5.7.1",
+    "@clerk/nextjs": "5.0.8",
     "clsx": "1.2.1",
     "cmdk": "1.0.0",
     "lucide-react": "0.244.0",

@@ -53,7 +53,7 @@ const UserDropdown = ({ user, logOut }: { user: any; logOut: () => void }) => {
         <Avatar>
           <AvatarImage src={user?.image || user?.imageUrl} />
           <AvatarFallback>
-            {user?.name[0] + user?.name[1] || user?.firstName}
+            {user?.firstName || user?.name?.[0] + user?.name?.[1]}
           </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>

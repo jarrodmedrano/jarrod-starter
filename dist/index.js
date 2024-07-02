@@ -208,7 +208,7 @@ function main() {
         case 16:
           s = p.spinner();
           if (!project.auth) {
-            _context4.next = 37;
+            _context4.next = 33;
             break;
           }
           s.start("Adding Auth");
@@ -217,53 +217,47 @@ function main() {
           return execPromise("mv ".concat(targetDir, "/apps/next/middleware_").concat(project.auth, ".ts ").concat(targetDir, "/apps/next/middleware.ts"));
         case 22:
           _context4.next = 24;
-          return execPromise("mv ".concat(targetDir, "/apps/next/app/layout_").concat(project.auth, ".tsx ").concat(targetDir, "/apps/next/app/layout.tsx"));
+          return execPromise("mv \"".concat(targetDir, "/apps/next/app/(auth)/signin/[[...rest]]/page_").concat(project.auth, ".tsx\" \"").concat(targetDir, "/apps/next/app/(auth)/signin/[[...rest]]/page.tsx\""));
         case 24:
           _context4.next = 26;
-          return execPromise("mv \"".concat(targetDir, "/apps/next/app/(auth)/signin/[[...rest]]/page_").concat(project.auth, ".tsx\" \"").concat(targetDir, "/apps/next/app/(auth)/signin/[[...rest]]/page.tsx\""));
-        case 26:
-          _context4.next = 28;
           return execPromise("mv \"".concat(targetDir, "/apps/next/app/(auth)/register/[[...rest]]/page_").concat(project.auth, ".tsx\" \"").concat(targetDir, "/apps/next/app/(auth)/register/[[...rest]]/page.tsx\""));
-        case 28:
-          _context4.next = 30;
-          return execPromise("mv \"".concat(targetDir, "/packages/ui/components/header/loginbutton/userbutton_").concat(project.auth, ".tsx\" \"").concat(targetDir, "/packages/ui/components/header/loginbutton/userbutton.tsx\""));
-        case 30:
+        case 26:
           s.stop("Added Auth");
-          _context4.next = 37;
+          _context4.next = 33;
           break;
-        case 33:
-          _context4.prev = 33;
+        case 29:
+          _context4.prev = 29;
           _context4.t0 = _context4["catch"](19);
           console.error("Error adding auth: ".concat(_context4.t0.message));
           s.stop("Failed to add Auth");
-        case 37:
+        case 33:
           if (!project.install) {
-            _context4.next = 49;
+            _context4.next = 45;
             break;
           }
           s.start("Installing via pnpm");
-          _context4.prev = 39;
-          _context4.next = 42;
+          _context4.prev = 35;
+          _context4.next = 38;
           return execPromise("pnpm install");
-        case 42:
+        case 38:
           console.log("Installed via pnpm");
-          _context4.next = 48;
+          _context4.next = 44;
           break;
-        case 45:
-          _context4.prev = 45;
-          _context4.t1 = _context4["catch"](39);
+        case 41:
+          _context4.prev = 41;
+          _context4.t1 = _context4["catch"](35);
           console.error("Error executing pnpm install: ".concat(_context4.t1.message));
-        case 48:
+        case 44:
           s.stop();
-        case 49:
+        case 45:
           nextSteps = "cd ".concat(project.path, "        \n").concat(project.install ? "" : "pnpm install\n", "pnpm dev");
           p.note(nextSteps, "Next steps.");
           p.outro("Done! Don't forget to set your environment vars! Problems? ".concat(_picocolors["default"].underline(_picocolors["default"].cyan("https://github.com/jarrodmedrano/jarrod-starter/issues"))));
-        case 52:
+        case 48:
         case "end":
           return _context4.stop();
       }
-    }, _callee4, null, [[19, 33], [39, 45]]);
+    }, _callee4, null, [[19, 29], [35, 41]]);
   }));
 }
 main()["catch"](console.error);

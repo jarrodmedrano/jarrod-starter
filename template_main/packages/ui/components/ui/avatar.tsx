@@ -27,7 +27,6 @@ const AvatarImage = React.forwardRef<
   <AvatarPrimitive.Image
     ref={ref}
     className={cn('aspect-square h-full w-full', className)}
-    aria-role="button"
     {...props}
   />
 ))

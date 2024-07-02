@@ -23,7 +23,7 @@ const withDashboard = (Component: ElementType<any>) => {
     navCollapsedSize?: number
   }) => {
     //@ts-ignore this line
-    const { session, data } = props
+    const { data } = props
 
     const [isCollapsed, setIsCollapsed] = useState<boolean>(defaultCollapsed)
 
@@ -40,7 +40,7 @@ const withDashboard = (Component: ElementType<any>) => {
 
     return (
       <>
-        <SiteHeader session={session} signOut={() => {}} />
+        <SiteHeader signOut={() => {}} />
         <main className="h-screen flex-1">
           <TooltipProvider delayDuration={0}>
             <ResizablePanelGroup
@@ -62,7 +62,6 @@ const withDashboard = (Component: ElementType<any>) => {
               >
                 <Sidebar
                   defaultLayout={defaultLayout}
-                  session={session}
                   isCollapsed={isCollapsed}
                   setIsCollapsed={handleCollapse}
                   data={data}

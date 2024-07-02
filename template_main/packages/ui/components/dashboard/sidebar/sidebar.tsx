@@ -8,7 +8,6 @@ export const Sidebar = ({
   isCollapsed,
   data = {},
 }: {
-  session: any
   defaultLayout?: number[]
   defaultCollapsed?: boolean
   navCollapsedSize?: number

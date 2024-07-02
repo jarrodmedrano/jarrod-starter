@@ -124,16 +124,10 @@ async function main() {
         `mv ${targetDir}/apps/next/middleware_${project.auth}.ts ${targetDir}/apps/next/middleware.ts`
       );
       await execPromise(
-        `mv ${targetDir}/apps/next/app/layout_${project.auth}.tsx ${targetDir}/apps/next/app/layout.tsx`
-      );
-      await execPromise(
         `mv "${targetDir}/apps/next/app/(auth)/signin/[[...rest]]/page_${project.auth}.tsx" "${targetDir}/apps/next/app/(auth)/signin/[[...rest]]/page.tsx"`
       );
       await execPromise(
         `mv "${targetDir}/apps/next/app/(auth)/register/[[...rest]]/page_${project.auth}.tsx" "${targetDir}/apps/next/app/(auth)/register/[[...rest]]/page.tsx"`
-      );
-      await execPromise(
-        `mv "${targetDir}/packages/ui/components/header/loginbutton/userbutton_${project.auth}.tsx" "${targetDir}/packages/ui/components/header/loginbutton/userbutton.tsx"`
       );
       s.stop("Added Auth");
     } catch (error: any) {
