@@ -15,18 +15,17 @@ const withAuth = (Component: ElementType<any>) => {
   }) => {
     const headersList = headers()
     const referer = headersList.get('referer')
-
     const session = await auth()
 
     if (referer) {
       const request = new NextRequest(referer)
 
-      if (!session) {
+      if (process.env.AUTH_TYPE === 'nextauth' && !session) {
         const dest = headersList.get('x-invoke-path')
         redirect(`${request.nextUrl.origin}/${signinRoute}?callbackUrl=${dest}`)
       }
     } else {
-      if (!session) {
+      if (process.env.AUTH_TYPE === 'nextauth' && !session) {
         redirect(signinRoute)
       }
     }

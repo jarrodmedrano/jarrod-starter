@@ -57,7 +57,7 @@ export const useSidebarNav = (isCollapsed: boolean, data: any) => {
           </TooltipContent>
         </Tooltip>
       ) : (
-        <ComboBoxResponsive page={page} onAdd={handleAdd} />
+        <ComboBoxResponsive key={index} page={page} onAdd={handleAdd} />
       )
       // ) : (
       //   <Link
