@@ -1,103 +1,65 @@
-// import NextAuth from 'next-auth'
-// import { NextResponse } from 'next/server'
-
-import { NextAuthRequest } from 'next-auth/lib'
-import { NextResponse } from 'next/server'
-
-// import { authConfig } from './auth'
+import { NextResponse } from 'next/server';
+import { NextAuthRequest } from 'next-auth/lib';
+import createIntlMiddleware from 'next-intl/middleware';
 import {
   DEFAULT_LOGIN_REDIRECT,
   apiAuthPrefix,
   authRoutes,
   privateRoutes,
-} from './routes'
-// const { auth } = NextAuth(authConfig)
+} from './routes';
+import { intlConfig, pipedString } from './i18n';
 
-// import { auth } from './auth'
-// import { NextAuthRequest } from 'next-auth/lib'
+// Create the middleware for next-intl
+const intlMiddleware = createIntlMiddleware(intlConfig);
 
-// const { auth } = NextAuth(authConfig)
+export default async function combinedMiddleware(req: NextAuthRequest) {
+  const { nextUrl } = req;
+  const isLoggedIn = !!req.auth;
 
-// export default auth((req: NextAuthRequest): Response | Promise<Response> => {
-//   const { nextUrl } = req
-//   const isLoggedIn = !!req.auth
+  const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
+  const isPrivateRoute = privateRoutes.includes(nextUrl.pathname);
+  const isAuthRoute = authRoutes.includes(nextUrl.pathname);
 
-//   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix)
-//   const isPublicRoute = publicRoutes.includes(nextUrl.pathname)
-//   const isAuthRoute = authRoutes.includes(nextUrl.pathname)
-
-//   if (isApiAuthRoute) {
-//     return NextResponse.next()
-//   }
-
-//   if (isAuthRoute) {
-//     if (isLoggedIn) {
-//       return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl))
-//     }
-//     return NextResponse.next()
-//   }
-
-//   if (!isLoggedIn && !isPublicRoute) {
-//     let callbackUrl = nextUrl.pathname
-//     if (nextUrl.search) {
-//       callbackUrl += nextUrl.search
-//     }
-
-//     const encodedCallbackUrl = encodeURIComponent(callbackUrl)
-
-//     return Response.redirect(
-//       new URL(`/auth/login?callbackUrl=${encodedCallbackUrl}`, nextUrl),
-//     )
-//   }
-
-//   return NextResponse.next()
-// })
-export default async function middleware(
-  req: NextAuthRequest,
-): Promise<Response> {
-  const { nextUrl } = req
-  const isLoggedIn = !!req.auth
-
-  const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix)
-  // const _isPublicRoute = publicRoutes.includes(nextUrl.pathname)
-  const isPrivateRoute = privateRoutes.includes(nextUrl.pathname)
-
-  const isAuthRoute = authRoutes.includes(nextUrl.pathname)
-
-  if (isApiAuthRoute) {
-    return NextResponse.next()
+  // Execute the intl middleware first
+  const intlResponse = intlMiddleware(req);
+  if (intlResponse) {
+    return intlResponse;
   }
 
+  // Execute the custom authentication middleware logic
   if (isApiAuthRoute) {
-    return NextResponse.next()
+    return NextResponse.next();
   }
 
   if (isAuthRoute) {
     if (isLoggedIn) {
-      return NextResponse.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl))
+      return NextResponse.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
     }
-    return NextResponse.next()
+    return NextResponse.next();
   }
 
   if (!isLoggedIn && isPrivateRoute) {
-    let callbackUrl = nextUrl.pathname
+    let callbackUrl = nextUrl.pathname;
     if (nextUrl.search) {
-      callbackUrl += nextUrl.search
+      callbackUrl += nextUrl.search;
     }
 
-    const encodedCallbackUrl = encodeURIComponent(callbackUrl)
+    const encodedCallbackUrl = encodeURIComponent(callbackUrl);
 
-    return Response.redirect(
-      new URL(`/signin?callbackUrl=${encodedCallbackUrl}`, nextUrl),
-    )
+    return NextResponse.redirect(
+      new URL(`/signin?callbackUrl=${encodedCallbackUrl}`, nextUrl)
+    );
   }
 
-  return NextResponse.next()
+  return NextResponse.next();
 }
-// Optionally, don't invoke Middleware on some paths
-// export const config = {
-//   matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)'],
-// }
+
+// Combine the matcher configurations
 export const config = {
-  matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)'],
-}
+  matcher: [
+    '/',
+    `/(${pipedString})/:path*`,
+    '/((?!.+\\.[\\w]+$|_next).*)',
+    '/(api|trpc)(.*)',
+  ],
+};
