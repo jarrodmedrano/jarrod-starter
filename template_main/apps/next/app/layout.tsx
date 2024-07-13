@@ -24,7 +24,9 @@ export default async function RootLayout({
 }) {
   const session = await auth()
   const locale = await getLocale()
-  const messages = await getMessages(locale)
+  const messages = await getMessages({
+    locale,
+  })
 
   return (
     <SessionProvider session={session}>

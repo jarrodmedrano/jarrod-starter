@@ -6,7 +6,6 @@ import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Logo } from '../icons/logo'
 import { UserButton } from './userbutton/userbutton'
-import { DropdownMenu } from '../ui/dropdown-menu'
 import { LangButton } from './langbutton/langbutton'
 
 export const Header = ({
