@@ -7,6 +7,9 @@ import { Metadata } from 'next'
 import GoogleAnalytics from './GoogleAnalytics'
 import { auth } from '../auth'
 import { ClerkProvider } from '@clerk/nextjs'
+import { NextIntlClientProvider } from 'next-intl'
+import { getLocale, getMessages } from 'next-intl/server'
+import { CookiesProvider } from 'next-client-cookies/server'
 
 export const metadata: Metadata = {
   title: 'Starter App',
@@ -21,11 +24,15 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
   const session = await auth()
+  const locale = await getLocale()
+  const messages = await getMessages({
+    locale,
+  })
 
   return (
     <SessionProvider session={session}>
       <ClerkProvider>
-        <html lang="en">
+        <html lang={locale}>
           <link
             rel="apple-touch-icon"
             sizes="180x180"
@@ -48,10 +55,14 @@ export default async function RootLayout({
           <meta name="msapplication-TileColor" content="#da532c" />
           <meta name="theme-color" content="#ffffff" />
           <body>
-            <GoogleAnalytics />
-            <PublicEnvProvider>
-              <Provider>{children}</Provider>
-            </PublicEnvProvider>
+            <NextIntlClientProvider messages={messages}>
+              <GoogleAnalytics />
+              <PublicEnvProvider>
+                <Provider>
+                  <CookiesProvider>{children}</CookiesProvider>
+                </Provider>
+              </PublicEnvProvider>
+            </NextIntlClientProvider>
           </body>
         </html>
       </ClerkProvider>

@@ -1,0 +1,17 @@
+{
+  "Navigation": {
+    "home": "startseite",
+    "create": "erstellen",
+    "browse": "durchsuchen",
+    "about": "uber",
+    "stories": "geschichten",
+    "characters": "personen",
+    "locations": "orte",
+    "timelines": "zeitenlinien",
+    "features": "funktionen",
+    "pricing": "preise",
+    "contact": "kontakt",
+    "privacy": "datenschutz",
+    "terms": "bedingungen"
+  }
+}

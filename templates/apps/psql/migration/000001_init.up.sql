@@ -40,6 +40,7 @@ CREATE TABLE users (
     "isTwoFactorEnabled" BOOLEAN,
     "twoFactorConfirmation" TEXT,
     "isAdmin" BOOLEAN,
+    "locale" TEXT,
     PRIMARY KEY (id)
 );
 

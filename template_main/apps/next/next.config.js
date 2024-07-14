@@ -2,6 +2,10 @@ const { withExpo } = require('@expo/next-adapter')
 
 const path = require('path')
 
+const createNextIntlPlugin = require('next-intl/plugin');
+ 
+const withNextIntl = createNextIntlPlugin();
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // reanimated (and thus, Moti) doesn't work with strict mode currently...
@@ -45,4 +49,4 @@ const nextConfig = {
   },
 }
 
-module.exports = withExpo(nextConfig)
+module.exports = withNextIntl(withExpo(nextConfig))

@@ -1,0 +1,17 @@
+{
+  "Navigation": {
+    "home": "home",
+    "create": "create",
+    "about": "about",
+    "browse": "browse",
+    "stories": "stories",
+    "characters": "characters",
+    "locations": "locations",
+    "timelines": "timelines",
+    "features": "features",
+    "pricing": "pricing",
+    "contact": "contact",
+    "privacy": "privacy",
+    "terms": "terms"
+  }
+}

@@ -18,6 +18,7 @@
     "typescript": "4.5.3"
   },
   "dependencies": {
+    "@clerk/nextjs": "5.0.8",
     "@headlessui/react": "1.7.18",
     "@heroicons/react": "2.1.1",
     "@hookform/resolvers": "3.3.4",
@@ -40,13 +41,13 @@
     "@react-spring/web": "9.7.3",
     "@tailwindcss/forms": "0.5.7",
     "class-variance-authority": "0.6.0",
-    "@clerk/nextjs": "5.0.8",
     "clsx": "1.2.1",
     "cmdk": "1.0.0",
     "lucide-react": "0.244.0",
     "nativewind": "2.0.11",
     "next": "14.2.4",
     "next-auth": "5.0.0-beta.4",
+    "next-client-cookies": "1.1.1",
     "next-themes": "0.2.1",
     "react-hook-form": "7.49.3",
     "react-resizable-panels": "2.0.17",
@@ -58,6 +59,7 @@
     "zod": "3.22.4"
   },
   "peerDependencies": {
+    "next-intl": "3.15.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.72.4",

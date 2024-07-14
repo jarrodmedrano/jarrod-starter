@@ -3,6 +3,7 @@ import { MainNav } from '@ui/components/header/internal/main-nav'
 import { MobileNav } from '@ui/components/header/internal/mobile-nav'
 import { ModeToggle } from '@ui/components/header/internal/mode-toggle'
 import { UserButton } from '../userbutton/userbutton'
+import { LangButton } from '../langbutton/langbutton'
 
 export function SiteHeader({ signOut }: { signOut: () => void }) {
   return (
@@ -15,6 +16,7 @@ export function SiteHeader({ signOut }: { signOut: () => void }) {
             <Command />
           </div>
           <nav className="flex items-center">
+            <LangButton />
             <ModeToggle />
             <UserButton />
           </nav>

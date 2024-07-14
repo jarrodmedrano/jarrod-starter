@@ -6,6 +6,7 @@ import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Logo } from '../icons/logo'
 import { UserButton } from './userbutton/userbutton'
+import { LangButton } from './langbutton/langbutton'
 
 export const Header = ({
   companyLink,
@@ -52,6 +53,9 @@ export const Header = ({
               {item.name}
             </a>
           ))}
+        </div>
+        <div className="hidden lg:flex lg:gap-x-12">
+          <LangButton />
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <UserButton />

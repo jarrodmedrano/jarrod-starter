@@ -1,7 +1,7 @@
 -- Users
 -- name: CreateUser :one
-INSERT INTO users (name, email, "emailVerified", "isTwoFactorEnabled", "twoFactorConfirmation", "password", "role")
-VALUES ($1, $2, $3, $4, $5, $6, $7)
+INSERT INTO users (name, email, "emailVerified", "isTwoFactorEnabled", "twoFactorConfirmation", "password", "role", "locale")
+VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
 RETURNING *;
 
 -- name: GetUser :one
@@ -28,9 +28,15 @@ UPDATE users SET
   "password" = COALESCE($6, "password"),
   "role" = COALESCE($7, "role"),
   "isTwoFactorEnabled" = COALESCE($8, "isTwoFactorEnabled"),
-  "twoFactorConfirmation" = COALESCE($9, "twoFactorConfirmation")
+  "twoFactorConfirmation" = COALESCE($9, "twoFactorConfirmation"),
+  "locale" = COALESCE($10, 'en')
 WHERE id = $1
 RETURNING *;
+
+-- name: UpdateUserLocale :exec
+UPDATE users
+SET "locale" = COALESCE($2, 'en')
+WHERE id = $1;
 
 -- name: UpdateUserEmail :one
 UPDATE users SET email = $2, "emailVerified" = NULL -- reset emailVerified when changing email
