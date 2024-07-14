@@ -15,6 +15,10 @@ import { useCookies } from 'next-client-cookies'
 
 export function LangButton() {
   const cookies = useCookies()
+  const handleLocaleChange = (locale: string) => {
+    cookies.set('NEXT_LOCALE', locale)
+    window.location.reload()
+  }
 
   return (
     <DropdownMenu>
@@ -29,7 +33,7 @@ export function LangButton() {
         {locales.map((locale) => (
           <DropdownMenuItem
             key={locale}
-            onClick={() => cookies.set('NEXT_LOCALE', locale)}
+            onClick={() => handleLocaleChange(locale)}
           >
             {locale}
           </DropdownMenuItem>

@@ -10,8 +10,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu'
+import { useTranslations } from 'next-intl'
+
 export const usePageNav = (sitemap: any, pathname: string) => {
   const [pages, setPages] = useState([])
+  const t = useTranslations('Navigation')
+
   useEffect(() => {
     const keyIndex = createKeyIndex(sitemap)
     const reducedPages = createPagesSubNav(keyIndex, 'pages', {})
@@ -34,14 +38,14 @@ export const usePageNav = (sitemap: any, pathname: string) => {
                   : 'text-foreground/60',
               )}
             >
-              {page?.title}
+              {t(page?.title)}
             </Link>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56">
             {page?.children?.map((link: any) => (
               <DropdownMenuGroup key={link?.title}>
                 <a href={`${link?.href}`}>
-                  <DropdownMenuItem>{link?.title}</DropdownMenuItem>
+                  <DropdownMenuItem>{t(link?.title)}</DropdownMenuItem>
                 </a>
               </DropdownMenuGroup>
             ))}
@@ -56,7 +60,7 @@ export const usePageNav = (sitemap: any, pathname: string) => {
             pathname === page?.href ? 'text-foreground' : 'text-foreground/60',
           )}
         >
-          {page?.title}
+          {t(page?.title)}
         </Link>
       )
     }),
