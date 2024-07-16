@@ -11,9 +11,6 @@ export function MainNav() {
   const pathname = usePathname()
   const { pages } = usePageNav(sitemap, pathname)
 
-  // eslint-disable-next-line no-console
-  console.log('the pages', pages)
-
   return (
     <div className="mr-4 hidden md:flex">
       <Link href="/" className="mr-6 flex items-center space-x-2">

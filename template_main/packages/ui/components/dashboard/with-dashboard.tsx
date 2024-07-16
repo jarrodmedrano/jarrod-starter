@@ -1,4 +1,4 @@
-import React, { ElementType, ReactNode, useState } from 'react'
+import React, { ElementType, ReactNode, useEffect, useState } from 'react'
 import { TooltipProvider } from '../ui/tooltip'
 import {
   ResizableHandle,
@@ -8,34 +8,66 @@ import {
 import { cn } from '@ui/lib/utils'
 import { SiteHeader } from '../header/internal/site-header'
 import { Sidebar } from './sidebar/sidebar'
+import { useCookies } from 'next-client-cookies'
 
 const withDashboard = (Component: ElementType<any>) => {
   const WrappedComponent = ({
     children,
-    defaultLayout = [265, 440, 655],
-    defaultCollapsed = false,
-    navCollapsedSize = 50,
     ...props
   }: {
     children: ReactNode
-    defaultLayout?: number[]
-    defaultCollapsed?: boolean
-    navCollapsedSize?: number
   }) => {
+    const [defaultCollapsed, setDefaultCollapsed] = useState<boolean>(false)
+    const [defaultLayout, setDefaultLayout] = useState<[number, number]>([
+      265, 440,
+    ])
+    const cookies = useCookies()
+
+    useEffect(() => {
+      const layout = cookies.get('layout')
+      const collapsed = cookies.get('collapsed')
+      try {
+        setDefaultLayout(
+          layout && layout !== 'undefined' ? JSON.parse(layout) : [],
+        )
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error('Invalid JSON in layout.value', e)
+      }
+
+      try {
+        // eslint-disable-next-line no-console
+        console.log('collapsed', collapsed)
+        setDefaultCollapsed(
+          collapsed && collapsed !== 'undefined'
+            ? JSON.parse(collapsed)
+            : false,
+        )
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error('Invalid JSON in collapsed.value', e)
+      }
+    }, [cookies])
+
     //@ts-ignore this line
     const { data } = props
 
     const [isCollapsed, setIsCollapsed] = useState<boolean>(defaultCollapsed)
 
-    const handleCollapse = (isCollapsed: boolean): void => {
-      setIsCollapsed(isCollapsed)
-      document.cookie = `react-resizable-panels:collapsed=${JSON.stringify(
-        isCollapsed,
-      )}`
+    useEffect(() => {
+      if (isCollapsed) {
+        cookies.set('collapsed', 'true')
+      } else {
+        cookies.set('collapsed', 'false')
+      }
+    }, [cookies, isCollapsed])
+
+    const handleCollapse = () => {
+      setIsCollapsed(true)
     }
 
-    const handleLayout = (sizes: number[]) => {
-      document.cookie = `react-resizable-panels:layout=${JSON.stringify(sizes)}`
+    const handleExpand = () => {
+      setIsCollapsed(false)
     }
 
     return (
@@ -45,25 +77,27 @@ const withDashboard = (Component: ElementType<any>) => {
           <TooltipProvider delayDuration={0}>
             <ResizablePanelGroup
               direction="horizontal"
-              onLayout={handleLayout}
+              onLayout={(sizes: number[]) => {
+                cookies.set('layout', JSON.stringify(sizes))
+              }}
               className="h-full items-stretch"
             >
               <ResizablePanel
-                defaultSize={defaultLayout[0]}
-                collapsedSize={navCollapsedSize}
-                collapsible={true}
-                minSize={15}
-                maxSize={20}
-                onCollapse={() => handleCollapse}
                 className={cn(
                   isCollapsed &&
                     'min-w-[50px] transition-all duration-300 ease-in-out',
                 )}
+                collapsedSize={5}
+                collapsible={true}
+                defaultSize={15}
+                maxSize={20}
+                minSize={15}
+                onCollapse={handleCollapse}
+                onExpand={handleExpand}
               >
                 <Sidebar
                   defaultLayout={defaultLayout}
                   isCollapsed={isCollapsed}
-                  setIsCollapsed={handleCollapse}
                   data={data}
                 />
               </ResizablePanel>
