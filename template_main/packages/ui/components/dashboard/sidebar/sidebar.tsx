@@ -12,7 +12,6 @@ export const Sidebar = ({
   defaultCollapsed?: boolean
   navCollapsedSize?: number
   isCollapsed: boolean
-  setIsCollapsed: (_isCollapsed: boolean) => void
   children?: ReactNode
   data?: any
 }) => {

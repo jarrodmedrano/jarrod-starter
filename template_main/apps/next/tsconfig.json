@@ -18,6 +18,7 @@
     "paths": {
       "@app/*": ["../../packages/app/*"],
       "@app/provider": ["../../packages/app/provider"],
+      "@ui": ["../../packages/ui"],
       "@ui/*": ["../../packages/ui/*"],
       "@utils/*": ["./utils"],
       "auth": ["./auth"],

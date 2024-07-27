@@ -38,6 +38,7 @@ export const newVerification = async (token: string) => {
     role: null,
     istwofactorenabled: null,
     twofactorconfirmation: null,
+    locale: null,
   })
 
   await deleteToken({

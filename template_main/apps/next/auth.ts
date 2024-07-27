@@ -121,6 +121,7 @@ export const authConfig: NextAuthConfig = {
           role: null,
           istwofactorenabled: null,
           twofactorconfirmation: null,
+          locale: null,
         })
       }
     },

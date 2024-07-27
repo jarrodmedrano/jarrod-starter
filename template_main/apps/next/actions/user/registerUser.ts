@@ -41,6 +41,7 @@ export const registerUser = async ({
     emailverified: null,
     istwofactorenabled: null,
     twofactorconfirmation: null,
+    locale: 'en',
   })
 
   await sendVerificationToken({
