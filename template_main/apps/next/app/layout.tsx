@@ -32,7 +32,7 @@ export default async function RootLayout({
   return (
     <SessionProvider session={session}>
       <ClerkProvider>
-        <html lang={locale}>
+        <html lang={locale} suppressHydrationWarning>
           <link
             rel="apple-touch-icon"
             sizes="180x180"

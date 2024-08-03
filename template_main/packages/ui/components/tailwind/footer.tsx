@@ -91,12 +91,10 @@ const navigation = {
   ],
 }
 
-const name = process.env.COMPANY_NAME || 'Company Name'
-
 export const Footer = () => {
   const [copyRight, setCopyright] = useState('')
   useEffect(() => {
-    setCopyright(`&copy; ${new Date().getFullYear()} ${name}. All rights
+    setCopyright(`© ${new Date().getFullYear()}. All rights
     reserved.`)
   }, [])
   return (
