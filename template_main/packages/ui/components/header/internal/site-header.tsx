@@ -1,4 +1,4 @@
-import { Command } from '@/components/ui/command'
+import { Command } from '@ui/components/ui/ui/command'
 import { MainNav } from '@ui/components/header/internal/main-nav'
 import { MobileNav } from '@ui/components/header/internal/mobile-nav'
 import { ModeToggle } from '@ui/components/header/internal/mode-toggle'

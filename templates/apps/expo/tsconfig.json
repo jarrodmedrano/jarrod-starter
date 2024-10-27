@@ -1,3 +1,14 @@
 {
-  "extends": "../../tsconfig"
+  "extends": "../../tsconfig",
+  "compilerOptions": {
+    "strictNullChecks": true,
+    "noUncheckedIndexedAccess": true,
+    "paths": {
+      "@app/*": ["../../packages/app/*"],
+      "@ui/*": ["../../packages/ui/*"],
+      "@schema/*": ["../../packages/schema/*"],
+      "@api/*": ["../../apps/api/*"],
+      "@sitemap/*": ["../../packages/sitemap/*"]
+    }
+  }
 }

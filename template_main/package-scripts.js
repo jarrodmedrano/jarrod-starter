@@ -59,5 +59,8 @@ module.exports = {
       client: `cd ${clientPath} && npx vitest`,
       api: `cd ${apiPath} && npx vitest`,
     },
+    mobile: {
+      default: 'cd apps/expo && pnpm start',
+    },
   },
 }

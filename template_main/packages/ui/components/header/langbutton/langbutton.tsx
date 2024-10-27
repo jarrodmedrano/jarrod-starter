@@ -7,8 +7,8 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
-import { Button } from '@/components/ui/button'
+} from '@ui/components/ui/ui/dropdown-menu'
+import { Button } from '@ui/components/ui/ui/button'
 import { LanguageIcon } from '@heroicons/react/20/solid'
 import { locales } from '../../../../app/lang'
 import { useCookies } from 'next-client-cookies'

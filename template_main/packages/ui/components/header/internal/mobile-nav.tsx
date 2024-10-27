@@ -7,10 +7,10 @@ import { useRouter } from 'next/navigation'
 import { docsConfig } from '@/config/docs'
 import { siteConfig } from '@/config/site'
 import { cn } from '@/lib/utils'
-import { Icons } from '@/components/generic/icons'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
-import { Button } from '@/components/ui/button'
+import { Icons } from '@ui/components/ui/generic/icons'
+import { ScrollArea } from '@ui/components/ui/ui/scroll-area'
+import { Sheet, SheetContent, SheetTrigger } from '@ui/components/ui/ui/sheet'
+import { Button } from '@ui/components/ui/ui/button'
 
 export function MobileNav() {
   const [open, setOpen] = React.useState(false)
