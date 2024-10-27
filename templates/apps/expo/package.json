@@ -2,7 +2,6 @@
   "dependencies": {
     "app": "*",
     "expo": "^49.0.0",
-    "expo-linear-gradient": "~12.3.0",
     "expo-linking": "~5.0.2",
     "expo-router": "^2.0.5",
     "expo-splash-screen": "~0.20.5",
@@ -18,15 +17,18 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
-    "@types/react": "~18.2.21",
+    "@types/react": "^18.2.21",
     "@types/react-native": "^0.72.2",
+    "tailwindcss": "^3.0.24",
     "typescript": "^5.2.2"
   },
   "scripts": {
     "start": "expo start",
     "android": "expo run:android",
-    "ios": "expo run:ios"
+    "ios": "expo run:ios",
+    "web": "expo start --web"
   },
+  "main": "index.js",
   "version": "1.0.0",
   "private": true,
   "name": "expo-app"

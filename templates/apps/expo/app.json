@@ -1,15 +1,12 @@
 {
   "expo": {
-    "name": "solito-expo-router",
-    "slug": "solito-expo-router",
+    "name": "solito-nativewind",
+    "slug": "solito-nativewind",
     "version": "1.0.0",
-    "scheme": "solito-expo-router",
+    "scheme": "solito-nativewind",
     "platforms": ["ios", "android"],
     "ios": {
-      "bundleIdentifier": "com.solito.expo-router"
-    },
-    "plugins": [
-      "expo-router"
-    ]
+      "bundleIdentifier": "com.solito.nativewind"
+    }
   }
 }
