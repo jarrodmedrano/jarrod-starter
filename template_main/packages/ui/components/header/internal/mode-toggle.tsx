@@ -8,8 +8,8 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@ui/components/ui/ui/dropdown-menu'
-import { Button } from '@ui/components/ui/ui/button'
+} from '@ui/components/ui/dropdown-menu'
+import { Button } from '@ui/components/ui/button'
 import { MoonIcon, SunIcon } from '@heroicons/react/20/solid'
 
 export function ModeToggle() {
