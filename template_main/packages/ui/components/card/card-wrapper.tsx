@@ -1,8 +1,8 @@
 'use client'
 
-import { CardContent, CardFooter, CardHeader } from '@/components/ui/card'
-import { Header } from '@/components/card/header'
-import { BackButton } from '@/components/card/back-button'
+import { CardContent, CardFooter, CardHeader } from '@ui/components/ui/card'
+import { Header } from '@ui/components/ui/card/header'
+import { BackButton } from '@ui/components/ui/card/back-button'
 
 interface CardWrapperProps {
   children: React.ReactNode

@@ -46,7 +46,7 @@ export const Header = () => {
   return (
     <HeaderNav
       navigation={mainNav}
-      companyName={process.env.COMPANY_NAME || 'Company Name'}
+      companyName={'Company Name'}
       companyLogo={<Logo className="h-8 w-auto" />}
       companyLink={'/'}
     />

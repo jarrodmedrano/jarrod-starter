@@ -1,4 +1,4 @@
-import { Provider } from 'app/provider'
+import { Provider } from '../../../packages/app/provider'
 import { Stack } from 'expo-router'
 
 export default function Root() {

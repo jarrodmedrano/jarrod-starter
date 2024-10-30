@@ -1,6 +1,6 @@
 'use client'
 
-import { useAuthType } from '@/components/hooks/useAuthType'
+import { useAuthType } from '@ui/components/ui/hooks/useAuthType'
 import { ScreenProps } from '../../common/interfaces'
 import DashboardLayout from '../../components/dashboard-layout'
 import React, { useEffect } from 'react'
