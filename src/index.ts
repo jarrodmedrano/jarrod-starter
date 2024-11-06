@@ -54,10 +54,11 @@ async function main() {
   };
 
   const copyIac = async () => {
-    const iacPaths = path.join(__dirname, `../templates/iac-aws`);
-
+    const iacPaths = path.join(__dirname, `../templates/aws/iac`);
+    const githubPaths = path.join(__dirname, `../templates/aws/github`);
     try {
       await fs.copy(iacPaths, targetDir + `/iac`);
+      await fs.copy(githubPaths, targetDir + "/.github");
       console.log("IAC copied successfully!");
     } catch (err) {
       console.error("Error copying directory:", err);

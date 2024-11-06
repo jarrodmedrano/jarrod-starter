@@ -126,27 +126,31 @@ function main() {
           };
           copyIac = function copyIac() {
             return __awaiter(_this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
-              var iacPaths;
+              var iacPaths, githubPaths;
               return _regeneratorRuntime().wrap(function _callee4$(_context4) {
                 while (1) switch (_context4.prev = _context4.next) {
                   case 0:
-                    iacPaths = path.join(__dirname, "../templates/iac-aws");
-                    _context4.prev = 1;
-                    _context4.next = 4;
+                    iacPaths = path.join(__dirname, "../templates/aws/iac");
+                    githubPaths = path.join(__dirname, "../templates/aws/github");
+                    _context4.prev = 2;
+                    _context4.next = 5;
                     return fs.copy(iacPaths, targetDir + "/iac");
-                  case 4:
-                    console.log("IAC copied successfully!");
-                    _context4.next = 10;
-                    break;
+                  case 5:
+                    _context4.next = 7;
+                    return fs.copy(githubPaths, targetDir + "/.github");
                   case 7:
-                    _context4.prev = 7;
-                    _context4.t0 = _context4["catch"](1);
-                    console.error("Error copying directory:", _context4.t0);
+                    console.log("IAC copied successfully!");
+                    _context4.next = 13;
+                    break;
                   case 10:
+                    _context4.prev = 10;
+                    _context4.t0 = _context4["catch"](2);
+                    console.error("Error copying directory:", _context4.t0);
+                  case 13:
                   case "end":
                     return _context4.stop();
                 }
-              }, _callee4, null, [[1, 7]]);
+              }, _callee4, null, [[2, 10]]);
             }));
           };
           _context5.next = 8;
