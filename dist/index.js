@@ -44,11 +44,11 @@ var execPromise = util.promisify(exec);
 var templateDir = path.join(__dirname, "../template_main");
 var targetDir = process.cwd();
 function main() {
-  return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+  return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
     var _this = this;
-    var copyFiles, copyDb, copyMobile, project, s, nextSteps;
-    return _regeneratorRuntime().wrap(function _callee4$(_context4) {
-      while (1) switch (_context4.prev = _context4.next) {
+    var copyFiles, copyDb, copyMobile, copyIac, project, s, nextSteps;
+    return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+      while (1) switch (_context5.prev = _context5.next) {
         case 0:
           console.clear();
           p.intro("".concat(_picocolors["default"].bgCyan(_picocolors["default"].black(" create-app "))));
@@ -124,7 +124,32 @@ function main() {
               }, _callee3, null, [[2, 10]]);
             }));
           };
-          _context4.next = 7;
+          copyIac = function copyIac() {
+            return __awaiter(_this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+              var iacPaths;
+              return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+                while (1) switch (_context4.prev = _context4.next) {
+                  case 0:
+                    iacPaths = path.join(__dirname, "../templates/iac-aws");
+                    _context4.prev = 1;
+                    _context4.next = 4;
+                    return fs.copy(iacPaths, targetDir + "/iac");
+                  case 4:
+                    console.log("IAC copied successfully!");
+                    _context4.next = 10;
+                    break;
+                  case 7:
+                    _context4.prev = 7;
+                    _context4.t0 = _context4["catch"](1);
+                    console.error("Error copying directory:", _context4.t0);
+                  case 10:
+                  case "end":
+                    return _context4.stop();
+                }
+              }, _callee4, null, [[1, 7]]);
+            }));
+          };
+          _context5.next = 8;
           return p.group({
             path: function path() {
               return p.text({
@@ -175,6 +200,12 @@ function main() {
                 }]
               });
             },
+            iac: function iac() {
+              return p.confirm({
+                message: "Install IaC? (terraform aws setup)",
+                initialValue: false
+              });
+            },
             install: function install() {
               return p.confirm({
                 message: "Install dependencies?",
@@ -187,77 +218,87 @@ function main() {
               process.exit(0);
             }
           });
-        case 7:
-          project = _context4.sent;
-          _context4.next = 10;
+        case 8:
+          project = _context5.sent;
+          _context5.next = 11;
           return copyFiles();
-        case 10:
+        case 11:
           if (!project.mobile) {
-            _context4.next = 13;
+            _context5.next = 14;
             break;
           }
-          _context4.next = 13;
+          _context5.next = 14;
           return copyMobile();
-        case 13:
+        case 14:
           if (!project.database) {
-            _context4.next = 16;
+            _context5.next = 17;
             break;
           }
-          _context4.next = 16;
+          _context5.next = 17;
           return copyDb(project.database);
-        case 16:
+        case 17:
           s = p.spinner();
           if (!project.auth) {
-            _context4.next = 33;
+            _context5.next = 34;
             break;
           }
           s.start("Adding Auth");
-          _context4.prev = 19;
-          _context4.next = 22;
+          _context5.prev = 20;
+          _context5.next = 23;
           return execPromise("mv ".concat(targetDir, "/apps/next/middleware_").concat(project.auth, ".ts ").concat(targetDir, "/apps/next/middleware.ts"));
-        case 22:
-          _context4.next = 24;
+        case 23:
+          _context5.next = 25;
           return execPromise("mv \"".concat(targetDir, "/apps/next/app/(auth)/signin/[[...rest]]/page_").concat(project.auth, ".tsx\" \"").concat(targetDir, "/apps/next/app/(auth)/signin/[[...rest]]/page.tsx\""));
-        case 24:
-          _context4.next = 26;
+        case 25:
+          _context5.next = 27;
           return execPromise("mv \"".concat(targetDir, "/apps/next/app/(auth)/register/[[...rest]]/page_").concat(project.auth, ".tsx\" \"").concat(targetDir, "/apps/next/app/(auth)/register/[[...rest]]/page.tsx\""));
-        case 26:
+        case 27:
           s.stop("Added Auth");
-          _context4.next = 33;
+          _context5.next = 34;
           break;
-        case 29:
-          _context4.prev = 29;
-          _context4.t0 = _context4["catch"](19);
-          console.error("Error adding auth: ".concat(_context4.t0.message));
+        case 30:
+          _context5.prev = 30;
+          _context5.t0 = _context5["catch"](20);
+          console.error("Error adding auth: ".concat(_context5.t0.message));
           s.stop("Failed to add Auth");
-        case 33:
+        case 34:
+          if (!project.iac) {
+            _context5.next = 39;
+            break;
+          }
+          s.start("Installing IaC");
+          _context5.next = 38;
+          return copyIac();
+        case 38:
+          s.stop("Installed IaC");
+        case 39:
           if (!project.install) {
-            _context4.next = 45;
+            _context5.next = 51;
             break;
           }
           s.start("Installing via pnpm");
-          _context4.prev = 35;
-          _context4.next = 38;
+          _context5.prev = 41;
+          _context5.next = 44;
           return execPromise("pnpm install");
-        case 38:
-          console.log("Installed via pnpm");
-          _context4.next = 44;
-          break;
-        case 41:
-          _context4.prev = 41;
-          _context4.t1 = _context4["catch"](35);
-          console.error("Error executing pnpm install: ".concat(_context4.t1.message));
         case 44:
+          console.log("Installed via pnpm");
+          _context5.next = 50;
+          break;
+        case 47:
+          _context5.prev = 47;
+          _context5.t1 = _context5["catch"](41);
+          console.error("Error executing pnpm install: ".concat(_context5.t1.message));
+        case 50:
           s.stop();
-        case 45:
+        case 51:
           nextSteps = "cd ".concat(project.path, "        \n").concat(project.install ? "" : "pnpm install\n", "pnpm dev");
           p.note(nextSteps, "Next steps.");
           p.outro("Done! Don't forget to set your environment vars! Problems? ".concat(_picocolors["default"].underline(_picocolors["default"].cyan("https://github.com/jarrodmedrano/jarrod-starter/issues"))));
-        case 48:
+        case 54:
         case "end":
-          return _context4.stop();
+          return _context5.stop();
       }
-    }, _callee4, null, [[19, 29], [35, 41]]);
+    }, _callee5, null, [[20, 30], [41, 47]]);
   }));
 }
 main()["catch"](console.error);

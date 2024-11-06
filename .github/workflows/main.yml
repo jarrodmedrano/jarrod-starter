@@ -28,7 +28,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-          cache: 'yarn'
+          cache: "yarn"
       - name: Install dependencies
         run: yarn
 
@@ -60,9 +60,6 @@ jobs:
           docker push $ECR_REGISTRY/${ECR_REPOSITORY}:${IMAGE_TAG}-client
           docker build -t $ECR_REGISTRY/${ECR_REPOSITORY}:${IMAGE_TAG}-api . -f ${API_PATH}/Dockerfile
           docker push $ECR_REGISTRY/${ECR_REPOSITORY}:${IMAGE_TAG}-api
-          docker pull bretttolbert/verbecc-svc:latest
-          docker tag bretttolbert/verbecc-svc:latest $ECR_REGISTRY/${ECR_REPOSITORY}:${IMAGE_TAG}-verbecc
-          docker push $ECR_REGISTRY/${ECR_REPOSITORY}:${IMAGE_TAG}-verbecc
           docker pull nginx:latest
           docker tag nginx:latest $ECR_REGISTRY/${ECR_REPOSITORY}:${IMAGE_TAG}-nginx
           docker push $ECR_REGISTRY/${ECR_REPOSITORY}:${IMAGE_TAG}-nginx
@@ -91,18 +88,6 @@ jobs:
           container-name: api
           image: $ECR_REGISTRY/${ECR_REPOSITORY}-api
 
-      - name: Modify Amazon ECS task definition with third
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
-          IMAGE_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
-        id: render-verbecc-container
-        uses: aws-actions/amazon-ecs-render-task-definition@v1
-        with:
-          task-definition: ${{ steps.render-api-container.outputs.task-definition }}
-          container-name: verbecc
-          image: $ECR_REGISTRY/${ECR_REPOSITORY}-verbecc
-
       - name: Modify Amazon ECS task definition with fourth
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
@@ -111,6 +96,6 @@ jobs:
         id: render-nginx-container
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
-          task-definition: ${{ steps.render-verbecc-container.outputs.task-definition }}
+          task-definition: ${{ steps.render-nginx-container.outputs.task-definition }}
           container-name: nginx
           image: $ECR_REGISTRY/${ECR_REPOSITORY}-nginx

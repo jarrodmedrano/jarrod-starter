@@ -3,19 +3,6 @@
   "family": "portuguese-verbs",
   "containerDefinitions": [
     {
-      "name": "verbecc",
-      "image": "bretttolbert/verbecc-svc:latest",
-      "memory": 512,
-      "cpu": 256,
-      "essential": true,
-      "portMappings": [
-        {
-          "containerPort": 8000,
-          "hostPort": 8000
-        }
-      ]
-    },
-    {
       "name": "api",
       "image": "api:latest",
       "memory": 512,
@@ -28,10 +15,6 @@
         }
       ],
       "environment": [
-        {
-          "name": "VERBECC_API_URL",
-          "value": "verbecc"
-        },
         {
           "name": "TRPC_PORT",
           "value": "4000"
@@ -57,10 +40,6 @@
         }
       ],
       "environment": [
-        {
-          "name": "VERBECC_API",
-          "value": "verbecc"
-        },
         {
           "name": "NODE_ENV",
           "value": "production"

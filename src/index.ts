@@ -53,6 +53,17 @@ async function main() {
     }
   };
 
+  const copyIac = async () => {
+    const iacPaths = path.join(__dirname, `../templates/iac-aws`);
+
+    try {
+      await fs.copy(iacPaths, targetDir + `/iac`);
+      console.log("IAC copied successfully!");
+    } catch (err) {
+      console.error("Error copying directory:", err);
+    }
+  };
+
   const project = await p.group(
     {
       path: () =>
@@ -89,6 +100,11 @@ async function main() {
             { value: "sqlite", label: "SQLite" },
             { value: "", label: "None" },
           ],
+        }),
+      iac: () =>
+        p.confirm({
+          message: "Install IaC? (terraform aws setup)",
+          initialValue: false,
         }),
       install: () =>
         p.confirm({
@@ -134,6 +150,12 @@ async function main() {
       console.error(`Error adding auth: ${error.message}`);
       s.stop("Failed to add Auth");
     }
+  }
+
+  if (project.iac) {
+    s.start("Installing IaC");
+    await copyIac();
+    s.stop("Installed IaC");
   }
 
   if (project.install) {
