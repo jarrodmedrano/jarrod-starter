@@ -10,8 +10,7 @@ import {
 } from '@ui/components/ui/tooltip'
 import { buttonVariants } from '@ui/components/ui/button'
 import sitemap from 'sitemap/sitemap.json'
-import { ComboBoxResponsive } from '../combobox/ComboBoxResponsive'
-
+import ComboBoxResponsive from '@ui/components/combobox'
 import { useRouter } from 'next/navigation'
 
 export const useSidebarNav = (isCollapsed: boolean, data: any) => {

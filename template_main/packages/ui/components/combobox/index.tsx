@@ -14,7 +14,7 @@ const extraItems = [
     onSelect: () => {},
   },
 ]
-export function ComboBoxResponsive({
+function ComboBoxResponsive({
   page,
   onAdd,
 }: {
@@ -75,3 +75,5 @@ export function ComboBoxResponsive({
     </Drawer>
   )
 }
+
+export default ComboBoxResponsive
