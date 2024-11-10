@@ -1,7 +1,7 @@
 import { Inbox } from 'lucide-react'
 import { ReactNode, useEffect, useState } from 'react'
 import { NapPropsLinks, SidebarNav } from '../sidebar-nav'
-import { sitemap } from '../../../../../packages/sitemap/sitemap.json'
+import sitemap from '../../../../../packages/sitemap/sitemap.json'
 import { createKeyIndex } from '../utils/build-nav'
 
 export const Sidebar = ({

@@ -2,7 +2,7 @@ import { Header as HeaderNav } from '@ui/components/header/header'
 import { Logo } from '@ui/components/icons/logo'
 import React, { useEffect } from 'react'
 import { createKeyIndex } from '../../ui/components/dashboard/utils/build-nav'
-import { sitemap } from '../../sitemap/sitemap.json'
+import sitemap from '../../sitemap/sitemap.json'
 
 export const Header = () => {
   const [mainNav, setMainNav] = React.useState<

@@ -9,7 +9,7 @@ import {
   TooltipTrigger,
 } from '@ui/components/ui/tooltip'
 import { buttonVariants } from '@ui/components/ui/button'
-import { sitemap } from 'sitemap/sitemap.json'
+import sitemap from 'sitemap/sitemap.json'
 import { ComboBoxResponsive } from '../combobox/ComboBoxResponsive'
 
 import { useRouter } from 'next/navigation'

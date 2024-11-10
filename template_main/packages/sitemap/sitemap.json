@@ -1,165 +1,163 @@
-{
-  "sitemap": [
-    {
-      "page": {
-        "name": "home",
-        "loc": "/"
-      }
-    },
-    {
-      "page": {
-        "loc": "/create",
-        "name": "create",
-        "children": [
-          {
-            "page": {
-              "name": "stories",
-              "loc": "/create/stories"
-            }
-          },
-          {
-            "page": {
-              "name": "characters",
-              "loc": "/create/characters"
-            }
-          },
-          {
-            "page": {
-              "name": "locations",
-              "loc": "/create/locations"
-            }
-          },
-          {
-            "page": {
-              "name": "timelines",
-              "loc": "/create/timelines"
-            }
-          }
-        ]
-      }
-    },
-
-    {
-      "page": {
-        "loc": "/stories",
-        "name": "browse",
-        "children": [
-          {
-            "page": {
-              "name": "stories",
-              "loc": "/:user/stories/:slug"
-            }
-          },
-          {
-            "page": {
-              "name": "characters",
-              "loc": "/:user/characters/:slug"
-            }
-          },
-          {
-            "page": {
-              "name": "locations",
-              "loc": "/:user/locations/:slug"
-            }
-          },
-          {
-            "page": {
-              "name": "timelines",
-              "loc": "/:user/timelines/:slug"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "page": {
-        "loc": "/about",
-        "name": "about",
-        "children": [
-          {
-            "page": {
-              "name": "features",
-              "loc": "/about/features"
-            }
-          },
-          {
-            "page": {
-              "name": "pricing",
-              "loc": "/about/pricing"
-            }
-          },
-          {
-            "page": {
-              "name": "contact",
-              "loc": "/about/contact"
-            }
-          },
-          {
-            "page": {
-              "name": "privacy",
-              "loc": "/about/privacy"
-            }
-          },
-          {
-            "page": {
-              "name": "terms",
-              "loc": "/about/terms"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "collection": {
-        "name": "stories",
-        "loc": "/stories",
-        "items": [
-          {
-            "page": {
-              "loc": "/stories/:user/:slug"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "collection": {
-        "name": "characters",
-        "loc": "/characters",
-        "items": [
-          {
-            "page": {
-              "loc": "/characters/:user/:slug"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "collection": {
-        "name": "locations",
-        "loc": "/locations",
-        "items": [
-          {
-            "page": {
-              "loc": "/locations/:user/:slug"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "collection": {
-        "name": "timelines",
-        "loc": "/timelines",
-        "items": [
-          {
-            "page": {
-              "loc": "/timelines/:user/:slug"
-            }
-          }
-        ]
-      }
+[
+  {
+    "page": {
+      "name": "home",
+      "loc": "/"
     }
-  ]
-}
+  },
+  {
+    "page": {
+      "loc": "/create",
+      "name": "create",
+      "children": [
+        {
+          "page": {
+            "name": "stories",
+            "loc": "/create/stories"
+          }
+        },
+        {
+          "page": {
+            "name": "characters",
+            "loc": "/create/characters"
+          }
+        },
+        {
+          "page": {
+            "name": "locations",
+            "loc": "/create/locations"
+          }
+        },
+        {
+          "page": {
+            "name": "timelines",
+            "loc": "/create/timelines"
+          }
+        }
+      ]
+    }
+  },
+
+  {
+    "page": {
+      "loc": "/stories",
+      "name": "browse",
+      "children": [
+        {
+          "page": {
+            "name": "stories",
+            "loc": "/:user/stories/:slug"
+          }
+        },
+        {
+          "page": {
+            "name": "characters",
+            "loc": "/:user/characters/:slug"
+          }
+        },
+        {
+          "page": {
+            "name": "locations",
+            "loc": "/:user/locations/:slug"
+          }
+        },
+        {
+          "page": {
+            "name": "timelines",
+            "loc": "/:user/timelines/:slug"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "page": {
+      "loc": "/about",
+      "name": "about",
+      "children": [
+        {
+          "page": {
+            "name": "features",
+            "loc": "/about/features"
+          }
+        },
+        {
+          "page": {
+            "name": "pricing",
+            "loc": "/about/pricing"
+          }
+        },
+        {
+          "page": {
+            "name": "contact",
+            "loc": "/about/contact"
+          }
+        },
+        {
+          "page": {
+            "name": "privacy",
+            "loc": "/about/privacy"
+          }
+        },
+        {
+          "page": {
+            "name": "terms",
+            "loc": "/about/terms"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "collection": {
+      "name": "stories",
+      "loc": "/stories",
+      "items": [
+        {
+          "page": {
+            "loc": "/stories/:user/:slug"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "collection": {
+      "name": "characters",
+      "loc": "/characters",
+      "items": [
+        {
+          "page": {
+            "loc": "/characters/:user/:slug"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "collection": {
+      "name": "locations",
+      "loc": "/locations",
+      "items": [
+        {
+          "page": {
+            "loc": "/locations/:user/:slug"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "collection": {
+      "name": "timelines",
+      "loc": "/timelines",
+      "items": [
+        {
+          "page": {
+            "loc": "/timelines/:user/:slug"
+          }
+        }
+      ]
+    }
+  }
+]
