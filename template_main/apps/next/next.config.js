@@ -2,9 +2,9 @@ const { withExpo } = require('@expo/next-adapter')
 
 const path = require('path')
 
-const createNextIntlPlugin = require('next-intl/plugin');
- 
-const withNextIntl = createNextIntlPlugin();
+const createNextIntlPlugin = require('next-intl/plugin')
+
+const withNextIntl = createNextIntlPlugin()
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -15,10 +15,6 @@ const nextConfig = {
   // once that gets fixed, set this back to true
   reactStrictMode: false,
   output: 'standalone',
-  experimental: {
-    outputFileTracingRoot: path.join(__dirname, '../../'),
-    serverActions: true,
-  },
   webpack: (config) => {
     config.watchOptions = {
       poll: 1000,
