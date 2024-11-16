@@ -8,7 +8,7 @@ For convenience you can select which auth type you want (`next-auth` or `clerk`)
 ```
 mkdir test-project
 cd test-project
-pnpm link ../create-jarrod-starter
+pnpm link ../jarrod-starter
 pnpm create-jarrod-starter
 ```
 
