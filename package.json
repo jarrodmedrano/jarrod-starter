@@ -1,6 +1,6 @@
 {
   "name": "create-jarrod-starter",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Create template for jarrod-starter",
   "main": "index.ts",
   "scripts": {
