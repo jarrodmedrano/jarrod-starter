@@ -6,6 +6,7 @@ module.exports = {
     './pages/**/*.{js,jsx,ts,tsx}',
     '../../packages/**/*.{js,jsx,ts,tsx}',
     './app/**/**/*.{js,ts,jsx,tsx,mdx}',
+    '!../../*/**/node_modules/**/*.{html,js}',
   ],
   theme: {
     ...theme,
