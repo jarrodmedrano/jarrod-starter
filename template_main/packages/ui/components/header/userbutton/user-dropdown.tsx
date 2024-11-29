@@ -14,6 +14,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from '../../ui/avatar'
 const links = ['stories', 'characters', 'locations', 'timelines']
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const UserLinks: ({ user }: { user: any }) => JSX.Element = ({
   user,
 }: {

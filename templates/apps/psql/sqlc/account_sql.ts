@@ -1,6 +1,7 @@
 import { QueryArrayConfig, QueryArrayResult } from "pg";
 
 interface Client {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     query: (config: QueryArrayConfig) => Promise<QueryArrayResult>;
 }
 

@@ -1,7 +1,5 @@
 const { withExpo } = require('@expo/next-adapter')
 
-const path = require('path')
-
 const createNextIntlPlugin = require('next-intl/plugin')
 
 const withNextIntl = createNextIntlPlugin()

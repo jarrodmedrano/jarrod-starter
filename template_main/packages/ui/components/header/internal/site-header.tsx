@@ -5,7 +5,7 @@ import { ModeToggle } from '@ui/components/header/internal/mode-toggle'
 import { UserButton } from '../userbutton/userbutton'
 import { LangButton } from '../langbutton/langbutton'
 
-export function SiteHeader({ signOut }: { signOut: () => void }) {
+export function SiteHeader() {
   return (
     <header className="border-border/40 bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full border-b backdrop-blur">
       <div className="container flex h-14 max-w-screen-2xl items-center">
