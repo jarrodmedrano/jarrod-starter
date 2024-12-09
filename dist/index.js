@@ -280,32 +280,35 @@ function main() {
           s.stop("Installed IaC");
         case 40:
           if (!project.install) {
-            _context5.next = 52;
+            _context5.next = 53;
             break;
           }
           s.start("Installing via pnpm");
           _context5.prev = 42;
-          _context5.next = 45;
+          if (project.path) {
+            process.chdir(targetDir);
+          }
+          _context5.next = 46;
           return execPromise("pnpm install");
-        case 45:
+        case 46:
           console.log("Installed via pnpm");
-          _context5.next = 51;
+          _context5.next = 52;
           break;
-        case 48:
-          _context5.prev = 48;
+        case 49:
+          _context5.prev = 49;
           _context5.t1 = _context5["catch"](42);
           console.error("Error executing pnpm install: ".concat(_context5.t1.message));
-        case 51:
-          s.stop();
         case 52:
+          s.stop();
+        case 53:
           nextSteps = "cd ".concat(project.path, "        \n").concat(project.install ? "" : "pnpm install\n", "pnpm dev");
           p.note(nextSteps, "Next steps.");
           p.outro("Done! Don't forget to set your environment vars! Problems? ".concat(_picocolors["default"].underline(_picocolors["default"].cyan("https://github.com/jarrodmedrano/jarrod-starter/issues"))));
-        case 55:
+        case 56:
         case "end":
           return _context5.stop();
       }
-    }, _callee5, null, [[21, 31], [42, 48]]);
+    }, _callee5, null, [[21, 31], [42, 49]]);
   }));
 }
 main()["catch"](console.error);

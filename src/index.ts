@@ -167,6 +167,9 @@ async function main() {
     s.start("Installing via pnpm");
 
     try {
+      if (project.path) {
+        process.chdir(targetDir);
+      }
       await execPromise("pnpm install");
       console.log("Installed via pnpm");
     } catch (error: any) {
