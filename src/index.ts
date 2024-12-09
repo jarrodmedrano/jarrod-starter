@@ -10,7 +10,7 @@ const util = require("util");
 const execPromise = util.promisify(exec);
 
 const templateDir = path.join(__dirname, "../template_main");
-const targetDir = process.cwd();
+let targetDir = process.cwd();
 
 async function main() {
   console.clear();
@@ -120,6 +120,10 @@ async function main() {
       },
     }
   );
+
+  if (project.path) {
+    targetDir = path.join(process.cwd(), project.path);
+  }
 
   await copyFiles();
 

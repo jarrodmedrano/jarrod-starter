@@ -224,85 +224,88 @@ function main() {
           });
         case 8:
           project = _context5.sent;
-          _context5.next = 11;
+          if (project.path) {
+            targetDir = path.join(process.cwd(), project.path);
+          }
+          _context5.next = 12;
           return copyFiles();
-        case 11:
+        case 12:
           if (!project.mobile) {
-            _context5.next = 14;
+            _context5.next = 15;
             break;
           }
-          _context5.next = 14;
+          _context5.next = 15;
           return copyMobile();
-        case 14:
+        case 15:
           if (!project.database) {
-            _context5.next = 17;
+            _context5.next = 18;
             break;
           }
-          _context5.next = 17;
+          _context5.next = 18;
           return copyDb(project.database);
-        case 17:
+        case 18:
           s = p.spinner();
           if (!project.auth) {
-            _context5.next = 34;
+            _context5.next = 35;
             break;
           }
           s.start("Adding Auth");
-          _context5.prev = 20;
-          _context5.next = 23;
+          _context5.prev = 21;
+          _context5.next = 24;
           return execPromise("mv ".concat(targetDir, "/apps/next/middleware_").concat(project.auth, ".ts ").concat(targetDir, "/apps/next/middleware.ts"));
-        case 23:
-          _context5.next = 25;
+        case 24:
+          _context5.next = 26;
           return execPromise("mv \"".concat(targetDir, "/apps/next/app/(auth)/signin/[[...rest]]/page_").concat(project.auth, ".tsx\" \"").concat(targetDir, "/apps/next/app/(auth)/signin/[[...rest]]/page.tsx\""));
-        case 25:
-          _context5.next = 27;
+        case 26:
+          _context5.next = 28;
           return execPromise("mv \"".concat(targetDir, "/apps/next/app/(auth)/register/[[...rest]]/page_").concat(project.auth, ".tsx\" \"").concat(targetDir, "/apps/next/app/(auth)/register/[[...rest]]/page.tsx\""));
-        case 27:
+        case 28:
           s.stop("Added Auth");
-          _context5.next = 34;
+          _context5.next = 35;
           break;
-        case 30:
-          _context5.prev = 30;
-          _context5.t0 = _context5["catch"](20);
+        case 31:
+          _context5.prev = 31;
+          _context5.t0 = _context5["catch"](21);
           console.error("Error adding auth: ".concat(_context5.t0.message));
           s.stop("Failed to add Auth");
-        case 34:
+        case 35:
           if (!project.iac) {
-            _context5.next = 39;
+            _context5.next = 40;
             break;
           }
           s.start("Installing IaC");
-          _context5.next = 38;
+          _context5.next = 39;
           return copyIac();
-        case 38:
-          s.stop("Installed IaC");
         case 39:
+          s.stop("Installed IaC");
+        case 40:
           if (!project.install) {
-            _context5.next = 51;
+            _context5.next = 52;
             break;
           }
           s.start("Installing via pnpm");
-          _context5.prev = 41;
-          _context5.next = 44;
+          _context5.prev = 42;
+          _context5.next = 45;
           return execPromise("pnpm install");
-        case 44:
+        case 45:
           console.log("Installed via pnpm");
-          _context5.next = 50;
+          _context5.next = 51;
           break;
-        case 47:
-          _context5.prev = 47;
-          _context5.t1 = _context5["catch"](41);
+        case 48:
+          _context5.prev = 48;
+          _context5.t1 = _context5["catch"](42);
           console.error("Error executing pnpm install: ".concat(_context5.t1.message));
-        case 50:
-          s.stop();
         case 51:
+          s.stop();
+        case 52:
           nextSteps = "cd ".concat(project.path, "        \n").concat(project.install ? "" : "pnpm install\n", "pnpm dev");
           p.note(nextSteps, "Next steps.");
           p.outro("Done! Don't forget to set your environment vars! Problems? ".concat(_picocolors["default"].underline(_picocolors["default"].cyan("https://github.com/jarrodmedrano/jarrod-starter/issues"))));
-        case 54:
+        case 55:
         case "end":
           return _context5.stop();
       }
-    }, _callee5, null, [[20, 30], [41, 47]]);
+    }, _callee5, null, [[21, 31], [42, 48]]);
   }));
 }
 main()["catch"](console.error);
