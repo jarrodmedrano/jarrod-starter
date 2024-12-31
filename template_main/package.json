@@ -58,7 +58,7 @@
     "jsdom": "20.0.3",
     "nps": "5.10.0",
     "prettier": "3.0.3",
-    "prettier-plugin-tailwindcss": "0.5.4",
+    "prettier-plugin-tailwindcss": "0.6.9",
     "turbo": "1.10.16",
     "typescript": "5.2.2",
     "vite-plugin-istanbul": "4.0.0",

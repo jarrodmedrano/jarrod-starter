@@ -8,7 +8,7 @@ import Apple from 'next-auth/providers/apple'
 //   EmailConfig,
 //   SendVerificationRequestParams,
 // } from 'next-auth/providers/email'
-import NextAuth from 'next-auth'
+import NextAuth, { type NextAuthResult } from 'next-auth'
 import type { NextAuthConfig } from 'next-auth'
 import bcrypt from 'bcryptjs'
 import Credentials from 'next-auth/providers/credentials'
@@ -197,4 +197,9 @@ export const authConfig: NextAuthConfig = {
   },
 } satisfies NextAuthConfig
 
-export const { handlers, auth, signIn, signOut } = NextAuth(authConfig)
+const result = NextAuth(authConfig)
+
+export const handlers: NextAuthResult['handlers'] = result.handlers
+export const auth: NextAuthResult['auth'] = result.auth
+export const signIn: NextAuthResult['signIn'] = result.signIn
+export const signOut: NextAuthResult['signOut'] = result.signOut

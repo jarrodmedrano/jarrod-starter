@@ -7,7 +7,7 @@ export default function combinedMiddleware(
   res: NextFetchEvent,
 ) {
   // Execute the Clerk middleware
-  return clerkMiddleware()(req, res)
+  return clerkMiddleware()(req, res) as unknown
 }
 
 // Combine the matcher configurations

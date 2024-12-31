@@ -72,7 +72,7 @@ const withDashboard = (Component: ElementType<any>) => {
 
     return (
       <>
-        <SiteHeader signOut={() => {}} />
+        <SiteHeader />
         <main className="h-screen flex-1">
           <TooltipProvider delayDuration={0}>
             <ResizablePanelGroup

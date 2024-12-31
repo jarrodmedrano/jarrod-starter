@@ -30,4 +30,4 @@ export const trpc = createTRPCNext<TRPCRouter>({
    * @link https://trpc.io/docs/ssr
    **/
   ssr: false,
-})
+}) as any
