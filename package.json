@@ -1,6 +1,6 @@
 {
   "name": "create-jarrod-starter",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "Create template for jarrod-starter",
   "main": "index.ts",
   "scripts": {
@@ -27,7 +27,7 @@
     "@babel/plugin-transform-modules-commonjs": "^7.24.6",
     "@babel/preset-env": "^7.24.6",
     "@babel/preset-typescript": "^7.24.6",
-    "pg": "8.11.3",
+    "@types/pg": "8.10.9",
     "ts-node": "10.9.2",
     "typescript": "5.4.5"
   },
