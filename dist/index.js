@@ -3,6 +3,10 @@
 
 var p = _interopRequireWildcard(require("@clack/prompts"));
 var _picocolors = _interopRequireDefault(require("picocolors"));
+var _path = _interopRequireDefault(require("path"));
+var _fsExtra = _interopRequireDefault(require("fs-extra"));
+var _child_process = require("child_process");
+var _util = _interopRequireDefault(require("util"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { "default": e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n["default"] = e, t && t.set(e, n), n; }
@@ -35,13 +39,8 @@ var __awaiter = void 0 && (void 0).__awaiter || function (thisArg, _arguments, P
     step((generator = generator.apply(thisArg, _arguments || [])).next());
   });
 };
-var path = require("path");
-var fs = require("fs-extra");
-var _require = require("child_process"),
-  exec = _require.exec;
-var util = require("util");
-var execPromise = util.promisify(exec);
-var templateDir = path.join(__dirname, "../template_main");
+var execPromise = _util["default"].promisify(_child_process.exec);
+var templateDir = _path["default"].join(__dirname, '../template_main');
 var targetDir = process.cwd();
 function main() {
   return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
@@ -51,17 +50,17 @@ function main() {
       while (1) switch (_context5.prev = _context5.next) {
         case 0:
           console.clear();
-          p.intro("".concat(_picocolors["default"].bgCyan(_picocolors["default"].black(" create-app "))));
+          p.intro("".concat(_picocolors["default"].bgCyan(_picocolors["default"].black(' create-app '))));
           copyFiles = function copyFiles() {
             return __awaiter(_this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
               return _regeneratorRuntime().wrap(function _callee$(_context) {
                 while (1) switch (_context.prev = _context.next) {
                   case 0:
                     _context.next = 2;
-                    return fs.copy(templateDir, targetDir).then(function () {
-                      console.log("Project created successfully.");
+                    return _fsExtra["default"].copy(templateDir, targetDir).then(function () {
+                      console.log('Project created successfully.');
                     })["catch"](function (err) {
-                      console.error("Error creating project:", err);
+                      console.error('Error creating project:', err);
                     });
                   case 2:
                   case "end":
@@ -76,18 +75,18 @@ function main() {
               return _regeneratorRuntime().wrap(function _callee2$(_context2) {
                 while (1) switch (_context2.prev = _context2.next) {
                   case 0:
-                    paths = path.join(__dirname, "../templates/apps/".concat(app));
+                    paths = _path["default"].join(__dirname, "../templates/apps/".concat(app));
                     _context2.prev = 1;
                     _context2.next = 4;
-                    return fs.copy(paths, targetDir + "/apps/database");
+                    return _fsExtra["default"].copy(paths, targetDir + "/apps/database");
                   case 4:
-                    console.log("Database copied successfully!");
+                    console.log('Database copied successfully!');
                     _context2.next = 10;
                     break;
                   case 7:
                     _context2.prev = 7;
                     _context2.t0 = _context2["catch"](1);
-                    console.error("Error copying directory:", _context2.t0);
+                    console.error('Error copying directory:', _context2.t0);
                   case 10:
                   case "end":
                     return _context2.stop();
@@ -101,22 +100,22 @@ function main() {
               return _regeneratorRuntime().wrap(function _callee3$(_context3) {
                 while (1) switch (_context3.prev = _context3.next) {
                   case 0:
-                    expoPaths = path.join(__dirname, "../templates/apps/expo");
-                    iosPaths = path.join(__dirname, "../templates/ios");
+                    expoPaths = _path["default"].join(__dirname, "../templates/apps/expo");
+                    iosPaths = _path["default"].join(__dirname, "../templates/ios");
                     _context3.prev = 2;
                     _context3.next = 5;
-                    return fs.copy(expoPaths, targetDir + "/apps/expo");
+                    return _fsExtra["default"].copy(expoPaths, targetDir + "/apps/expo");
                   case 5:
                     _context3.next = 7;
-                    return fs.copy(iosPaths, targetDir + "/ios");
+                    return _fsExtra["default"].copy(iosPaths, targetDir + "/ios");
                   case 7:
-                    console.log("Expo copied successfully!");
+                    console.log('Expo copied successfully!');
                     _context3.next = 13;
                     break;
                   case 10:
                     _context3.prev = 10;
                     _context3.t0 = _context3["catch"](2);
-                    console.error("Error copying directory:", _context3.t0);
+                    console.error('Error copying directory:', _context3.t0);
                   case 13:
                   case "end":
                     return _context3.stop();
@@ -130,22 +129,22 @@ function main() {
               return _regeneratorRuntime().wrap(function _callee4$(_context4) {
                 while (1) switch (_context4.prev = _context4.next) {
                   case 0:
-                    iacPaths = path.join(__dirname, "../templates/aws/iac");
-                    githubPaths = path.join(__dirname, "../templates/aws/github");
+                    iacPaths = _path["default"].join(__dirname, "../templates/aws/iac");
+                    githubPaths = _path["default"].join(__dirname, "../templates/aws/github");
                     _context4.prev = 2;
                     _context4.next = 5;
-                    return fs.copy(iacPaths, targetDir + "/iac");
+                    return _fsExtra["default"].copy(iacPaths, targetDir + "/iac");
                   case 5:
                     _context4.next = 7;
-                    return fs.copy(githubPaths, targetDir + "/.github");
+                    return _fsExtra["default"].copy(githubPaths, targetDir + '/.github');
                   case 7:
-                    console.log("IAC copied successfully!");
+                    console.log('IAC copied successfully!');
                     _context4.next = 13;
                     break;
                   case 10:
                     _context4.prev = 10;
                     _context4.t0 = _context4["catch"](2);
-                    console.error("Error copying directory:", _context4.t0);
+                    console.error('Error copying directory:', _context4.t0);
                   case 13:
                   case "end":
                     return _context4.stop();
@@ -157,17 +156,17 @@ function main() {
           return p.group({
             path: function path() {
               return p.text({
-                message: "Where should we create your project?",
-                placeholder: "./sparkling-solid",
+                message: 'Where should we create your project?',
+                placeholder: './sparkling-solid',
                 validate: function validate(value) {
-                  if (!value) return "Please enter a path.";
-                  if (value[0] !== ".") return "Please enter a relative path.";
+                  if (!value) return 'Please enter a path.';
+                  if (value[0] !== '.') return 'Please enter a relative path.';
                 }
               });
             },
             mobile: function mobile() {
               return p.confirm({
-                message: "Is this a mobile project?",
+                message: 'Is this a mobile project?',
                 initialValue: false
               });
             },
@@ -175,14 +174,14 @@ function main() {
               var results = _ref.results;
               return p.select({
                 message: "Pick an auth type within \"".concat(results.path, "\""),
-                initialValue: "nextauth",
+                initialValue: 'nextauth',
                 maxItems: 1,
                 options: [{
-                  value: "nextauth",
-                  label: "Next Auth"
+                  value: 'nextauth',
+                  label: 'Next Auth'
                 }, {
-                  value: "clerk",
-                  label: "Clerk"
+                  value: 'clerk',
+                  label: 'Clerk'
                 }]
               });
             },
@@ -190,42 +189,42 @@ function main() {
               var results = _ref2.results;
               return p.select({
                 message: "Pick a database type within \"".concat(results.path, "\""),
-                initialValue: "psql",
+                initialValue: 'psql',
                 maxItems: 1,
                 options: [{
-                  value: "psql",
-                  label: "Postgresql & Golang"
+                  value: 'psql',
+                  label: 'Postgresql & Golang'
                 }, {
-                  value: "sqlite",
-                  label: "SQLite"
+                  value: 'sqlite',
+                  label: 'SQLite'
                 }, {
-                  value: "",
-                  label: "None"
+                  value: '',
+                  label: 'None'
                 }]
               });
             },
             iac: function iac() {
               return p.confirm({
-                message: "Install IaC? (terraform aws setup)",
+                message: 'Install IaC? (terraform aws setup)',
                 initialValue: false
               });
             },
             install: function install() {
               return p.confirm({
-                message: "Install dependencies?",
+                message: 'Install dependencies?',
                 initialValue: false
               });
             }
           }, {
             onCancel: function onCancel() {
-              p.cancel("Operation cancelled.");
+              p.cancel('Operation cancelled.');
               process.exit(0);
             }
           });
         case 8:
           project = _context5.sent;
           if (project.path) {
-            targetDir = path.join(process.cwd(), project.path);
+            targetDir = _path["default"].join(process.cwd(), project.path);
           }
           _context5.next = 12;
           return copyFiles();
@@ -249,7 +248,7 @@ function main() {
             _context5.next = 35;
             break;
           }
-          s.start("Adding Auth");
+          s.start('Adding Auth');
           _context5.prev = 21;
           _context5.next = 24;
           return execPromise("mv ".concat(targetDir, "/apps/next/middleware_").concat(project.auth, ".ts ").concat(targetDir, "/apps/next/middleware.ts"));
@@ -260,50 +259,58 @@ function main() {
           _context5.next = 28;
           return execPromise("mv \"".concat(targetDir, "/apps/next/app/(auth)/register/[[...rest]]/page_").concat(project.auth, ".tsx\" \"").concat(targetDir, "/apps/next/app/(auth)/register/[[...rest]]/page.tsx\""));
         case 28:
-          s.stop("Added Auth");
+          s.stop('Added Auth');
           _context5.next = 35;
           break;
         case 31:
           _context5.prev = 31;
           _context5.t0 = _context5["catch"](21);
-          console.error("Error adding auth: ".concat(_context5.t0.message));
-          s.stop("Failed to add Auth");
+          if (_context5.t0 instanceof Error) {
+            console.error("Error adding auth: ".concat(_context5.t0.message));
+          } else {
+            console.error('Error adding auth:', _context5.t0);
+          }
+          s.stop('Failed to add Auth');
         case 35:
           if (!project.iac) {
             _context5.next = 40;
             break;
           }
-          s.start("Installing IaC");
+          s.start('Installing IaC');
           _context5.next = 39;
           return copyIac();
         case 39:
-          s.stop("Installed IaC");
+          s.stop('Installed IaC');
         case 40:
           if (!project.install) {
             _context5.next = 53;
             break;
           }
-          s.start("Installing via pnpm");
+          s.start('Installing via pnpm');
           _context5.prev = 42;
           if (project.path) {
             process.chdir(targetDir);
           }
           _context5.next = 46;
-          return execPromise("pnpm install");
+          return execPromise('pnpm install');
         case 46:
-          console.log("Installed via pnpm");
+          console.log('Installed via pnpm');
           _context5.next = 52;
           break;
         case 49:
           _context5.prev = 49;
           _context5.t1 = _context5["catch"](42);
-          console.error("Error executing pnpm install: ".concat(_context5.t1.message));
+          if (_context5.t1 instanceof Error) {
+            console.error("Error executing pnpm install: ".concat(_context5.t1.message));
+          } else {
+            console.error('Error executing pnpm install:', _context5.t1);
+          }
         case 52:
           s.stop();
         case 53:
-          nextSteps = "cd ".concat(project.path, "        \n").concat(project.install ? "" : "pnpm install\n", "pnpm dev");
-          p.note(nextSteps, "Next steps.");
-          p.outro("Done! Don't forget to set your environment vars! Problems? ".concat(_picocolors["default"].underline(_picocolors["default"].cyan("https://github.com/jarrodmedrano/jarrod-starter/issues"))));
+          nextSteps = "cd ".concat(project.path, "        \n").concat(project.install ? '' : 'pnpm install\n', "pnpm dev");
+          p.note(nextSteps, 'Next steps.');
+          p.outro("Done! Don't forget to set your environment vars! Problems? ".concat(_picocolors["default"].underline(_picocolors["default"].cyan('https://github.com/jarrodmedrano/jarrod-starter/issues'))));
         case 56:
         case "end":
           return _context5.stop();

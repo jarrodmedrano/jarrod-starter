@@ -13,13 +13,13 @@
     "build": "npm run build:ts && npm run build:babel",
     "build:babel": "babel dist --out-dir dist",
     "build:ts": "tsc",
-    "eslint": "eslint \"**/*.+(js|jsx|ts|tsx)\"",
-    "eslint:fix": "eslint --fix \"**/*.+(js|jsx|ts|tsx)\"",
+    "eslint": "eslint \"src/*.+(js|jsx|ts|tsx)\"",
+    "eslint:fix": "eslint --fix \"src/*.+(js|jsx|ts|tsx)\"",
     "preinstall": "npx only-allow pnpm",
     "precommit": "nps precommit",
     "prepare": "npx husky install",
-    "prettier": "prettier --check \"**/*.+(js|jsx|ts|tsx|json|yml|yaml|md|css)\"",
-    "prettier:fix": "prettier --write \"**/*.+(js|jsx|ts|tsx|json|yml|yaml|md|css)\"",
+    "prettier": "prettier --check \"src/*.+(js|jsx|ts|tsx|json|yml|yaml|md|css)\"",
+    "prettier:fix": "prettier --write \"src/*.+(js|jsx|ts|tsx|json|yml|yaml|md|css)\"",
     "start": "ts-node src/index.ts"
   },
   "lint-staged": {

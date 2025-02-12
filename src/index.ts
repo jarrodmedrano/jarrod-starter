@@ -70,15 +70,15 @@ async function main() {
         p.text({
           message: 'Where should we create your project?',
           placeholder: './sparkling-solid',
-          validate: (value) => {
+          validate: value => {
             if (!value) return 'Please enter a path.'
             if (value[0] !== '.') return 'Please enter a relative path.'
-          },
+          }
         }),
       mobile: () =>
         p.confirm({
           message: 'Is this a mobile project?',
-          initialValue: false,
+          initialValue: false
         }),
       auth: ({ results }) =>
         p.select({
@@ -87,8 +87,8 @@ async function main() {
           maxItems: 1,
           options: [
             { value: 'nextauth', label: 'Next Auth' },
-            { value: 'clerk', label: 'Clerk' },
-          ],
+            { value: 'clerk', label: 'Clerk' }
+          ]
         }),
       database: ({ results }) =>
         p.select({
@@ -98,25 +98,25 @@ async function main() {
           options: [
             { value: 'psql', label: 'Postgresql & Golang' },
             { value: 'sqlite', label: 'SQLite' },
-            { value: '', label: 'None' },
-          ],
+            { value: '', label: 'None' }
+          ]
         }),
       iac: () =>
         p.confirm({
           message: 'Install IaC? (terraform aws setup)',
-          initialValue: false,
+          initialValue: false
         }),
       install: () =>
         p.confirm({
           message: 'Install dependencies?',
-          initialValue: false,
-        }),
+          initialValue: false
+        })
     },
     {
       onCancel: () => {
         p.cancel('Operation cancelled.')
         process.exit(0)
-      },
+      }
     }
   )
 
@@ -141,13 +141,19 @@ async function main() {
 
     try {
       await execPromise(
-        `mv ${targetDir}/apps/next/middleware_${project.auth}.ts ${targetDir}/apps/next/middleware.ts`
+        `mv ${targetDir}/apps/next/middleware_${
+          project.auth
+        }.ts ${targetDir}/apps/next/middleware.ts`
       )
       await execPromise(
-        `mv "${targetDir}/apps/next/app/(auth)/signin/[[...rest]]/page_${project.auth}.tsx" "${targetDir}/apps/next/app/(auth)/signin/[[...rest]]/page.tsx"`
+        `mv "${targetDir}/apps/next/app/(auth)/signin/[[...rest]]/page_${
+          project.auth
+        }.tsx" "${targetDir}/apps/next/app/(auth)/signin/[[...rest]]/page.tsx"`
       )
       await execPromise(
-        `mv "${targetDir}/apps/next/app/(auth)/register/[[...rest]]/page_${project.auth}.tsx" "${targetDir}/apps/next/app/(auth)/register/[[...rest]]/page.tsx"`
+        `mv "${targetDir}/apps/next/app/(auth)/register/[[...rest]]/page_${
+          project.auth
+        }.tsx" "${targetDir}/apps/next/app/(auth)/register/[[...rest]]/page.tsx"`
       )
       s.stop('Added Auth')
     } catch (error) {
