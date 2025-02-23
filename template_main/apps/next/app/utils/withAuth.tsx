@@ -14,14 +14,14 @@ const withAuth = (Component: ElementType<any>) => {
     children: ReactComponentElement<any, any>
   }) => {
     const headersList = headers()
-    const referer = headersList.get('referer')
+    const referer = (await headersList).get('referer')
     const session = await auth()
 
     if (referer) {
       const request = new NextRequest(referer)
 
       if (process.env.AUTH_TYPE === 'nextauth' && !session) {
-        const dest = headersList.get('x-invoke-path')
+        const dest = (await headersList).get('x-invoke-path')
         redirect(`${request.nextUrl.origin}/${signinRoute}?callbackUrl=${dest}`)
       }
     } else {

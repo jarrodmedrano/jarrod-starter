@@ -16,7 +16,7 @@ import {
   CommandList,
   CommandSeparator,
   CommandShortcut,
-} from '@ui/components/ui/command'
+} from '@repo/ui/components/ui/command'
 
 export const Search = ({ className }: React.HTMLAttributes<HTMLDivElement>) => {
   return (

@@ -3,7 +3,7 @@ import { Pool } from 'pg'
 import { inferAsyncReturnType } from '@trpc/server'
 import { CreateFastifyContextOptions } from '@trpc/server/adapters/fastify'
 // Reference required for compilation
-import type fastify from 'fastify'
+// import type fastify from 'fastify'
 
 const pool = new Pool({
   host: process.env.DATABASE_HOST || 'database',

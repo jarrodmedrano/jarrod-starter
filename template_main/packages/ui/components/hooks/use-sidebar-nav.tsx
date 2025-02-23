@@ -1,16 +1,16 @@
-import { createPagesSubNav } from '@ui/components/dashboard/utils/build-nav'
-import { createKeyIndex } from '@ui/components/dashboard/utils/build-nav'
-import { cn } from '@ui/lib/utils'
+import { createPagesSubNav } from '@repo/ui/components/dashboard/utils/build-nav'
+import { createKeyIndex } from '@repo/ui/components/dashboard/utils/build-nav'
+import { cn } from '@repo/ui/lib/utils'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from '@ui/components/ui/tooltip'
-import { buttonVariants } from '@ui/components/ui/button'
+} from '@repo/ui/components/ui/tooltip'
+import { buttonVariants } from '@repo/ui/components/ui/button'
 import sitemap from 'sitemap/sitemap.json'
-import ComboBoxResponsive from '@ui/components/combobox'
+import ComboBoxResponsive from '@repo/ui/components/combobox'
 import { useRouter } from 'next/navigation'
 
 export const useSidebarNav = (isCollapsed: boolean, data: any) => {

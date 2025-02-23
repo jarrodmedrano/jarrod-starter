@@ -1,7 +1,7 @@
 'use client'
 import UserDropdown from './user-dropdown'
 import { signOut } from 'next-auth/react'
-import { useAuthType } from '@ui/components/hooks/useAuthType'
+import { useAuthType } from '@repo/ui/components/hooks/useAuthType'
 
 export const UserButton = () => {
   const { user } = useAuthType(process.env.AUTH_TYPE || 'clerk')

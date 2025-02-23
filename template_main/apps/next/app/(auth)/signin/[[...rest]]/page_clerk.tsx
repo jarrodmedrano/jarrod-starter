@@ -1,5 +1,5 @@
 import { SignIn } from '@clerk/nextjs'
-import { SigninFormClerk } from '@ui/components/pages/signin_clerk'
+import { SigninFormClerk } from '@repo/ui/components/pages/signin_clerk'
 
 export default function Page() {
   return (

@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Logo } from '@ui/components/icons/logo'
+import { Logo } from '@repo/ui/components/icons/logo'
 import { siteConfig } from '@/config/site'
 import sitemap from '../../../../../packages/sitemap/sitemap.json'
 import { usePageNav } from '../../hooks/use-page-nav'

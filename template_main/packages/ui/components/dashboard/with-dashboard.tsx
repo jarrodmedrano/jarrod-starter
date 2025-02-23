@@ -5,7 +5,7 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from '../ui/resizable'
-import { cn } from '@ui/lib/utils'
+import { cn } from '@repo/ui/lib/utils'
 import { SiteHeader } from '../header/internal/site-header'
 import { Sidebar } from './sidebar/sidebar'
 import { useCookies } from 'next-client-cookies'

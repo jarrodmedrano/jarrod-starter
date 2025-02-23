@@ -16,7 +16,7 @@
       "@schema/*": ["./*"]
     }
   },
-  "extends": "tsconfig/base.json",
+  "extends": "@repo/typescript-config/base.json",
   "include": ["**/*.ts"],
   "exclude": ["./node_modules", "./dist", "./.turbo", "node_modules/**/*"]
 }

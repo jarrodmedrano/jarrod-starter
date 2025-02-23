@@ -18,8 +18,8 @@
     "paths": {
       "@app/*": ["../../packages/app/*"],
       "@app/provider": ["../../packages/app/provider"],
-      "@ui": ["../../packages/ui"],
-      "@ui/*": ["../../packages/ui/*"],
+      "@repo/ui": ["../../packages/ui"],
+      "@repo/ui/*": ["../../packages/ui/*"],
       "@utils/*": ["./utils"],
       "auth": ["./auth"],
       "@api/*": ["../../apps/api/*"],
@@ -27,7 +27,9 @@
       "@schema/*": ["../../packages/schema/*"],
       "@/*": ["./*"],
       "@repo/database/*": ["../../apps/database/*"],
-      "@repo/database": ["../../apps/database"]
+      "@repo/database": ["../../apps/database"],
+      "@repo/eslint-config/*": ["../../packages/eslint-config/*"],
+      "@repo/typescript-config/*": ["../../packages/typescript-config/*"]
     },
     "plugins": [
       {

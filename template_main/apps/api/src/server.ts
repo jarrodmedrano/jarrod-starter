@@ -1,30 +1,30 @@
-import helmet from '@fastify/helmet'
-import cors from '@fastify/cors'
-import { fastifyTRPCPlugin } from '@trpc/server/adapters/fastify'
-import { build } from './app'
-import { createContext } from './routes/context'
-import { env } from './config/env'
-import { config } from './config/config'
-import { appRouter } from './routes'
+import helmet from "@fastify/helmet";
+import cors from "@fastify/cors";
+import { fastifyTRPCPlugin } from "@trpc/server/adapters/fastify";
+import { build } from "./app";
+import { createContext } from "./routes/context";
+import { env } from "./config/env";
+import { config } from "./config/config";
+import { appRouter } from "./routes";
 
 const app = build({
-  logger: config[env.NODE_ENV].logger,
-})
+  logger: config?.[env.NODE_ENV]?.logger,
+});
 
 app.register(fastifyTRPCPlugin, {
-  prefix: '/api',
+  prefix: "/api",
   trpcOptions: {
     router: appRouter,
     createContext,
   },
-})
+});
 
 app.register(cors, {
-  origin: '*',
+  origin: "*",
   credentials: true,
-})
+});
 
-app.register(helmet)
+app.register(helmet);
 
 if (env.HOST) {
   app.listen(
@@ -34,11 +34,11 @@ if (env.HOST) {
     },
     (err, _address) => {
       if (err) {
-        app.log.error(err)
-        process.exit(1)
+        app.log.error(err);
+        process.exit(1);
       }
-    },
-  )
+    }
+  );
 } else {
   app.listen(
     {
@@ -46,9 +46,9 @@ if (env.HOST) {
     },
     (err, _address) => {
       if (err) {
-        app.log.error(err)
-        process.exit(1)
+        app.log.error(err);
+        process.exit(1);
       }
-    },
-  )
+    }
+  );
 }

@@ -1,6 +1,6 @@
-import { createPagesSubNav } from '@ui/components/dashboard/utils/build-nav'
-import { createKeyIndex } from '@ui/components/dashboard/utils/build-nav'
-import { cn } from '@ui/lib/utils'
+import { createPagesSubNav } from '@repo/ui/components/dashboard/utils/build-nav'
+import { createKeyIndex } from '@repo/ui/components/dashboard/utils/build-nav'
+import { cn } from '@repo/ui/lib/utils'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import {

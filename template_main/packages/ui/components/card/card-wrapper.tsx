@@ -1,6 +1,10 @@
 'use client'
 
-import { CardContent, CardFooter, CardHeader } from '@ui/components/ui/card'
+import {
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from '@repo/ui/components/ui/card'
 import { Header } from './header'
 import { BackButton } from './back-button'
 

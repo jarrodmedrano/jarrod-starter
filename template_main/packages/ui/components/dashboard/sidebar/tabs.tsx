@@ -1,12 +1,12 @@
 import { Separator } from '@radix-ui/react-select'
-import { Search } from '@ui/components/search/search'
-import { Input } from '@ui/components/ui/input'
+import { Search } from '@repo/ui/components/search/search'
+import { Input } from '@repo/ui/components/ui/input'
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-} from '@ui/components/ui/tabs'
+} from '@repo/ui/components/ui/tabs'
 
 export default (
   <Tabs defaultValue="all">

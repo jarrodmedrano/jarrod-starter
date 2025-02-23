@@ -1,4 +1,4 @@
-import { NewVerificationForm } from '@ui/components/pages/verify-token'
+import { NewVerificationForm } from '@repo/ui/components/pages/verify-token'
 import { newVerification } from '../../../actions/user/verifyUser'
 
 const VerifyTokenPage = () => {

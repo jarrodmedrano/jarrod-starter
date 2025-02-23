@@ -11,8 +11,10 @@
   "author": "jarrodmedrano",
   "license": "ISC",
   "devDependencies": {
-    "typescript": "4.9.4",
-    "tsconfig": "workspace:*"
+    "@repo/eslint-config": "workspace:*",
+    "eslint": "9.20.0",
+    "@repo/typescript-config": "workspace:*",
+    "typescript": "4.9.4"
   },
   "dependencies": {
     "zod": "3.20.2"

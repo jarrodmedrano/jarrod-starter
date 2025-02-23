@@ -11,6 +11,6 @@
   "dependencies": {
     "make": "0.8.1",
     "pg": "8.11.3",
-    "tsconfig": "workspace:*"
+    "@repo/typescript-config": "workspace:*"
   }
 }

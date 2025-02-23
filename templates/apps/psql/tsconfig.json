@@ -5,5 +5,5 @@
     "noUnusedParameters": false
   },
   "exclude": ["./node_modules", "./dist", "./.turbo"],
-  "extends": "tsconfig/base.json"
+  "extends": "@repo/typescript-config/base.json"
 }

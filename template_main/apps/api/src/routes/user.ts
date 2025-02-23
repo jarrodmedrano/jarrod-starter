@@ -14,7 +14,7 @@ export const userRouter = router({
         email: z.string(),
       }),
     )
-    .query(async ({ input, ctx }): Promise<any> => {
+    .query(async ({ input, ctx }): Promise<Awaited<[]>> => {
       // Destructure id from input
       const { email } = input
 
@@ -28,7 +28,7 @@ export const userRouter = router({
 
         // Assuming rows[0] contains the user data you want to return
         return rows[0]
-      } catch (error) {
+      } catch (_error) {
         // Handle or throw the error appropriately
         throw new Error('Failed to fetch user from the database')
       }
@@ -49,7 +49,7 @@ export const userRouter = router({
         }
 
         return rows[0]
-      } catch (error) {
+      } catch (_error) {
         throw new Error('Failed to fetch user from the database')
       }
     }),

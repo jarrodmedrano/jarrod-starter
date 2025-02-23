@@ -55,12 +55,15 @@
     "@vitejs/plugin-react": "3.1.0",
     "@vitest/coverage-istanbul": "0.28.3",
     "@vitest/ui": "0.28.4",
-    "eslint": "8.21.0",
+    "@eslint/js": "9.20.0",
+    "@typescript-eslint/eslint-plugin": "8.24.0",
+    "@typescript-eslint/parser": "8.24.0",
+    "eslint": "9.20.1",
     "jsdom": "20.0.3",
     "nps": "5.10.0",
     "prettier": "3.0.3",
     "prettier-plugin-tailwindcss": "0.6.9",
-    "turbo": "1.10.16",
+    "turbo": "2.4.0",
     "typescript": "5.2.2",
     "vite-plugin-istanbul": "4.0.0",
     "vitest": "0.26.2"
@@ -82,5 +85,6 @@
   "nohoist": [
     "**/expo-router",
     "**/expo-router/**"
-  ]
+  ],
+  "packageManager": "pnpm@8.10.0"
 }

@@ -1,7 +1,7 @@
 import { Command } from '../../ui/command'
-import { MainNav } from '@ui/components/header/internal/main-nav'
-import { MobileNav } from '@ui/components/header/internal/mobile-nav'
-import { ModeToggle } from '@ui/components/header/internal/mode-toggle'
+import { MainNav } from '@repo/ui/components/header/internal/main-nav'
+import { MobileNav } from '@repo/ui/components/header/internal/mobile-nav'
+import { ModeToggle } from '@repo/ui/components/header/internal/mode-toggle'
 import { UserButton } from '../userbutton/userbutton'
 import { LangButton } from '../langbutton/langbutton'
 

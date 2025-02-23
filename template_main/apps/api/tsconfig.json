@@ -71,10 +71,14 @@
     "baseUrl": "./",
     "paths": {
       "@schema/*": ["../../packages/schema/*"],
-      "@api/*": ["./*"]
+      "@api/*": ["./*"],
+      "@repo/eslint-config": ["../../packages/eslint-config"],
+      "@repo/eslint-config/*": ["../../packages/eslint-config/*"],
+      "@repo/typescript-config": ["../../packages/typescript-config"],
+      "@repo/typescript-config/*": ["../../packages/typescript-config/*"]
     }
   },
-  "extends": "tsconfig/base.json",
+  "extends": "@repo/typescript-config/base.json",
   "include": ["src/**/*.ts"],
   "exclude": ["./node_modules", "./dist", "./.turbo"]
 }

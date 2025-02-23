@@ -1,54 +1,39 @@
 {
-  "$schema": "https://turborepo.org/schema.json",
-  "pipeline": {
-    "dev": {
-      "cache": false
-    },
-    "db:generate": {
-      "cache": false
-    },
-    "db:push": {
-      "cache": false
-    },
-    "start": {
-      "dependsOn": ["^build"],
-      "outputs": ["dist/**", "build/**"]
-    },
-    "//#lint": {
-      "dependsOn": ["//#check:toml", "//#check:prettier"],
-      "outputs": ["dist/**", "build/**"]
-    },
-    "//#check:prettier": {
-      "outputs": ["dist/**", "build/**"]
-    },
-    "//#check:toml": {
-      "outputs": ["dist/**", "build/**"]
-    },
-    "check-types": {
-      "dependsOn": ["build:ts", "^build"],
-      "outputs": ["dist/**", "build/**"]
-    },
-    "build:ts": {
-      "outputs": ["packages/**/dist", "apps/**/dist"]
-    },
+  "$schema": "https://turbo.build/schema.json",
+  "globalEnv": [
+    "DB_URL",
+    "DATABASE_URL_UNPOOLED",
+    "PGHOST",
+    "POSTGRES_USER",
+    "DATABASE_URL",
+    "PGPASSWORD",
+    "POSTGRES_PRISMA_URL",
+    "PGDATABASE",
+    "PGHOST_UNPOOLED",
+    "POSTGRES_URL_NO_SSL",
+    "PGUSER",
+    "POSTGRES_PASSWORD",
+    "POSTGRES_DATABASE",
+    "POSTGRES_URL_NON_POOLING",
+    "POSTGRES_URL",
+    "POSTGRES_HOST"
+  ],
+  "ui": "tui",
+  "tasks": {
     "build": {
-      "outputs": ["dist/**/*", ".next/**/*"],
-      "dependsOn": ["^build"]
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": [".next/**", "!.next/cache/**"]
     },
     "lint": {
-      "cache": false
+      "dependsOn": ["^lint"]
     },
-    "lint:fix": {
-      "cache": false
+    "check-types": {
+      "dependsOn": ["^check-types"]
     },
-    "format": {
-      "cache": false
-    },
-    "format:check": {
-      "cache": false
-    },
-    "clean": {
-      "cache": false
+    "dev": {
+      "cache": false,
+      "persistent": true
     }
   }
 }

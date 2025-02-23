@@ -1,9 +1,5 @@
 module.exports = {
   scripts: {
-    prepare: {
-      default: 'nps prepare.install prepare.format',
-      install: 'pnpm husky install && pnpm install',
-    },
     eslint: {
       default: 'eslint "src/*.+(js|jsx|ts|tsx)"',
       fix: 'eslint --fix "src/*.+(js|jsx|ts|tsx)"',

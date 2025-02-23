@@ -1,7 +1,7 @@
 // import '../src/styles/global.css'
 import { PublicEnvProvider } from 'next-runtime-env'
 import { Provider } from '@app/provider'
-import '@ui/styles/globals.css'
+import '@repo/ui/styles/globals.css'
 import { SessionProvider } from 'next-auth/react'
 import { Metadata } from 'next'
 import GoogleAnalytics from './GoogleAnalytics'
