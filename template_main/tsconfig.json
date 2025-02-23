@@ -4,7 +4,7 @@
     "noUncheckedIndexedAccess": true,
     "paths": {
       "@app/*": ["./packages/app/*"],
-      "@ui/*": ["./packages/ui/*"],
+      "@repo/ui/*": ["./packages/ui/*"],
       "@schema/*": ["./packages/schema/*"],
       "@api/*": ["./apps/api/*"],
       "@sitemap/*": ["./packages/sitemap/*"]

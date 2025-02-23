@@ -17,7 +17,7 @@
     "target": "es5",
     "paths": {
       "@/*": ["./*"],
-      "@ui/*": ["../../packages/ui/*"],
+      "@repo/ui/*": ["../../packages/ui/*"],
       "@repo/ui/components/*": ["../../packages/ui/components/ui/*"],
       "@repo/ui/components/ui/*": ["../../packages/ui/components/ui/*"]
     }
