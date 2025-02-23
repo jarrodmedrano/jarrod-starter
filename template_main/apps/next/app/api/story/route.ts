@@ -1,8 +1,8 @@
 import { createStory } from '@repo/database'
 import pool from '../../utils/open-pool'
 
-export async function POST(request: Request) {
-  const body = await request.json()
+export async function GET(_request: Request, props: { params: Promise<{ slug: number }> }) {
+  const params = await props.params;
   const client = await pool.connect()
 
   const storyRequest = await createStory(client, {

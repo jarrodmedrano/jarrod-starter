@@ -13,7 +13,7 @@ const withAuth = (Component: ElementType<any>) => {
   }: {
     children: ReactComponentElement<any, any>
   }) => {
-    const headersList = headers()
+    const headersList = await headers()
     const referer = (await headersList).get('referer')
     const session = await auth()
 
