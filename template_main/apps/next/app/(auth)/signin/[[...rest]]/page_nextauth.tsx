@@ -1,4 +1,4 @@
-import { SigninFormCard } from '@ui/components/pages/signin'
+import { SigninFormCard } from '@repo/ui/components/pages/signin'
 import { authConfig, signOut } from '../../../../auth'
 import { signInUser } from '../../../../actions/user/signinUser'
 
