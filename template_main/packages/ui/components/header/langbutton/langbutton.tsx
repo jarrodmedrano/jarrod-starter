@@ -24,7 +24,7 @@ export function LangButton() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="w-9 px-0">
-          <LanguageIcon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all" />
+          <LanguageIcon className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all" />
           <span className="sr-only">Toggle language</span>
         </Button>
       </DropdownMenuTrigger>

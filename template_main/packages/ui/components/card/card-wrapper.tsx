@@ -33,10 +33,10 @@ export const CardWrapper = ({
           backButtonLabel={backButtonLabel}
         />
       </CardHeader>
-      <div className="mb-10 mt-2 sm:mx-auto sm:w-full sm:max-w-[480px]">
+      <div className="mt-2 mb-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
         {slim && <CardContent>{children}</CardContent>}
         {!slim && (
-          <div className="bg-white px-6 py-12 shadow dark:bg-gray-800 sm:rounded-lg sm:px-12">
+          <div className="bg-white px-6 py-12 shadow-xs sm:rounded-lg sm:px-12 dark:bg-gray-800">
             <CardContent>{children}</CardContent>
           </div>
         )}

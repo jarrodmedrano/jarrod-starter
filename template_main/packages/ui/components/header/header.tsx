@@ -48,7 +48,7 @@ export const Header = ({
             <a
               key={item.name}
               href={item.href}
-              className="text-sm font-semibold leading-6 text-white"
+              className="text-sm leading-6 font-semibold text-white"
             >
               {item.name}
             </a>
@@ -90,7 +90,7 @@ export const Header = ({
                   <a
                     key={item.name}
                     href={item.href}
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-800"
+                    className="-mx-3 block rounded-lg px-3 py-2 text-base leading-7 font-semibold text-white hover:bg-gray-800"
                   >
                     {item.name}
                   </a>

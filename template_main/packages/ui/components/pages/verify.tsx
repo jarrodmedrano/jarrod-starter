@@ -31,7 +31,7 @@ export const VerifyCard = () => {
       </p>
 
       <p className="mt-10 text-center text-sm text-gray-500 dark:text-gray-400">
-        <a href="/" className="font-semibold leading-6">
+        <a href="/" className="leading-6 font-semibold">
           Go back
         </a>
       </p>

@@ -1,4 +1,4 @@
-import { ComponentProps, forwardRef } from 'react'
+import { ComponentProps } from 'react'
 import { Text as NativeText, Platform, Linking, TextStyle } from 'react-native'
 import { styled, StyledProps } from 'nativewind'
 
@@ -21,10 +21,13 @@ export interface AProps extends ComponentProps<typeof Text> {
   }
 }
 
-export const A = forwardRef<NativeText, StyledProps<AProps>>(function A(
-  { className = '', href, target, ...props },
+export const A = ({
+  className = '',
+  href,
+  target,
   ref,
-) {
+  ...props
+}: StyledProps<AProps>) => {
   const nativeAProps = Platform.select<Partial<AProps>>({
     web: {
       href,
@@ -53,4 +56,4 @@ export const A = forwardRef<NativeText, StyledProps<AProps>>(function A(
       ref={ref}
     />
   )
-})
+}

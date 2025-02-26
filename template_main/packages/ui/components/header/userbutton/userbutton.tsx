@@ -9,7 +9,7 @@ export const UserButton = () => {
   return user ? (
     <UserDropdown user={user} logOut={signOut} />
   ) : (
-    <a href="/signin" className="text-sm font-semibold leading-6 text-white">
+    <a href="/signin" className="text-sm leading-6 font-semibold text-white">
       Log in <span aria-hidden="true">&rarr;</span>
     </a>
   )

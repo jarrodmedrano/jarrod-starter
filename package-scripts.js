@@ -20,7 +20,7 @@ module.exports = {
       format: 'nps lintStaged',
     },
     precommit: {
-      default: 'npx sort-package-json && nps prebuild && nps build',
+      default: 'npx sort-package-json',
     },
     prebuild: {
       default: 'nps prepare.format',

@@ -83,7 +83,7 @@ export const Pricing = () => {
         {/* Pricing section */}
         <div className="mx-auto mt-16 max-w-7xl px-6 sm:mt-32 lg:px-8">
           <div className="mx-auto max-w-4xl text-center">
-            <h1 className="text-base font-semibold leading-7 text-indigo-400">
+            <h1 className="text-base leading-7 font-semibold text-indigo-400">
               Pricing
             </h1>
             <p className="mt-2 text-4xl font-bold tracking-tight text-white sm:text-5xl">
@@ -99,7 +99,7 @@ export const Pricing = () => {
             <RadioGroup
               value={frequency}
               onChange={setFrequency}
-              className="grid grid-cols-2 gap-x-1 rounded-full bg-white/5 p-1 text-center text-xs font-semibold leading-5 text-white"
+              className="grid grid-cols-2 gap-x-1 rounded-full bg-white/5 p-1 text-center text-xs leading-5 font-semibold text-white"
             >
               <RadioGroup.Label className="sr-only">
                 Payment frequency
@@ -146,12 +146,12 @@ export const Pricing = () => {
                   <div className="flex items-center justify-between gap-x-4">
                     <h2
                       id={tier.id}
-                      className="text-lg font-semibold leading-8 text-white"
+                      className="text-lg leading-8 font-semibold text-white"
                     >
                       {tier.name}
                     </h2>
                     {tier.mostPopular ? (
-                      <p className="rounded-full bg-indigo-500 px-2.5 py-1 text-xs font-semibold leading-5 text-white">
+                      <p className="rounded-full bg-indigo-500 px-2.5 py-1 text-xs leading-5 font-semibold text-white">
                         Most popular
                       </p>
                     ) : null}
@@ -166,7 +166,7 @@ export const Pricing = () => {
                         tier.price[frequency.value]
                       }
                     </span>
-                    <span className="text-sm font-semibold leading-6 text-gray-300">
+                    <span className="text-sm leading-6 font-semibold text-gray-300">
                       {frequency.priceSuffix}
                     </span>
                   </p>
@@ -175,9 +175,9 @@ export const Pricing = () => {
                     aria-describedby={tier.id}
                     className={classNames(
                       tier.mostPopular
-                        ? 'bg-indigo-500 text-white shadow-sm hover:bg-indigo-400 focus-visible:outline-indigo-500'
+                        ? 'bg-indigo-500 text-white shadow-2xs hover:bg-indigo-400 focus-visible:outline-indigo-500'
                         : 'bg-white/10 text-white hover:bg-white/20 focus-visible:outline-white',
-                      'mt-6 block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2',
+                      'mt-6 block rounded-md px-3 py-2 text-center text-sm leading-6 font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2',
                     )}
                   >
                     Buy plan
@@ -205,7 +205,7 @@ export const Pricing = () => {
         {/* Testimonial section */}
         <div className="mx-auto mt-24 max-w-7xl px-6 sm:mt-56 lg:px-8">
           <div className="mx-auto grid max-w-2xl grid-cols-1 lg:mx-0 lg:max-w-none lg:grid-cols-2">
-            <div className="flex flex-col pb-10 sm:pb-16 lg:pb-0 lg:pr-8 xl:pr-20">
+            <div className="flex flex-col pb-10 sm:pb-16 lg:pr-8 lg:pb-0 xl:pr-20">
               <img
                 className="h-12 self-start"
                 src="https://tailwindui.com/img/logos/tuple-logo-white.svg"
@@ -234,7 +234,7 @@ export const Pricing = () => {
                 </figcaption>
               </figure>
             </div>
-            <div className="flex flex-col border-t border-white/10 pt-10 sm:pt-16 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0 xl:pl-20">
+            <div className="flex flex-col border-t border-white/10 pt-10 sm:pt-16 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-8 xl:pl-20">
               <img
                 className="h-12 self-start"
                 src="https://tailwindui.com/img/logos/reform-logo-white.svg"
@@ -269,7 +269,7 @@ export const Pricing = () => {
 
         {/* FAQ section */}
         <div className="mx-auto mt-24 max-w-7xl px-6 sm:mt-56 lg:px-8">
-          <h2 className="text-2xl font-bold leading-10 tracking-tight text-white">
+          <h2 className="text-2xl leading-10 font-bold tracking-tight text-white">
             Frequently asked questions
           </h2>
           <p className="mt-6 max-w-2xl text-base leading-7 text-gray-300">
@@ -284,10 +284,10 @@ export const Pricing = () => {
             and we’ll get back to you as soon as we can.
           </p>
           <div className="mt-20">
-            <dl className="space-y-16 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-16 sm:space-y-0 lg:grid-cols-3 lg:gap-x-10">
+            <dl className="space-y-16 sm:grid sm:grid-cols-2 sm:space-y-0 sm:gap-x-6 sm:gap-y-16 lg:grid-cols-3 lg:gap-x-10">
               {faqs.map((faq) => (
                 <div key={faq.id}>
-                  <dt className="text-base font-semibold leading-7 text-white">
+                  <dt className="text-base leading-7 font-semibold text-white">
                     {faq.question}
                   </dt>
                   <dd className="mt-2 text-base leading-7 text-gray-300">

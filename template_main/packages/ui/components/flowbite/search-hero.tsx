@@ -14,9 +14,9 @@ import { Button } from '../ui/button'
 const SearchBarDatepickerHeroSection = function () {
   return (
     <section>
-      <div className="z-1 relative mx-auto max-w-screen-xl px-4 py-8 text-white lg:py-16 xl:px-0">
-        <div className="mb-6 max-w-screen-md lg:mb-0">
-          <h1 className="mb-4 text-4xl font-extrabold leading-tight tracking-tight text-white md:text-5xl lg:text-6xl">
+      <div className="relative z-1 mx-auto max-w-(--breakpoint-xl) px-4 py-8 text-white lg:py-16 xl:px-0">
+        <div className="mb-6 max-w-(--breakpoint-md) lg:mb-0">
+          <h1 className="mb-4 text-4xl leading-tight font-extrabold tracking-tight text-white md:text-5xl lg:text-6xl">
             Find your inspiration
           </h1>
           <p className="mb-6 text-gray-300 md:text-lg lg:mb-8 lg:text-xl">
@@ -26,14 +26,14 @@ const SearchBarDatepickerHeroSection = function () {
           </p>
           <a
             href="/signin"
-            className="bg-primary-700 hover:bg-primary-800 focus:ring-primary-900 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 inline-flex items-center rounded-lg px-5 py-3 text-center font-medium text-white focus:outline-none focus:ring-4"
+            className="bg-primary-700 hover:bg-primary-800 focus:ring-primary-900 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 inline-flex items-center rounded-lg px-5 py-3 text-center font-medium text-white focus:ring-4 focus:outline-hidden"
           >
             Sign In / Register
           </a>
         </div>
         <form
           action="#"
-          className="mt-8 grid w-full gap-y-4 rounded bg-white p-4 dark:bg-gray-800 lg:mt-12 lg:grid-cols-9 lg:gap-x-4"
+          className="mt-8 grid w-full gap-y-4 rounded bg-white p-4 lg:mt-12 lg:grid-cols-9 lg:gap-x-4 dark:bg-gray-800"
         >
           <div className="lg:col-span-3">
             <Label htmlFor="location-form" className="sr-only">
@@ -58,7 +58,7 @@ const SearchBarDatepickerHeroSection = function () {
           </div>
           <Button type="submit" className="lg:col-span-2">
             <svg
-              className="-ml-1 mr-2 h-5 w-5"
+              className="mr-2 -ml-1 h-5 w-5"
               fill="currentColor"
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"

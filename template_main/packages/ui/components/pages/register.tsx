@@ -129,7 +129,7 @@ export const RegisterFormCard = ({
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-200"
+                  className="block text-sm leading-6 font-medium text-gray-900 dark:text-gray-200"
                 >
                   Name
                 </label>
@@ -147,7 +147,7 @@ export const RegisterFormCard = ({
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-200"
+                  className="block text-sm leading-6 font-medium text-gray-900 dark:text-gray-200"
                 >
                   Email address
                 </label>
@@ -168,7 +168,7 @@ export const RegisterFormCard = ({
                   <div>
                     <label
                       htmlFor="password"
-                      className="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-200"
+                      className="block text-sm leading-6 font-medium text-gray-900 dark:text-gray-200"
                     >
                       Password
                     </label>
@@ -182,12 +182,12 @@ export const RegisterFormCard = ({
                       />
                     </div>
                   </div>
-                  <div className="flex items-center justify-between  align-middle">
+                  <div className="flex items-center justify-between align-middle">
                     <div className="flex items-center">
                       <Checkbox id="remember-me" name="remember-me" />
                       <label
                         htmlFor="remember-me"
-                        className="ml-3 block text-sm font-medium leading-6 text-gray-900 dark:text-gray-200"
+                        className="ml-3 block text-sm leading-6 font-medium text-gray-900 dark:text-gray-200"
                       >
                         Remember me
                       </label>
@@ -199,7 +199,7 @@ export const RegisterFormCard = ({
                 <Button
                   variant="default"
                   type="submit"
-                  className="rounded-mdpx-3 flex w-full justify-center py-1.5 text-sm font-semibold leading-6 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+                  className="rounded-mdpx-3 flex w-full justify-center py-1.5 text-sm leading-6 font-semibold shadow-2xs focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
                 >
                   Register
                 </Button>
@@ -213,14 +213,14 @@ export const RegisterFormCard = ({
                 >
                   <div className="w-full border-t border-gray-200" />
                 </div>
-                <div className="relative flex justify-center text-sm font-medium leading-6">
-                  <span className="bg-white px-6 text-gray-900 dark:bg-gray-800 dark:text-gray-200 ">
+                <div className="relative flex justify-center text-sm leading-6 font-medium">
+                  <span className="bg-white px-6 text-gray-900 dark:bg-gray-800 dark:text-gray-200">
                     Or continue with
                   </span>
                 </div>
               </div>
 
-              <div className="mt-6 grid grid-cols-1  gap-4">
+              <div className="mt-6 grid grid-cols-1 gap-4">
                 <ProviderSignin
                   providers={providers}
                   callbackUrl={callbackUrl}

@@ -17,7 +17,7 @@ export const Header = ({
       <A href="/">
         <Logo className="mx-auto h-10 w-auto" />
       </A>
-      <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-white dark:text-gray-200">
+      <h2 className="mt-6 text-center text-2xl leading-9 font-bold tracking-tight text-white dark:text-gray-200">
         {label}
       </h2>
 

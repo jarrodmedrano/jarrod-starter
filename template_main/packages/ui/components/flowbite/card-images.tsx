@@ -1,9 +1,9 @@
 const ContentCardImagesSection = () => {
   return (
     <section className="bg-white dark:bg-gray-900">
-      <div className="mx-auto max-w-screen-xl px-4 py-8 lg:px-6 lg:py-16">
+      <div className="mx-auto max-w-(--breakpoint-xl) px-4 py-8 lg:px-6 lg:py-16">
         <div className="text-center text-gray-900">
-          <h2 className="mb-4 text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white lg:text-5xl">
+          <h2 className="mb-4 text-4xl font-extrabold tracking-tight text-gray-900 lg:text-5xl dark:text-white">
             AI Driven Story Plotting
           </h2>
           <a
@@ -33,7 +33,7 @@ const ContentCardImagesSection = () => {
               className="mr-4 h-36 w-auto rounded-lg md:h-auto md:w-full"
             />
             <div>
-              <h3 className="mb-2.5 text-xl font-bold text-gray-900 dark:text-white md:mt-4">
+              <h3 className="mb-2.5 text-xl font-bold text-gray-900 md:mt-4 dark:text-white">
                 Generate your story outline
               </h3>
               <p className="text-gray-500 dark:text-gray-400">
@@ -49,7 +49,7 @@ const ContentCardImagesSection = () => {
               className="mr-4 h-36 w-auto rounded-lg md:h-auto md:w-full"
             />
             <div>
-              <h3 className="mb-2.5 text-xl font-bold text-gray-900 dark:text-white md:mt-4">
+              <h3 className="mb-2.5 text-xl font-bold text-gray-900 md:mt-4 dark:text-white">
                 Build Your World
               </h3>
               <p className="text-gray-500 dark:text-gray-400">
@@ -66,7 +66,7 @@ const ContentCardImagesSection = () => {
               className="mr-4 h-36 w-auto rounded-lg md:h-auto md:w-full"
             />
             <div>
-              <h3 className="mb-2.5 text-xl font-bold text-gray-900 dark:text-white md:mt-4">
+              <h3 className="mb-2.5 text-xl font-bold text-gray-900 md:mt-4 dark:text-white">
                 Share with our community
               </h3>
               <p className="text-gray-500 dark:text-gray-400">
