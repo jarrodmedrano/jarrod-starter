@@ -1,7 +1,8 @@
-import { ComponentProps, forwardRef } from 'react'
+import { ComponentProps } from 'react'
 import { Text as NativeText, Platform, Linking, TextStyle } from 'react-native'
 import { styled, StyledProps } from 'nativewind'
 import { TextLink as SolitoTextLink } from 'solito/link'
+import React from 'react'
 
 export const Text = styled(NativeText)
 
@@ -27,18 +28,11 @@ export interface AProps extends ComponentProps<typeof Text> {
   target?: '_blank'
 }
 
-export const A = forwardRef<NativeText, StyledProps<AProps>>(function A(
-  { className = '', href, target, ...props },
-  ref,
-) {
+export const A = ({ className = '', href, target, ...props }: AProps) => {
   const nativeAProps = Platform.select<Partial<AProps>>({
     web: {
       href,
       target,
-      // hrefAttrs: {
-      //   rel: 'noreferrer',
-      //   target,
-      // },
     },
     default: {
       onPress: (event) => {
@@ -56,10 +50,11 @@ export const A = forwardRef<NativeText, StyledProps<AProps>>(function A(
       className={`text-blue-500 hover:underline ${className}`}
       {...props}
       {...nativeAProps}
-      ref={ref}
     />
   )
-})
+}
+
+A.displayName = 'A'
 
 /**
  * Solito's TextLink doesn't work directly with styled() since it has a textProps prop

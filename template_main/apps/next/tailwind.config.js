@@ -11,5 +11,5 @@ module.exports = {
   theme: {
     ...theme,
   },
-  extends: 'ui/tailwind.config',
+  extends: '@repo/ui/tailwind.config',
 }

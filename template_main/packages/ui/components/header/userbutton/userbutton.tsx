@@ -1,14 +1,12 @@
 'use client'
 import UserDropdown from './user-dropdown'
 import { signOut } from 'next-auth/react'
-import { useAuthType } from '@repo/ui/components/hooks/useAuthType'
+// import { useAuthType } from '@repo/ui/components/hooks/useAuthType'
 
 export const UserButton = () => {
-  const { user } = useAuthType(process.env.AUTH_TYPE || 'clerk')
+  // const { user } = useAuthType(process.env.AUTH_TYPE || 'clerk')
 
-  return user ? (
-    <UserDropdown user={user} logOut={signOut} />
-  ) : (
+  return (
     <a href="/signin" className="text-sm leading-6 font-semibold text-white">
       Log in <span aria-hidden="true">&rarr;</span>
     </a>
