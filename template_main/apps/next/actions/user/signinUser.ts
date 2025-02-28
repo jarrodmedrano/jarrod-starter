@@ -2,7 +2,7 @@
 
 import fetchUserByEmail from './getUserByEmail'
 import { sendVerificationToken } from '../mail/sendVerificationToken'
-import { LoginSchema, loginSchema } from '@schema/login'
+import { LoginSchema, loginSchema } from '@repo/schema/login'
 import { generateVerificationToken } from './generateVerificationToken'
 import { signIn } from '../../auth'
 // import { AuthError } from 'next-auth'

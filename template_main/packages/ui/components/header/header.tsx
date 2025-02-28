@@ -13,11 +13,13 @@ export const Header = ({
   companyName,
   navigation,
   companyLogo,
+  user,
 }: {
   companyLink: string
   companyName: string
   navigation: { name: string; href: string }[]
   companyLogo: React.ReactElement
+  user?: any
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
@@ -58,7 +60,7 @@ export const Header = ({
           <LangButton />
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <UserButton />
+          <UserButton user={user} />
         </div>
       </nav>
       <Dialog
@@ -97,7 +99,7 @@ export const Header = ({
                 ))}
               </div>
               <div className="py-6">
-                <UserButton />
+                <UserButton user={user} />
               </div>
             </div>
           </div>

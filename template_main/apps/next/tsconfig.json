@@ -24,7 +24,7 @@
       "auth": ["./auth"],
       "@api/*": ["../../apps/api/*"],
       "api/*": ["../../apps/api/*"],
-      "@schema/*": ["../../packages/schema/*"],
+      "@repo/schema/*": ["../../packages/schema/*"],
       "@/*": ["./*"],
       "@repo/database/*": ["../../apps/database/*"],
       "@repo/database": ["../../apps/database"],

@@ -5,7 +5,7 @@
     "paths": {
       "@app/*": ["./packages/app/*"],
       "@repo/ui/*": ["./packages/ui/*"],
-      "@schema/*": ["./packages/schema/*"],
+      "@repo/schema/*": ["./packages/schema/*"],
       "@api/*": ["./apps/api/*"],
       "@sitemap/*": ["./packages/sitemap/*"]
     },

@@ -70,7 +70,7 @@
     "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */,
     "baseUrl": "./",
     "paths": {
-      "@schema/*": ["../../packages/schema/*"],
+      "@repo/schema/*": ["../../packages/schema/*"],
       "@api/*": ["./*"],
       "@repo/eslint-config": ["../../packages/eslint-config"],
       "@repo/eslint-config/*": ["../../packages/eslint-config/*"],

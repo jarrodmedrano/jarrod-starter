@@ -13,7 +13,7 @@
     "sourceMap": true,
     "composite": true,
     "paths": {
-      "@schema/*": ["./*"]
+      "@repo/schema/*": ["./*"]
     }
   },
   "extends": "@repo/typescript-config/base.json",

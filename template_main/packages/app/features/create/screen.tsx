@@ -1,6 +1,6 @@
 'use client'
 
-import { useAuthType } from '../../../ui/components/hooks/useAuthType'
+import { useAuthType } from '../../hooks/useAuthType'
 import { ScreenProps } from '../../common/interfaces'
 import DashboardLayout from '../../components/dashboard-layout'
 import React, { useEffect } from 'react'
@@ -12,7 +12,7 @@ interface CreateScreenProps extends ScreenProps {
 const CreateScreen = function (props: CreateScreenProps) {
   const { listEntitiesForUser } = props
   const { user } = useAuthType(process.env.AUTH_TYPE || 'clerk')
-  const [userData, setUserData] = React.useState(null)
+  const [userData, setUserData] = useState(null)
 
   useEffect(() => {
     if (user) {
