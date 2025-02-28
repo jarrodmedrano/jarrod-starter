@@ -3,7 +3,7 @@
 import { useAuthType } from '../../hooks/useAuthType'
 import { ScreenProps } from '../../common/interfaces'
 import DashboardLayout from '../../components/dashboard-layout'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 interface CreateScreenProps extends ScreenProps {
   listEntitiesForUser: any
